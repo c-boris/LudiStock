@@ -2,12 +2,12 @@ User.create!(email: 'user1@gmail.com',password:'123456');
 User.create!(email: 'user2@gmail.com',password:'123456');
 User.create!(email: 'user3@gmail.com',password:'123456');
 
-AgeRange.create!(value: 1, label: "0-12 month");
-AgeRange.create!(value: 2, label: "12-24 month");
-AgeRange.create!(value: 3, label: "2-3 years");
-AgeRange.create!(value: 4, label: "4-6 years");
-AgeRange.create!(value: 5, label: "7-9 years");
-AgeRange.create!(value: 6, label: "10 years and more");
+Age.create!(value: 1, label: "0-12 month");
+Age.create!(value: 2, label: "12-24 month");
+Age.create!(value: 3, label: "2-3 years");
+Age.create!(value: 4, label: "4-6 years");
+Age.create!(value: 5, label: "7-9 years");
+Age.create!(value: 6, label: "10 years and more");
 
 State.create!(value: 1, label: "new");
 State.create!(value: 2, label: "very good condition");
