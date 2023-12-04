@@ -101,7 +101,7 @@ const Header = () => {
               className="-m-1.5 p-1.5 font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span className="sr-only">ImmoStock</span>
+              <span className="sr-only">LudiStock</span>
               Your company
             </NavLink>
             <button
