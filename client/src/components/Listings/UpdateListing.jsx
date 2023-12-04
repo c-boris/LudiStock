@@ -25,7 +25,7 @@ function UpdateListing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/listings/${item.id}`,
+        `http://localhost:3001/listings/${item.id}`,
         {
           method: "PATCH",
           headers: {
