@@ -4,10 +4,10 @@ import { userAtom } from "../../utils/atom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import PropertyForm from "./PropertyForm";
+import ListingForm from "./ListingForm";
 import { useLocation } from "react-router-dom";
 
-function UpdateProperty() {
+function UpdateListing() {
   const location = useLocation();
   const item = location.state.item;
   const [error, setError] = useState(null);
@@ -25,19 +25,18 @@ function UpdateProperty() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/properties/${item.id}`,
+        `http://localhost:3000/listings/${item.id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            property: {
+            listing: {
               id: item.id,
               user_id: user.id,
               title: title,
               price: price,
-              city: city,
               description: description,
             },
           }),
@@ -48,29 +47,27 @@ function UpdateProperty() {
         const data = await response.json();
         navigate("/my-listings");
         Cookies.set("token", response.headers.get("Authorization"));
-        toast.success("Property modified successfully!");
+        toast.success("Listing modified successfully!");
       } else {
-        toast.error("Error modifying property");
+        toast.error("Error modifying listing");
         setError("Identifiants invalides");
 
         console.log(error.message);
       }
     } catch (error) {
-      toast.error("An error occurred during property update");
+      toast.error("An error occurred during listing update");
       console.log(error.message);
     }
   };
 
   return (
     <>
-      <PropertyForm
-        viewTitle={"Modify property"}
+      <ListingForm
+        viewTitle={"Modify toy to sell"}
         title={title}
         setTitle={setTitle}
         price={price}
         setPrice={setPrice}
-        city={city}
-        setCity={setCity}
         description={description}
         setDescription={setDescription}
         handleSubmit={handleSubmit}
@@ -80,4 +77,4 @@ function UpdateProperty() {
   );
 }
 
-export default UpdateProperty;
+export default UpdateListing;

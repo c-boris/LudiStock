@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { userAtom } from "../../utils/atom";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Hero() {
   const [user] = useAtom(userAtom);
@@ -37,30 +37,35 @@ export default function Hero() {
               Sell your properties easily with us!!!
             </h1>
             <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
-            Our expert team turns transactions into a seamless quest, easy as executing a flawless code !
+              Our expert team turns transactions into a seamless quest, easy as
+              executing a flawless code !
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               {user.isLoggedIn ? (
                 <>
-                  <NavLink to="/my-listings" 
+                  <NavLink
+                    to="/my-listings"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     My listings
-                    </NavLink>
-                    <NavLink to="/profile" 
+                  </NavLink>
+                  <NavLink
+                    to="/profile"
                     className="text-sm font-semibold leading-6 text-primary dark:text-dprimary"
                   >
                     View my profil <span aria-hidden="true">→</span>
-                    </NavLink>
+                  </NavLink>
                 </>
               ) : (
                 <>
-                  <NavLink to="/listings" 
+                  <NavLink
+                    to="/listings"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     listings
-                    </NavLink>
-                    <NavLink to="/signup" 
+                  </NavLink>
+                  <NavLink
+                    to="/signup"
                     className="text-sm font-semibold leading-6 text-primary dark:text-dprimary"
                   >
                     Create an account <span aria-hidden="true">→</span>

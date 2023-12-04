@@ -13,12 +13,12 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReadProperties from "./components/Properties/properties.jsx";
-import ShowProperty from "./components/Properties/showproperty.jsx";
-import MyProperties from "./components/Properties/MyProperties.jsx";
-import NewProperty from "./components/Properties/NewProperty.jsx";
-import UpdateProperty from "./components/Properties/UpdateProperty.jsx";
-import DeleteProperty from "./components/Properties/DeleteProperty.jsx";
+import ReadListings from "./components/Listings/ReadListings.jsx";
+import MyListings from "./components/Listings/MyListings.jsx";
+import NewListing from "./components/Listings/NewListing.jsx";
+import UpdateListing from "./components/Listings/UpdateListing.jsx";
+import DeleteListing from "./components/Listings/DeleteListing.jsx";
+import ShowListing from "./components/Listings/ShowListing.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "listings",
-        element: <ReadProperties />,
+        element: <ReadListings />,
       },
       // {
       //   path: "marketplace",
@@ -56,24 +56,24 @@ const router = createBrowserRouter([
       },
       {
         path: "my-listings",
-        element: <MyProperties />,
+        element: <MyListings />,
       },
       {
         path: "profile",
         element: <Profile />,
       },
-      { path: "Properties/:id", element: <ShowProperty /> },
+      { path: "Properties/:id", element: <ShowListing /> },
       {
-        path: "/properties/update/:id",
-        element: <UpdateProperty />,
+        path: "/listings/update/:id",
+        element: <UpdateListing />,
       },
       {
         path: "/properties/delete/:id",
-        element: <DeleteProperty />,
+        element: <DeleteListing />,
       },
       {
-        path: "my-listings/newProperty",
-        element: <NewProperty />,
+        path: "my-listings/newListing",
+        element: <NewListing />,
       },
     ],
   },

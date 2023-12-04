@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
-import MyProperties from "./MyProperties";
+import MyListings from "./MyListings";
 import { useNavigate } from "react-router-dom";
 
-function DeleteProperty() {
+function DeleteListing() {
   const location = useLocation();
   const item = location.state.item;
   console.log("item.id", item.id);
@@ -16,7 +16,7 @@ function DeleteProperty() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/properties/${item.id}`,
+        `http://localhost:3000/listings/${item.id}`,
         {
           method: "DELETE",
           headers: {
@@ -27,22 +27,22 @@ function DeleteProperty() {
 
       if (response.ok) {
         navigate("/my-listings");
-        toast.success("Property deleted with success");
+        toast.success("Toy deleted with success");
       } else {
-        toast.error("Error deleting property");
+        toast.error("Error deleting toy");
         setError("Identifiants invalides");
 
         console.log(error.message);
       }
     } catch (error) {
-      toast.error("An error occurred during property delete");
+      toast.error("An error occurred during toy delete");
       console.log(error.message);
     }
   };
 
   return (
     <>
-      <MyProperties />
+      <MyListings />
       <form onSubmit={handleSubmit}>
         <button
           type="submit"
@@ -55,4 +55,4 @@ function DeleteProperty() {
   );
 }
 
-export default DeleteProperty;
+export default DeleteListing;
