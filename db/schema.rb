@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_135052) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_104150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "age_ranges", force: :cascade do |t|
+    t.integer "value"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.integer "value"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
@@ -22,16 +36,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_135052) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
-  create_table "properties", force: :cascade do |t|
+  create_table "listings", force: :cascade do |t|
     t.string "title"
     t.integer "price"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.string "city"
-    t.string "image_url"
-    t.index ["user_id"], name: "index_properties_on_user_id"
+    t.bigint "age_range_id", null: false
+    t.bigint "state_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["age_range_id"], name: "index_listings_on_age_range_id"
+    t.index ["category_id"], name: "index_listings_on_category_id"
+    t.index ["state_id"], name: "index_listings_on_state_id"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.integer "value"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,5 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_135052) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "properties", "users"
+  add_foreign_key "listings", "age_ranges"
+  add_foreign_key "listings", "categories"
+  add_foreign_key "listings", "states"
+  add_foreign_key "listings", "users"
 end
