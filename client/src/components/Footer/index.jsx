@@ -16,7 +16,7 @@ export default function Footer() {
                 <FaInstagram className="h-6 w-6" />
               </a>
             </div>
-            <p className="text-secondary dark:text-dsecondary">© 2023 ImmoStock | All rights reserved.</p>
+            <p className="text-secondary dark:text-dsecondary">© 2023 LudiStock | All rights reserved.</p>
           </div>
         
       </div>
