@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function ReadProperties() {
+function ReadListings() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:3000/properties`, {
+        const response = await fetch(`http://localhost:3000/listings`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function ReadProperties() {
           <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
             <div className="max-w-2xl">
               <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl">
-                List of properties
+                List of toys
               </h2>
               <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
                 All you are looking for is here below.
@@ -57,12 +57,11 @@ function ReadProperties() {
                     </h2>
                     <h2 className="text-sm font-semibold leading-6 text-secondary dark:text-dsecondary">
                       <p>Price: {item.price}</p>
-                      <p>City: {item.city}</p>
                       <p>Description: {item.description}</p>
                       <p>User #:{item.user_id}</p>
                     </h2>
                     <Link
-                      to={`/properties/${item.id}`}
+                      to={`/listings/${item.id}`}
                       state={{ item: item }}
                       className="font-semibold text-accent"
                     >
@@ -79,4 +78,4 @@ function ReadProperties() {
   );
 }
 
-export default ReadProperties;
+export default ReadListings;
