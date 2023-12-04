@@ -1,6 +1,7 @@
 # config/routes.rb
 
 Rails.application.routes.draw do
+  resources :ages
   resources :categories
   resources :states
   resources :age_ranges
