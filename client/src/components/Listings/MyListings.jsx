@@ -12,7 +12,7 @@ function MyListings() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:3000/listings`, {
+        const response = await fetch(`http://localhost:3001/listings`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
