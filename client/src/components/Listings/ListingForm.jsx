@@ -1,4 +1,4 @@
-function PropertyForm(props) {
+function ListingForm(props) {
   return (
     <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-light dark:bg-dark">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -99,4 +99,4 @@ function PropertyForm(props) {
     </div>
   );
 }
-export default PropertyForm;
+export default ListingForm;

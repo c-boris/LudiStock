@@ -4,10 +4,10 @@ import { userAtom } from "../../utils/atom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import PropertyForm from "./PropertyForm";
-import MyProperties from "./MyProperties";
+import ListingForm from "./ListingForm";
+import MyListings from "./MyListings";
 
-function NewProperty() {
+function NewListing() {
   const [user, setUser] = useAtom(userAtom);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -20,17 +20,16 @@ function NewProperty() {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3000/properties`, {
+      const response = await fetch(`http://localhost:3000/listings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          property: {
+          listing: {
             user_id: user.id,
             title: title,
             price: price,
-            city: city,
             description: description,
           },
         }),
@@ -40,33 +39,31 @@ function NewProperty() {
         const data = await response.json();
         Cookies.set("token", response.headers.get("Authorization"));
         navigate("/my-listings");
-        toast.success("Property created successfully!");
+        toast.success("Toy created successfully!");
       } else {
-        toast.error("Error creating property");
+        toast.error("Error creating toy");
       }
     } catch (error) {
-      toast.error("An error occurred during property creation");
+      toast.error("An error occurred during toy creation");
     }
   };
 
   return (
     <>
-      <PropertyForm
-        viewTitle={"Create a new property"}
+      <ListingForm
+        viewTitle={"Create a new toy to sell"}
         title={title}
         setTitle={setTitle}
         price={price}
         setPrice={setPrice}
-        city={city}
-        setCity={setCity}
         description={description}
         setDescription={setDescription}
         handleSubmit={handleSubmit}
         action={"Create"}
       />
-      <MyProperties />
+      <MyListings />
     </>
   );
 }
 
-export default NewProperty;
+export default NewListing;

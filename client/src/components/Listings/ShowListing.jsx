@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchAllUsers } from "../../utils/allUserAtom";
 
-function ShowProperty() {
+function ShowListing() {
   const location = useLocation();
   const item = location.state.item;
   const [userData, setUserData] = useState(null);
@@ -30,10 +30,10 @@ function ShowProperty() {
           <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
             <div className="max-w-2xl">
               <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl">
-                View property
+                View toy
               </h2>
               <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
-                Details on a given property
+                Details on a given toy
               </p>
             </div>
             <ul
@@ -60,4 +60,4 @@ function ShowProperty() {
   );
 }
 
-export default ShowProperty;
+export default ShowListing;
