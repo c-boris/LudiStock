@@ -1,6 +1,10 @@
 # config/routes.rb
 
 Rails.application.routes.draw do
+  resources :categories
+  resources :states
+  resources :age_ranges
+  resources :listings
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
