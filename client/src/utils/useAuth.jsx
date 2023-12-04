@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3001";
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
