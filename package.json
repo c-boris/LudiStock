@@ -1,0 +1,13 @@
+{
+  "name": "phase-4-deploying-app-demo",
+  "description": "Build scripts for Heroku",
+  "engines": {
+    "node": "v21.1.0"
+  },
+  "scripts": {
+    "build": "pnpm install --prefix client && pnpm run build --prefix client",
+    "clean": "rm -rf public",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "pnpm run clean && pnpm run build && pnpm run deploy"
+  }
+}
