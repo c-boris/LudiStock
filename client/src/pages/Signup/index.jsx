@@ -1,11 +1,11 @@
 import SignupForm from "../../components/SignupForm/"
 
-const Login = () => {
+const Signup = () => {
   return (
-    <div id='login'>
+    <div id='Signup'>
       <SignupForm/>
     </div>
   )
 }
 
-export default Login;
+export default Signup;
