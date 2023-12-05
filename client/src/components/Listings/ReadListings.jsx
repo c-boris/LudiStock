@@ -3,23 +3,33 @@ import { Link } from "react-router-dom";
 
 function ReadListings() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
-  async function fetchData() {
-    const response = await fetch(`http://localhost:3001/listings`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:3001/listings`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-    if (response.ok) {
-      const responseData = await response.json();
-      setData(responseData);
-    } else {
-      console.error("Une erreur s'est produite");
+        if (response.ok) {
+          const responseData = await response.json();
+          setData(responseData);
+        } else {
+          setError("Identifiants invalides");
+          console.log(error.message);
+        }
+      } catch (error) {
+        setError("Une erreur s'est produite");
+        console.log(error.message);
+      }
     }
-  }
-  if (data == null) fetchData();
+
+    fetchData();
+  }, []);
 
   return (
     <>
