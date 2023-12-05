@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 
 export default function Hero() {
   const [user] = useAtom(userAtom);
-
-  console.log(user);
   return (
     <section id="hero" className="bg-light dark:bg-dark h-screen">
       <div className="relative isolate px-6 pt-14 lg:px-8">
