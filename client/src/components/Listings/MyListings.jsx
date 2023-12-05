@@ -9,32 +9,28 @@ function MyListings() {
   const [error, setError] = useState(null);
   const [filteredData, setFilteredData] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`http://localhost:3001/listings`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  async function fetchData() {
+    try {
+      const response = await fetch(`http://localhost:3001/listings`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (response.ok) {
-          const responseData = await response.json();
-          setFilteredData(
-            responseData.filter((item) => item.user_id == user.id)
-          );
-        } else {
-          setError("Identifiants invalides");
-          console.log(error.message);
-        }
-      } catch (error) {
-        setError("Une erreur s'est produite");
+      if (response.ok) {
+        const responseData = await response.json();
+        setFilteredData(responseData.filter((item) => item.user_id == user.id));
+      } else {
+        setError("Identifiants invalides");
         console.log(error.message);
       }
+    } catch (error) {
+      setError("Une erreur s'est produite");
+      console.log(error.message);
     }
-    fetchData();
-  }, [setData, setFilteredData]);
+  }
+  fetchData();
 
   return (
     <>
