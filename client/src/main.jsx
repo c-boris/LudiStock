@@ -79,8 +79,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <ToastContainer position="bottom-center" theme="dark" />
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </>
 );

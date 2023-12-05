@@ -5,27 +5,10 @@ import { fetchAllUsers } from "../../utils/allUserAtom";
 function ShowListing() {
   const location = useLocation();
   const item = location.state.item;
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const users = await fetchAllUsers();
-        const user = users.find((user) => user.id === item.user_id);
-        setUserData(user);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    }
-
-    if (item) {
-      fetchData();
-    }
-  }, [item]);
 
   return (
     <>
-      {item && userData && (
+      {item && (
         <div className="bg-light dark:bg-dark py-24 sm:py-32 h-screen">
           <div className="mx-auto grid max-w-full gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
             <div className="max-w-full">
