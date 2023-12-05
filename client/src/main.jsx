@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-// import Marketplace from "./pages/Marketplace";
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
