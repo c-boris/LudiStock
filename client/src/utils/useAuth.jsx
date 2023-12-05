@@ -3,20 +3,24 @@ import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
 
-const API_URL =
-  process.env.NODE_ENV === "development" ? "http://localhost:3001" : "/api";
+const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '/api';
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
-  const token = Cookies.get("token");
-  if (token) {
-    setUser({
-      isLoggedIn: true,
-      email: Cookies.get("email"),
-      username: Cookies.get("username"),
-      id: Cookies.get("id"),
-    });
-  }
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    console.log("Token from cookie:", token);
+
+    if (token) {
+      setUser({
+        isLoggedIn: true,
+        email: Cookies.get("email"),
+        username: Cookies.get("username"),
+        id: Cookies.get("id"),
+      });
+    }
+  }, [setUser]);
 
   const handleResponse = async (response, successMessage, errorMessage) => {
     if (response.ok) {
@@ -86,11 +90,7 @@ const useAuth = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: {
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-          },
+          user: { email, password, password_confirmation: passwordConfirmation },
         }),
       });
 
@@ -146,7 +146,7 @@ const useAuth = () => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           user: {

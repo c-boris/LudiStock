@@ -1,6 +1,6 @@
 export const fetchAllUsers = async () => {
   try {
-    const response = await fetch("http://localhost:3001/users");
+    const response = await fetch("/users");
     if (response.ok) {
       const users = await response.json();
       console.log("allUserAtom:", users);
