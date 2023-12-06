@@ -43,7 +43,7 @@ function ReadListings() {
                 <li key={item.id}>
                   <Link
                     to={`/listings/${item.id}`}
-                    state={{ item: item }}
+                    state={{ item: item, delete: false }}
                     className="w-full"
                   >
                     <div className="flex flex-col justify-center">

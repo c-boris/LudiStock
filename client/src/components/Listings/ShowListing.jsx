@@ -1,8 +1,41 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import API_URL from "../../utils/environment";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function ShowListing() {
   const location = useLocation();
   const item = location.state.item;
+  const deleteList = location.state.delete;
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/listings/${item.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        navigate("/my-listings");
+        toast.success("Toy deleted with success");
+      } else {
+        toast.error("Error deleting toy");
+        setError("Identifiants invalides");
+
+        console.log(error.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred during toy delete");
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
@@ -37,19 +70,30 @@ function ShowListing() {
                   </div>
                   <div className="flex flex-col items-center justify-center mb-4">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                      {item.price} €
+                      {item.price} €<p>Ajouter les autres catégories</p>
                     </span>
                   </div>
-                  <div className="flex items-center mt-4">
-                    <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm">
-                      Add to cart
-                      <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                    <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm">
-                      Contact the seller
-                      <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                  </div>
+                  {deleteList ? (
+                    <form onSubmit={handleDelete}>
+                      <button
+                        type="submit"
+                        className="grid place-items-center w-full rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                      >
+                        Confirm deletion
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="flex items-center mt-4">
+                      <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm">
+                        Add to cart
+                        <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                      </button>
+                      <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm">
+                        Contact the seller
+                        <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

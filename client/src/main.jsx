@@ -16,7 +16,6 @@ import ReadListings from "./components/Listings/ReadListings.jsx";
 import MyListings from "./components/Listings/MyListings.jsx";
 import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
-import DeleteListing from "./components/Listings/DeleteListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
 
 const router = createBrowserRouter([
@@ -68,7 +67,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/listings/delete/:id",
-        element: <DeleteListing />,
+        element: <ShowListing />,
       },
       {
         path: "my-listings/newListing",
