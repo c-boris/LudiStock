@@ -4,12 +4,10 @@ import { userAtom } from "../../utils/atom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
 import { categoryAtom } from "../../utils/categoryAtom";
-
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
-import MyListings from "./MyListings";
 import API_URL from "../../utils/environment";
 import FetchAge from "../FetchAPI/FetchAge";
 import FetchState from "../FetchAPI/FetchSate";
@@ -67,7 +65,7 @@ function NewListing() {
         navigate("/my-listings");
         toast.success("Toy created successfully!");
       } else {
-        toast.error("Error creating toy");
+        toast.error("Missing field values");
       }
     } catch (error) {
       toast.error("An error occurred during toy creation");
@@ -98,7 +96,6 @@ function NewListing() {
         handleSubmit={handleSubmit}
         action={"Create"}
       />
-      <MyListings />
     </>
   );
 }
