@@ -59,7 +59,7 @@ const ProfileForm = () => {
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      required
+                      // required
                       aria-label="Email Address"
                     />
                   </div>
@@ -77,7 +77,7 @@ const ProfileForm = () => {
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={emailConfirmation}
                       onChange={(e) => setEmailConfirmation(e.target.value)}
-                      required
+                      // required
                       aria-label="Confirm Email Address"
                     />
                   </div>
@@ -95,11 +95,11 @@ const ProfileForm = () => {
                       id="password"
                       name="password"
                       type="password"
-                      autoComplete="password"
+                      // autoComplete="password"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      required
+                      // required
                       aria-label="Password"
                     />
                   </div>
@@ -113,11 +113,11 @@ const ProfileForm = () => {
                       id="password-confirmation"
                       name="password-confirmation"
                       type="password"
-                      autoComplete="password-confirmation"
+                      // autoComplete="password-confirmation"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={passwordConfirmation}
                       onChange={(e) => setPasswordConfirmation(e.target.value)}
-                      required
+                      // required
                       aria-label="Confirm Password"
                     />
                   </div>
