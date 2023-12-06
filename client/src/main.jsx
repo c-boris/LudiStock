@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         element: <UpdateListing />,
       },
       {
-        path: "/properties/delete/:id",
+        path: "/listings/delete/:id",
         element: <DeleteListing />,
       },
       {
