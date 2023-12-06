@@ -66,7 +66,78 @@ function ListingForm(props) {
               />
             </div>
           </div>
+          <label
+            htmlFor="age"
+            className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+          >
+            Age Selection :
+            <br />
+          </label>
+          <select
+            id="age"
+            value={props.selectedAge}
+            onChange={props.handleAgeChange}
+          >
+            <option value="">Select a range</option>
+            {props.ageAtomValue.map((age) => (
+              <option key={age.id} value={age.id}>
+                {age.label}
+              </option>
+            ))}
+          </select>
 
+          {/* You can use the selectedAge state value in your form submission */}
+          <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+            Selected Age: {props.selectedAge}
+          </p>
+          <label
+            htmlFor="state"
+            className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+          >
+            State Selection :
+            <br />
+          </label>
+          <select
+            id="state"
+            value={props.selectedState}
+            onChange={props.handleStateChange}
+          >
+            <option value="">Select a state</option>
+            {props.stateAtomValue.map((state) => (
+              <option key={state.id} value={state.id}>
+                {state.label}
+              </option>
+            ))}
+          </select>
+
+          {/* You can use the selectedAge state value in your form submission */}
+          <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+            Selected state: {props.selectedState}
+          </p>
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+          >
+            Category Selection :
+            <br />
+          </label>
+          <select
+            id="category"
+            value={props.selectedCategory}
+            onChange={props.handleCategoryChange}
+          >
+            <option value="">Select a category</option>
+            {props.categoryAtomValue.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+
+          {/* You can use the selectedAge state value in your form submission */}
+          <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+            Selected category: {props.selectedCategory}
+          </p>
           <div>
             <button
               type="submit"

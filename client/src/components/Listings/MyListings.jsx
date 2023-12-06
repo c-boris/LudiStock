@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "../../utils/atom";
 import { Link } from "react-router-dom";
-import API_URL from '../../utils/environment';
+import API_URL from "../../utils/environment";
 
 function MyListings() {
   const [user] = useAtom(userAtom);
@@ -22,7 +22,7 @@ function MyListings() {
         if (response.ok) {
           const responseData = await response.json();
           setFilteredData(
-            responseData.filter((item) => item.user_id === user.id)
+            responseData.filter((item) => item.user_id == user.id)
           );
         } else {
           setError("Identifiants invalides");
@@ -36,7 +36,7 @@ function MyListings() {
 
     fetchData();
   }, []);
-
+  console.log("filteredData", filteredData);
   return (
     <>
       {error && <p>{error}</p>}
@@ -67,6 +67,9 @@ function MyListings() {
                     <h2 className="text-sm font-semibold leading-6 text-secondary dark:text-dsecondary">
                       <p>Price: {item.price}</p>
                       <p>Description: {item.description}</p>
+                      <p>Age_id : {item.age_id}</p>
+                      <p>State_id : {item.state_id}</p>
+                      <p>Category_id : {item.category_id}</p>
                       <p>User #:{item.user_id}</p>
                     </h2>
                     <div className="flex-col">
@@ -79,7 +82,7 @@ function MyListings() {
                       </Link>
                       <br></br>
                       <Link
-                        to={`/properties/update/${item.id}`}
+                        to={`/listings/update/${item.id}`}
                         state={{ item: item }}
                         className="font-semibold text-accent"
                       >
@@ -87,7 +90,7 @@ function MyListings() {
                       </Link>
                       <br></br>
                       <Link
-                        to={`/properties/delete/${item.id}`}
+                        to={`/listings/delete/${item.id}`}
                         state={{ item: item }}
                         className="font-semibold text-accent"
                       >

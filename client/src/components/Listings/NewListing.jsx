@@ -1,22 +1,44 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "../../utils/atom";
+import { ageAtom } from "../../utils/ageAtom";
+import { stateAtom } from "../../utils/stateAtom";
+import { categoryAtom } from "../../utils/categoryAtom";
+
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import MyListings from "./MyListings";
-import API_URL from '../../utils/environment';
+import API_URL from "../../utils/environment";
+import FetchAge from "../FetchAge/FetchAge";
+import FetchState from "../FetchAge/FetchSate";
+import FetchCategory from "../FetchAge/FetchCategory";
 
 function NewListing() {
-  const [user, setUser] = useAtom(userAtom);
+  const [user] = useAtom(userAtom);
+  const [ageAtomValue] = useAtom(ageAtom);
+  const [stateAtomValue] = useAtom(stateAtom);
+  const [categoryAtomValue] = useAtom(categoryAtom);
+
+  const [selectedAge, setSelectedAge] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [age, setAge] = useSate(0);
 
   const navigate = useNavigate();
-
+  const handleAgeChange = (event) => {
+    setSelectedAge(event.target.value);
+  };
+  const handleStateChange = (event) => {
+    setSelectedState(event.target.value);
+  };
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,10 +50,9 @@ function NewListing() {
         },
         body: JSON.stringify({
           listing: {
-            age_id: 1,
-            property_id: 1,
-            state_id: 1,
-            category_id: 1,
+            age_id: selectedAge,
+            state_id: selectedState,
+            category_id: selectedCategory,
             user_id: user.id,
             title: title,
             price: price,
@@ -52,7 +73,9 @@ function NewListing() {
       toast.error("An error occurred during toy creation");
     }
   };
-
+  FetchAge();
+  FetchState();
+  FetchCategory();
   return (
     <>
       <ListingForm
@@ -63,8 +86,15 @@ function NewListing() {
         setPrice={setPrice}
         description={description}
         setDescription={setDescription}
-        age={age}
-        setAge={setAge}
+        ageAtomValue={ageAtomValue}
+        selectedAge={selectedAge}
+        handleAgeChange={handleAgeChange}
+        stateAtomValue={stateAtomValue}
+        selectedState={selectedState}
+        handleStateChange={handleStateChange}
+        categoryAtomValue={categoryAtomValue}
+        selectedCategory={selectedCategory}
+        handleCategoryChange={handleCategoryChange}
         handleSubmit={handleSubmit}
         action={"Create"}
       />
