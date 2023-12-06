@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "../../utils/atom";
 import { Link } from "react-router-dom";
+import API_URL from '../../utils/environment';
 
 function MyListings() {
   const [user] = useAtom(userAtom);
@@ -11,7 +12,7 @@ function MyListings() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:3001/listings`, {
+        const response = await fetch(`${API_URL}/listings`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

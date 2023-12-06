@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import { useLocation } from "react-router-dom";
+import API_URL from '../../utils/environment';
 
 function UpdateListing() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function UpdateListing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/listings/${item.id}`,
+        `${API_URL}/listings/${item.id}`,
         {
           method: "PATCH",
           headers: {

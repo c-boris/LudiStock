@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import API_URL from '../../utils/environment';
 import FetchAge from "../FetchAge/FetchAge";
 import MyFormComponent from "./MyFormComponent";
+
 
 function ReadListings() {
   const [data, setData] = useState(null);
 
   async function fetchData() {
-    const response = await fetch(`http://localhost:3001/listings`, {
+    const response = await fetch(`${API_URL}/listings`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

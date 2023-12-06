@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import MyListings from "./MyListings";
+import API_URL from '../../utils/environment';
 
 function NewListing() {
   const [user, setUser] = useAtom(userAtom);
@@ -20,7 +21,7 @@ function NewListing() {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3001/listings`, {
+      const response = await fetch(`${API_URL}/listings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
