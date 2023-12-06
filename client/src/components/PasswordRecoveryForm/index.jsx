@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import API_URL from '../../utils/environment';
 
 function PasswordRecoveryForm() {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ function PasswordRecoveryForm() {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/users/password", {
+      const response = await fetch(`${API_URL}/users/password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
