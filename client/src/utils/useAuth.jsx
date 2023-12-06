@@ -4,6 +4,9 @@ import Cookies from "js-cookie";
 import { userAtom } from "./atom";
 
 const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '/api';
+// const API_URL = "http://localhost:3001";
+// const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api' : '/api';
+
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
