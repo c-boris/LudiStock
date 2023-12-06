@@ -12,8 +12,8 @@ function NewListing() {
   const [user, setUser] = useAtom(userAtom);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
-  const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
+  const [age, setAge] = useSate(0);
 
   const navigate = useNavigate();
 
@@ -28,6 +28,10 @@ function NewListing() {
         },
         body: JSON.stringify({
           listing: {
+            age_id: 1,
+            property_id: 1,
+            state_id: 1,
+            category_id: 1,
             user_id: user.id,
             title: title,
             price: price,
@@ -59,6 +63,8 @@ function NewListing() {
         setPrice={setPrice}
         description={description}
         setDescription={setDescription}
+        age={age}
+        setAge={setAge}
         handleSubmit={handleSubmit}
         action={"Create"}
       />

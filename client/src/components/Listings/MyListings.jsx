@@ -50,7 +50,7 @@ function MyListings() {
               <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
                 All toys belonging to user:{user.id}
               </p>
-              <Link to={`newProperty`} className="font-semibold text-accent">
+              <Link to={`newListing`} className="font-semibold text-accent">
                 Create new toy
               </Link>
             </div>
