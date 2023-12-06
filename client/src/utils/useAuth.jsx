@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
 
-const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
+const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'http://ludistock-95072edabbd0.herokuapp.com';
 // const API_URL = "http://localhost:3001";
 // const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api' : '/api';
 
