@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import API_URL from '../../utils/environment';
-import FetchAge from "../FetchAge/FetchAge";
-import MyFormComponent from "./MyFormComponent";
-
+import API_URL from "../../utils/environment";
 
 function ReadListings() {
   const [data, setData] = useState(null);
@@ -114,7 +111,6 @@ function ReadListings() {
           </div>
         </div>
       )}
-      <FetchAge />
     </>
   );
 }

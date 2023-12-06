@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useAtom } from "jotai";
-import { ageAtom } from "../../utils/ageAtom";
+import { categoryAtom } from "../../utils/categoryAtom";
 import API_URL from "../../utils/environment";
 
-const FetchAge = () => {
-  const [, setAgeAtom] = useAtom(ageAtom);
+const FetchCategory = () => {
+  const [, setCategoryAtom] = useAtom(categoryAtom);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`${API_URL}/ages`, {
+        const response = await fetch(`${API_URL}/categories`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -19,26 +19,26 @@ const FetchAge = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("responseData in FetchAge", responseData);
+          console.log("responseData in FetchCategory", responseData);
 
           // Clear existing values before updating
-          setAgeAtom(() => responseData); // Update the atom with new data
-          toast.success("Table Age read successfully!");
+          setCategoryAtom(() => responseData); // Update the atom with new data
+          toast.success("Table Category read successfully!");
         } else {
-          toast.error("Error reading Age");
+          toast.error("Error reading Category");
         }
       } catch (error) {
-        toast.error("An error occurred during Age reading");
+        toast.error("An error occurred during Category reading");
       }
     }
 
     // Clear the atom when the component mounts (optional)
-    setAgeAtom(() => []);
+    setCategoryAtom(() => []);
 
     fetchData();
-  }, [setAgeAtom]);
+  }, [setCategoryAtom]);
 
   return null;
 };
 
-export default FetchAge;
+export default FetchCategory;

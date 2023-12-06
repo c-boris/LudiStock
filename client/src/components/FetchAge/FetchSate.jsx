@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useAtom } from "jotai";
-import { ageAtom } from "../../utils/ageAtom";
+import { stateAtom } from "../../utils/stateAtom";
 import API_URL from "../../utils/environment";
 
-const FetchAge = () => {
-  const [, setAgeAtom] = useAtom(ageAtom);
+const FetchState = () => {
+  const [, setStateAtom] = useAtom(stateAtom);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`${API_URL}/ages`, {
+        const response = await fetch(`${API_URL}/states`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -19,26 +19,26 @@ const FetchAge = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("responseData in FetchAge", responseData);
+          console.log("responseData in FetchSate", responseData);
 
           // Clear existing values before updating
-          setAgeAtom(() => responseData); // Update the atom with new data
-          toast.success("Table Age read successfully!");
+          setStateAtom(() => responseData); // Update the atom with new data
+          toast.success("Table State read successfully!");
         } else {
-          toast.error("Error reading Age");
+          toast.error("Error reading State");
         }
       } catch (error) {
-        toast.error("An error occurred during Age reading");
+        toast.error("An error occurred during State reading");
       }
     }
 
     // Clear the atom when the component mounts (optional)
-    setAgeAtom(() => []);
+    setStateAtom(() => []);
 
     fetchData();
-  }, [setAgeAtom]);
+  }, [setStateAtom]);
 
   return null;
 };
 
-export default FetchAge;
+export default FetchState;
