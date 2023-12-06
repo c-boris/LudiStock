@@ -11,9 +11,9 @@ import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import MyListings from "./MyListings";
 import API_URL from "../../utils/environment";
-import FetchAge from "../FetchAge/FetchAge";
-import FetchState from "../FetchAge/FetchSate";
-import FetchCategory from "../FetchAge/FetchCategory";
+import FetchAge from "../FetchAPI/FetchAge";
+import FetchState from "../FetchAPI/FetchSate";
+import FetchCategory from "../FetchAPI/FetchCategory";
 
 function NewListing() {
   const [user] = useAtom(userAtom);

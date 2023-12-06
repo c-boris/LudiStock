@@ -19,11 +19,7 @@ const FetchAge = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("responseData in FetchAge", responseData);
-
-          // Clear existing values before updating
-          setAgeAtom(() => responseData); // Update the atom with new data
-          toast.success("Table Age read successfully!");
+          setAgeAtom(() => responseData);
         } else {
           toast.error("Error reading Age");
         }
@@ -32,7 +28,6 @@ const FetchAge = () => {
       }
     }
 
-    // Clear the atom when the component mounts (optional)
     setAgeAtom(() => []);
 
     fetchData();
