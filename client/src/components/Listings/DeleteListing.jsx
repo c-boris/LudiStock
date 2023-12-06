@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import MyListings from "./MyListings";
 import { useNavigate } from "react-router-dom";
+import API_URL from '../../utils/environment';
 
 function DeleteListing() {
   const location = useLocation();
@@ -16,7 +17,7 @@ function DeleteListing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/listings/${item.id}`,
+        `${API_URL}/listings/${item.id}`,
         {
           method: "DELETE",
           headers: {
