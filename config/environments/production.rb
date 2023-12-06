@@ -73,7 +73,7 @@ Rails.application.configure do
   {
     user_name: Rails.application.credentials.gmail.email ,
     password:  Rails.application.credentials.gmail.password,
-    domain: 'ludistock-95072edabbd0.herokuapp.com',
+    domain: 'https://ludistock-95072edabbd0.herokuapp.com/',
     address: 'smtp.gmail.com',
     port: 587,
     authentication: :plain,
