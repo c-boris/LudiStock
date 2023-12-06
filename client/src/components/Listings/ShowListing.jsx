@@ -28,11 +28,12 @@ function ShowListing() {
                 </a>
                 <div className="px-5 pb-5 flex flex-col items-center justify-between">
                   <div>
-                    <a href="#">
-                      <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
-                        {item.description}
-                      </h3>
-                    </a>
+                    <h2 className="text-gray-900 font-semibold text-2xl tracking-tight dark:text-white">
+                      {item.title}
+                    </h2>
+                    <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
+                      {item.description}
+                    </h3>
                   </div>
                   <div className="flex flex-col items-center justify-center mb-4">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">

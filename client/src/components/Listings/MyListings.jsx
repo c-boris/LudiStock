@@ -47,10 +47,14 @@ function MyListings() {
                 MY toys
               </h2>
               <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
-                All toys belonging to user:{user.id}
+                All toys belonging to me (user:{user.id})
               </p>
-              <Link to={`newListing`} className="font-semibold text-accent">
+              <Link
+                to={`newListing`}
+                className="group relative h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+              >
                 Create new toy
+                <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
               </Link>
             </div>
             <ul
@@ -59,42 +63,56 @@ function MyListings() {
             >
               {filteredData.map((item) => (
                 <li key={item.id}>
-                  <div className="flex items-center gap-x-6">
-                    <h2 className="text-base font-semibold leading-7 tracking-tight text-primary dark:text-dprimary">
-                      {item.title}
-                    </h2>
-                    <h2 className="text-sm font-semibold leading-6 text-secondary dark:text-dsecondary">
-                      <p>Price: {item.price}</p>
-                      <p>Description: {item.description}</p>
-                      <p>Age_id : {item.age_id}</p>
-                      <p>State_id : {item.state_id}</p>
-                      <p>Category_id : {item.category_id}</p>
-                      <p>User #:{item.user_id}</p>
-                    </h2>
-                    <div className="flex-col">
-                      <Link
-                        to={`/listings/${item.id}`}
-                        state={{ item: item }}
-                        className="font-semibold text-accent"
-                      >
-                        Details
-                      </Link>
-                      <br></br>
-                      <Link
-                        to={`/listings/update/${item.id}`}
-                        state={{ item: item }}
-                        className="font-semibold text-accent"
-                      >
-                        Modify
-                      </Link>
-                      <br></br>
-                      <Link
-                        to={`/listings/delete/${item.id}`}
-                        state={{ item: item }}
-                        className="font-semibold text-accent"
-                      >
-                        Delete
-                      </Link>
+                  <div className="max-w-full mx-auto">
+                    <div className="shadow-md rounded-lg max-w-full dark:bg-gray-800 dark:border-gray-700">
+                      <a href="#">
+                        <img
+                          className="rounded-t-lg p-8"
+                          src="https://i.ibb.co/KqdgGY4/cosmetic-packaging-mockup-1150-40280.webp"
+                          alt="product image"
+                        />
+                      </a>
+                      <div className="px-5 pb-5 flex flex-col items-center justify-between">
+                        <h2 className="text-gray-900 font-semibold text-2xl tracking-tight dark:text-white">
+                          {item.title}
+                        </h2>
+                        <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
+                          {item.description}
+                        </h3>
+                        <div className="flex flex-col items-center justify-center mb-4">
+                          <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                            {item.price} €
+                          </span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                          <Link
+                            to={`/listings/${item.id}`}
+                            state={{ item: item }}
+                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+                          >
+                            Details
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                          </Link>
+
+                          <Link
+                            to={`/listings/update/${item.id}`}
+                            state={{ item: item }}
+                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+                          >
+                            Modify
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                          </Link>
+
+                          <Link
+                            to={`/listings/delete/${item.id}`}
+                            state={{ item: item }}
+                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-red-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+                          >
+                            Delete
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </li>

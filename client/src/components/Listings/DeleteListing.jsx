@@ -2,8 +2,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import MyListings from "./MyListings";
+import ShowListing from "./ShowListing";
 import { useNavigate } from "react-router-dom";
-import API_URL from '../../utils/environment';
+import API_URL from "../../utils/environment";
 
 function DeleteListing() {
   const location = useLocation();
@@ -16,15 +17,12 @@ function DeleteListing() {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        `${API_URL}/listings/${item.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/listings/${item.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
         navigate("/my-listings");
@@ -43,11 +41,11 @@ function DeleteListing() {
 
   return (
     <>
-      <MyListings />
+      <ShowListing state={{ item: item }} />
       <form onSubmit={handleSubmit}>
         <button
           type="submit"
-          className="flex justify-center w-full rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="grid place-items-center w-2/3 rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
         >
           Confirm deletion
         </button>
