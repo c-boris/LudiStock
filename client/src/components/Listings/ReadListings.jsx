@@ -75,10 +75,10 @@ function ReadListings() {
                           <div className="mt-4 pl-2 mb-2 flex justify-between">
                             <div>
                               <p className="text-lg font-semibold text-gray-900 mb-0">
-                                Product Name
+                                {item.title}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                ${item.price}
+                                €{item.price}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
                                 {item.description}

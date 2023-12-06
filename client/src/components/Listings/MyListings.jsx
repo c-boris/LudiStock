@@ -36,7 +36,6 @@ function MyListings() {
 
     fetchData();
   }, []);
-  console.log("filteredData", filteredData);
   return (
     <>
       {error && <p>{error}</p>}
@@ -74,7 +73,7 @@ function MyListings() {
                     </h2>
                     <div className="flex-col">
                       <Link
-                        to={`/properties/${item.id}`}
+                        to={`/listings/${item.id}`}
                         state={{ item: item }}
                         className="font-semibold text-accent"
                       >
