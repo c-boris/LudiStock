@@ -51,10 +51,10 @@ function MyListings() {
               </p>
               <Link
                 to={`newListing`}
-                className="group relative h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+                className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center"
               >
                 Create new toy
-                <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
               </Link>
             </div>
             <ul
@@ -87,11 +87,11 @@ function MyListings() {
                         <div className="flex items-center mt-4">
                           <Link
                             to={`/listings/${item.id}`}
-                            state={{ item: item }}
+                            state={{ item: item, delete: false }}
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
                             Details
-                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
 
                           <Link
@@ -100,16 +100,16 @@ function MyListings() {
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
                             Modify
-                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
 
                           <Link
                             to={`/listings/delete/${item.id}`}
-                            state={{ item: item }}
+                            state={{ item: item, delete: true }}
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-red-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
                             Delete
-                            <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                            <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
                         </div>
                       </div>
