@@ -114,6 +114,7 @@ function ReadListings() {
           </div>
         </div>
       )}
+      <FetchAge />
     </>
   );
 }
