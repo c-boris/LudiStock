@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 export default function Hero() {
   const [user] = useAtom(userAtom);
 
-  console.log(user);
   return (
     <section id="hero" className="bg-light dark:bg-dark h-screen">
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -34,11 +33,10 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-6xl py-20">
-              Sell your properties easily with us!!!
+              Sell your old toys easily with us!!!
             </h1>
             <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
-              Our expert team turns transactions into a seamless quest, easy as
-              executing a flawless code !
+              Rediscover Joy: Reimagined Toys for Every Playful Heart!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               {user.isLoggedIn ? (
