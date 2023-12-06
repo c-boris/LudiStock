@@ -19,11 +19,7 @@ const FetchCategory = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("responseData in FetchCategory", responseData);
-
-          // Clear existing values before updating
-          setCategoryAtom(() => responseData); // Update the atom with new data
-          toast.success("Table Category read successfully!");
+          setCategoryAtom(() => responseData);
         } else {
           toast.error("Error reading Category");
         }
@@ -32,7 +28,6 @@ const FetchCategory = () => {
       }
     }
 
-    // Clear the atom when the component mounts (optional)
     setCategoryAtom(() => []);
 
     fetchData();

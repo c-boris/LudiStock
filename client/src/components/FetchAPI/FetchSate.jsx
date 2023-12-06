@@ -19,11 +19,7 @@ const FetchState = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("responseData in FetchSate", responseData);
-
-          // Clear existing values before updating
-          setStateAtom(() => responseData); // Update the atom with new data
-          toast.success("Table State read successfully!");
+          setStateAtom(() => responseData);
         } else {
           toast.error("Error reading State");
         }
@@ -32,7 +28,6 @@ const FetchState = () => {
       }
     }
 
-    // Clear the atom when the component mounts (optional)
     setStateAtom(() => []);
 
     fetchData();
