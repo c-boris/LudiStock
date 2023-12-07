@@ -28,10 +28,12 @@ const useAuth = () => {
       const token = response.headers.get("Authorization");
 
       // Store token and user data in cookies
-      Cookies.set("token", token);
-      Cookies.set("id", data.user.id);
-      Cookies.set("email", data.user.email);
-      Cookies.set("username", data.user.username);
+      updateCookies({
+        token,
+        id: data.user.id,
+        email: data.user.email,
+        username: data.user.username,
+      });
 
       // Set the user as logged in
       setUser({
@@ -45,6 +47,13 @@ const useAuth = () => {
     } else {
       return { success: false, message: errorMessage };
     }
+  };
+
+  const updateCookies = ({ token, id, email, username }) => {
+    Cookies.set("token", token);
+    Cookies.set("id", id);
+    Cookies.set("email", email);
+    Cookies.set("username", username);
   };
 
   const login = async (email, password, navigate, toast) => {
