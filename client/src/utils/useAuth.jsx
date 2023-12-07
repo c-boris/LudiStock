@@ -117,16 +117,22 @@ const useAuth = () => {
     Cookies.remove("id");
     Cookies.remove("email");
     Cookies.remove("username");
-
+  
+    // Update user state
     setUser({
       isLoggedIn: false,
       email: "",
       username: "",
     });
-
-    navigate("/login");
-    toast.success("Logout successful!");
+  
+    // Delay the navigation to allow state update to propagate
+    setTimeout(() => {
+      // Navigate to the login page and display success message
+      navigate("/");
+      toast.success("Logout successful!");
+    }, 100);
   };
+  
 
   const updateProfile = async ({
     email = "",
