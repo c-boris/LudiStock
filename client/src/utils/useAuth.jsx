@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
-import API_URL from "./environment";
+import API_URL from './environment';
+
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
@@ -98,11 +99,7 @@ const useAuth = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: {
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-          },
+          user: { email, password, password_confirmation: passwordConfirmation },
         }),
       });
 
@@ -125,11 +122,12 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-
-    Object.keys(Cookies.get()).forEach((cookieName) => {
-      Cookies.remove(cookieName);
-    });
-
+    Cookies.remove("token");
+    Cookies.remove("id");
+    Cookies.remove("email");
+    Cookies.remove("username");
+  
+    // Update user state
     setUser({
       isLoggedIn: false,
       email: "",
@@ -163,7 +161,7 @@ const useAuth = () => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           user: {
