@@ -40,7 +40,7 @@ function ShowListing() {
   return (
     <>
       {item && (
-        <div className="bg-light dark:bg-dark py-24 sm:py-32 h-screen">
+        <div className="bg-light dark:bg-dark py-24 sm:py-32">
           <div className="mx-auto grid max-w-full gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
             <div className="max-w-full">
               <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl">
