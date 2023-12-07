@@ -65,8 +65,9 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "marketplace_production"
 
   config.action_mailer.perform_caching = false
-
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'ludistock-95072edabbd0.herokuapp.com' }
+
 
   config.action_mailer.smtp_settings =
 
@@ -113,6 +114,4 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-
-  # config.action_mailer.default_url_options = { host: 'votre-domaine.com' }
 end
