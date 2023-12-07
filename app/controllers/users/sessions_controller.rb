@@ -19,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def log_out_success
-    cookies.delete(:token, domain: '127.0.0.1')
+    cookies.delete(:token, domain: '127.0.0.1') ||
     cookies.delete(:token, domain: '.herokuapp.com')
     render json: { message: 'You are logged out.' }, status: :ok
   end
