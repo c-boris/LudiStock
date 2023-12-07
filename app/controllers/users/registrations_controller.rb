@@ -3,14 +3,14 @@
     before_action :authenticate_user!, only: [:update_profile]
     respond_to :json
 
-    def create
-      super do |resource|
-        if resource.persisted?
-          # Action to send a welcome email after user creation
-          UserMailer.with(user: resource).welcome_email.deliver_later
-        end
-      end
-    end
+    # def create
+    #   super do |resource|
+    #     if resource.persisted?
+    #       # Action to send a welcome email after user creation
+    #       UserMailer.with(user: resource).welcome_email.deliver_now
+    #     end
+    #   end
+    # end
 
     def update_profile
       user = current_user
