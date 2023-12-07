@@ -19,19 +19,25 @@ function ReadListings() {
     }
   }
   if (data == null) fetchData();
-  const [priceFilter, setPriceFilter] = useState(100);
-  function priceFilterData() {
-    setData(data.filter((item) => item.price <= priceFilter));
-    console.log("data", data);
-  }
-  const [nameFilter, setNameFilter] = useState("");
-  function nameFilterData() {
-    console.log("nameFilter", nameFilter);
-    if (nameFilter == "") {
+
+  const [priceFilter, setPriceFilter] = useState(null);
+  const [nameFilter, setNameFilter] = useState(null);
+
+  function FilterData() {
+    if (priceFilter != null && nameFilter != null) {
+      setData(
+        data.filter(
+          (item) => item.price <= priceFilter && item.title.includes(nameFilter)
+        )
+      );
+    } else if (priceFilter != null && nameFilter == null) {
+      setData(data.filter((item) => item.price <= priceFilter));
+    } else if (priceFilter == null && nameFilter != null) {
+      setData(data.filter((item) => item.title.includes(nameFilter)));
+    } else {
       fetchData();
-    } else setData(data.filter((item) => item.title.includes(nameFilter)));
+    }
   }
-  console.log(data);
   return (
     <>
       <form className="py-20 bg-light dark:bg-dark">
@@ -40,27 +46,18 @@ function ReadListings() {
             htmlFor="price"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Price filter:
+            Price filter max:
           </label>
           <div className="mt-1">
             <input
               type="text"
               id="price-filter"
-              value={priceFilter}
-              onChange={(e) =>
-                setPriceFilter(parseInt(e.target.value, 10) || "")
-              }
+              value={priceFilter || ""}
+              onChange={(e) => setPriceFilter(parseInt(e.target.value, 10))}
               required
               className="block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
-          <button
-            type="button"
-            onClick={priceFilterData}
-            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Filter
-          </button>
         </div>
         <div className="flex items-center">
           <label
@@ -73,20 +70,20 @@ function ReadListings() {
             <input
               type="text"
               id="name-filter"
-              value={nameFilter}
+              value={nameFilter || ""}
               onChange={(e) => setNameFilter(e.target.value)}
               required
               className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
-          <button
-            type="button"
-            onClick={nameFilterData}
-            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Filter
-          </button>
         </div>
+        <button
+          type="button"
+          onClick={FilterData}
+          className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Filter
+        </button>
       </form>
       {data == [] ? (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
