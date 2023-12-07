@@ -122,8 +122,9 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-    Object.keys(Cookies.get()).forEach((cookieName) =>{
-      Cookies.remove(cookieName);
+    const cookiesToRemove = ["token", "id", "email", "username"];
+    cookiesToRemove.forEach((cookieName) => {
+      Cookies.remove(cookieName, { path: '/' });
     });
   
     // Update user state
@@ -134,13 +135,28 @@ const useAuth = () => {
       id: "",
     });
   
-    // Delay the navigation to allow state update to propagate
+    // Use onBeforeUnload to trigger cookie removal before navigating
+    const handleBeforeUnload = () => {
+      // Clear cookies when the user is about to leave the page
+      cookiesToRemove.forEach((cookieName) => {
+        Cookies.remove(cookieName, { path: '/' });
+      });
+    };
+  
+    // Attach the event listener
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  
+    // Navigate after a short delay
     setTimeout(() => {
+      // Remove the event listener
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+  
       // Navigate to the login page and display success message
       navigate("/");
       toast.success("Logout successful!");
     }, 100);
   };
+  
   
 
   const updateProfile = async ({
