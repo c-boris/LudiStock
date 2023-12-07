@@ -122,10 +122,9 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-    Cookies.remove("token");
-    Cookies.remove("id");
-    Cookies.remove("email");
-    Cookies.remove("username");
+    Object.keys(Cookies.get()).forEach((cookieName) =>{
+      Cookies.remove(cookieName);
+    });
   
     // Update user state
     setUser({
