@@ -131,6 +131,7 @@ const useAuth = () => {
       isLoggedIn: false,
       email: "",
       username: "",
+      id: "",
     });
   
     // Delay the navigation to allow state update to propagate
