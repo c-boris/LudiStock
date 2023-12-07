@@ -4,7 +4,6 @@ import API_URL from "../../utils/environment";
 
 function ReadListings() {
   const [data, setData] = useState(null);
-
   async function fetchData() {
     const response = await fetch(`${API_URL}/listings`, {
       method: "GET",
@@ -12,7 +11,6 @@ function ReadListings() {
         "Content-Type": "application/json",
       },
     });
-
     if (response.ok) {
       const responseData = await response.json();
       setData(responseData);
@@ -21,20 +19,91 @@ function ReadListings() {
     }
   }
   if (data == null) fetchData();
-
+  const [priceFilter, setPriceFilter] = useState(100);
+  function priceFilterData() {
+    setData(data.filter((item) => item.price <= priceFilter));
+    console.log("data", data);
+  }
+  const [nameFilter, setNameFilter] = useState("");
+  function nameFilterData() {
+    console.log("nameFilter", nameFilter);
+    if (nameFilter == "") {
+      fetchData();
+    } else setData(data.filter((item) => item.title.includes(nameFilter)));
+  }
+  console.log(data);
   return (
     <>
-      {data && (
+      <form className="py-20 bg-light dark:bg-dark">
+        <div className="flex items-center">
+          <label
+            htmlFor="price"
+            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
+          >
+            Price filter:
+          </label>
+          <div className="mt-1">
+            <input
+              type="text"
+              id="price-filter"
+              value={priceFilter}
+              onChange={(e) =>
+                setPriceFilter(parseInt(e.target.value, 10) || "")
+              }
+              required
+              className="block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={priceFilterData}
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Filter
+          </button>
+        </div>
+        <div className="flex items-center">
+          <label
+            htmlFor="name"
+            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
+          >
+            Name filter on title (submit blank to reload data):
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              id="name-filter"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              required
+              className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={nameFilterData}
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Filter
+          </button>
+        </div>
+      </form>
+      {data == [] ? (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
-          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl">
-                List of toys
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-secondary dark:text-dsecondary">
-                All you are looking for is here below.
-              </p>
-            </div>
+          <h1>Nothing found</h1>
+        </div>
+      ) : null}
+      {data && (
+        <div className="bg-light dark:bg-dark py-1 sm:py-1">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8">
+              List of toys
+            </h2>
+            <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary">
+              All you are looking for is here below.
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2">
             <ul
               role="list"
               className="grid gap-x-4 gap-y-2 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2"
