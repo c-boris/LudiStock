@@ -38,9 +38,14 @@ function ReadListings() {
       fetchData();
     }
   }
+  function ReloadData() {
+    fetchData();
+    setNameFilter(null);
+    setPriceFilter(null);
+  }
   return (
     <>
-      <form className="py-20 bg-light dark:bg-dark">
+      <form className="px-8 pt-20 bg-light dark:bg-dark">
         <div className="flex items-center">
           <label
             htmlFor="price"
@@ -55,7 +60,7 @@ function ReadListings() {
               value={priceFilter || ""}
               onChange={(e) => setPriceFilter(parseInt(e.target.value, 10))}
               required
-              className="block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+              className="mx-11 block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
         </div>
@@ -64,7 +69,7 @@ function ReadListings() {
             htmlFor="name"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Name filter on title (submit blank to reload data):
+            Name filter on title :
           </label>
           <div className="mt-2">
             <input
@@ -73,17 +78,28 @@ function ReadListings() {
               value={nameFilter || ""}
               onChange={(e) => setNameFilter(e.target.value)}
               required
-              className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+              className="mx-1 block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
         </div>
-        <button
-          type="button"
-          onClick={FilterData}
-          className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Filter
-        </button>
+        <div className="flex">
+          <button
+            type="button"
+            onClick={FilterData}
+            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+          >
+            Filter
+            <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+          </button>
+          <button
+            type="button"
+            onClick={ReloadData}
+            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+          >
+            Reload data
+            <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+          </button>
+        </div>
       </form>
       {data == [] ? (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
@@ -91,9 +107,9 @@ function ReadListings() {
         </div>
       ) : null}
       {data && (
-        <div className="bg-light dark:bg-dark py-1 sm:py-1">
+        <div className="bg-light dark:bg-dark pt-8 sm:py-1">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8">
+            <h2 className=" font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 pt-8">
               List of toys
             </h2>
             <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary">
