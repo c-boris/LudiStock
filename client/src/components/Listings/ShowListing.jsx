@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useAtom } from "jotai";
+import { NavLink, useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import SellerModal from "../Modal/SellerModal";
+import { userAtom } from "../../utils/atom";
 
 function ShowListing() {
   const location = useLocation();
@@ -12,6 +14,7 @@ function ShowListing() {
   const navigate = useNavigate();
   const [showSellerModal, setShowSellerModal] = useState(false);
   const [error, setError] = useState(null);
+  const [user] = useAtom(userAtom);
 
   const openSellerModal = () => {
     setShowSellerModal(true);
@@ -33,7 +36,7 @@ function ShowListing() {
         toast.success("Toy deleted with success");
       } else {
         toast.error("Error deleting toy");
-        setError("Identifiants invalides");
+        setError("Invalid credentials");
         console.log(error.message);
       }
     } catch (error) {
@@ -41,7 +44,7 @@ function ShowListing() {
       console.log(error.message);
     }
   };
-
+  console.log("User:", user);
   return (
     <>
       {item && (
@@ -75,7 +78,7 @@ function ShowListing() {
                   </div>
                   <div className="flex flex-col items-center justify-center mb-4">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                      {item.price} €<p>Ajouter les autres catégories</p>
+                      {item.user} €<p>Add other categories</p>
                     </span>
                   </div>
                   {deleteList ? (
@@ -89,17 +92,29 @@ function ShowListing() {
                     </form>
                   ) : (
                     <div className="flex items-center mt-4">
-                      {/* <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 font-medium rounded-lg text-white text-sm">
-                        Add to cart
-                      </button> */}
-                      <button
-                        onClick={openSellerModal}
-                        className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 first-line:font-medium rounded-lg text-white text-sm"
-                      >
-                        Contact the seller
-                      </button>
-                      {showSellerModal && (
-                        <SellerModal setShowSellerModal={setShowSellerModal} />
+                      {user.isLoggedIn ? (
+                        <>
+                          <button
+                            onClick={openSellerModal}
+                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 first-line:font-medium rounded-lg text-white text-sm"
+                          >
+                            Contact the seller
+                          </button>
+                          {showSellerModal && (
+                            <SellerModal
+                              setShowSellerModal={setShowSellerModal}
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <NavLink
+                            to="/signup"
+                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 font-medium rounded-lg text-white py-2 text-sm"
+                          >
+                            Login or create an account to contact seller
+                          </NavLink>
+                        </>
                       )}
                     </div>
                   )}

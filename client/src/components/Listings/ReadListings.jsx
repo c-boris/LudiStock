@@ -14,6 +14,7 @@ function ReadListings() {
     if (response.ok) {
       const responseData = await response.json();
       setData(responseData);
+      console.log("DATA :", responseData);
     } else {
       console.error("Une erreur s'est produite");
     }
