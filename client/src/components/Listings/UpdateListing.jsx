@@ -10,9 +10,8 @@ import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import { useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
-import FetchAge from "../FetchAPI/FetchAge";
-import FetchState from "../FetchAPI/FetchSate";
-import FetchCategory from "../FetchAPI/FetchCategory";
+import FetchListings from "../FetchAPI/FetchListings";
+
 function UpdateListing() {
   const location = useLocation();
   const item = location.state.item;
@@ -62,9 +61,10 @@ function UpdateListing() {
 
       if (response.ok) {
         const data = await response.json();
-        navigate("/my-listings");
         Cookies.set("token", response.headers.get("Authorization"));
         toast.success("Listing modified successfully!");
+        <FetchListings />;
+        navigate("/my-listings");
       } else {
         toast.error("Error modifying listing");
         setError("Identifiants invalides");
@@ -76,9 +76,6 @@ function UpdateListing() {
       console.log(error.message);
     }
   };
-  FetchAge();
-  FetchState();
-  FetchCategory();
   return (
     <>
       <ListingForm
