@@ -1,7 +1,11 @@
-# app/controllers/users/sessions_controller.rb
-
 class Users::SessionsController < Devise::SessionsController
+  before_action :authenticate_user!, only: [:destroy]
+  skip_before_action :verify_signed_out_user, only: [:destroy]
   respond_to :json
+
+  def destroy
+    respond_to_on_destroy
+  end
 
   private
 
