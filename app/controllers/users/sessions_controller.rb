@@ -19,8 +19,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def log_out_success
-    reset_session 
-    cookies.delete('_interslice_session', domain: 'ludistock-95072edabbd0.herokuapp.com')
     render json: { message: 'You are logged out.' }, status: :ok
   end
 
