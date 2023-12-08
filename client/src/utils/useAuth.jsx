@@ -66,6 +66,7 @@ const useAuth = () => {
         body: JSON.stringify({
           user: { email, password },
         }),
+        credentials: "include",  // Include credentials in the request
       });
 
       const result = await handleResponse(
@@ -122,7 +123,7 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-    Object.keys(Cookies.get()).forEach((cookieName) =>{
+    Object.keys(Cookies.get()).forEach((cookieName) => {
       Cookies.remove(cookieName);
     });
   
@@ -134,13 +135,21 @@ const useAuth = () => {
       id: "",
     });
   
-    // Delay the navigation to allow state update to propagate
-    setTimeout(() => {
-      // Navigate to the login page and display success message
-      navigate("/");
-      toast.success("Logout successful!");
-    }, 100);
+    // Trigger server-side logout using the Devise route
+    fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
+      .then(res => {
+        if (res.ok) {
+          // Delay the navigation to allow state update to propagate
+          setTimeout(() => {
+            // Navigate to the login page and display success message
+            navigate("/");
+            toast.success("Logout successful!");
+          }, 100);
+        }
+      });
   };
+  
+  
   
 
   const updateProfile = async ({
@@ -162,6 +171,7 @@ const useAuth = () => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
+          // "Authorization": `Bearer ${user.token}`,
         },
         body: JSON.stringify({
           user: {
