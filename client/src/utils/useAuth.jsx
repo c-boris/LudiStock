@@ -135,7 +135,6 @@ const useAuth = () => {
       id: "",
     });
   
-    // Trigger server-side logout using the Devise route
     fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
       .then(res => {
         if (res.ok) {
@@ -149,9 +148,6 @@ const useAuth = () => {
       });
   };
   
-  
-  
-
   const updateProfile = async ({
     email = "",
     emailConfirmation = "",

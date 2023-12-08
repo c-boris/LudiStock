@@ -11,7 +11,6 @@
 #              #max_age: 600
 #   end
 # end
-
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'http://127.0.0.1:3000' # Spécifiez l'origine correcte de votre application front-end
