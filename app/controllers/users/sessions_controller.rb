@@ -4,7 +4,6 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
   def destroy
-    reset_session
     respond_to_on_destroy
   end
 
