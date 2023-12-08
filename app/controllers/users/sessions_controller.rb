@@ -19,7 +19,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def log_out_success
-    reset_session
     render json: { message: 'You are logged out.' }, status: :ok
   end
 
