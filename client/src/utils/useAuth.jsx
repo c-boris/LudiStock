@@ -122,7 +122,7 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-    const cookiesToRemove = ["token", "id", "email", "username"];
+    const cookiesToRemove = ["token", "id", "email", "username", "_interslice_session"];
     cookiesToRemove.forEach((cookieName) => {
       Cookies.remove(cookieName, { path: '/' });
     });
