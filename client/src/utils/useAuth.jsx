@@ -66,7 +66,7 @@ const useAuth = () => {
         body: JSON.stringify({
           user: { email, password },
         }),
-        credentials: "include",  // Include credentials in the request
+        // credentials: "include",  // Include credentials in the request
       });
 
       const result = await handleResponse(
@@ -135,7 +135,8 @@ const useAuth = () => {
       id: "",
     });
   
-    fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
+    fetch(`${API_URL}/users/sign_out`, { method: "DELETE"})
+    // fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
       .then(res => {
         if (res.ok) {
           // Delay the navigation to allow state update to propagate
