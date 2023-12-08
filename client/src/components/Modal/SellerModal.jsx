@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import { userAtom } from "../../utils/atom";
+import { useAtom } from "jotai";
 
 const SellerModal = ({ setShowSellerModal }) => {
   const modalRef = useRef();
+  const [user] = useAtom(userAtom);
 
   const closeOnOutsideClick = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
