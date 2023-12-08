@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import sellerModal from "../Modal/sellerModal";
+import SellerModal from "../Modal/SellerModal";
 import { userAtom } from "../../utils/atom";
 
 function ShowListing() {
