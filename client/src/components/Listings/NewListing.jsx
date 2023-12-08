@@ -4,14 +4,12 @@ import { userAtom } from "../../utils/atom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
 import { categoryAtom } from "../../utils/categoryAtom";
+import FetchListings from "../../components/FetchAPI/FetchListings";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import API_URL from "../../utils/environment";
-import FetchAge from "../FetchAPI/FetchAge";
-import FetchState from "../FetchAPI/FetchSate";
-import FetchCategory from "../FetchAPI/FetchCategory";
 
 function NewListing() {
   const [user] = useAtom(userAtom);
@@ -22,7 +20,6 @@ function NewListing() {
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -62,8 +59,9 @@ function NewListing() {
       if (response.ok) {
         const data = await response.json();
         Cookies.set("token", response.headers.get("Authorization"));
-        navigate("/my-listings");
+        <FetchListings />;
         toast.success("Toy created successfully!");
+        navigate("/my-listings");
       } else {
         toast.error("Missing field values");
       }
@@ -71,9 +69,6 @@ function NewListing() {
       toast.error("An error occurred during toy creation");
     }
   };
-  FetchAge();
-  FetchState();
-  FetchCategory();
   return (
     <>
       <ListingForm

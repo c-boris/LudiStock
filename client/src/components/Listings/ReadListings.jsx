@@ -1,28 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAtom } from "jotai";
 import { Link } from "react-router-dom";
-import API_URL from "../../utils/environment";
+import { listingsAtom } from "../../utils/listingsAtom";
 
 function ReadListings() {
-  const [data, setData] = useState(null);
-  async function fetchData() {
-    const response = await fetch(`${API_URL}/listings`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      const responseData = await response.json();
-      setData(responseData);
-    } else {
-      console.error("Une erreur s'est produite");
-    }
-  }
-  if (data == null) fetchData();
-
+  const [dataListings] = useAtom(listingsAtom);
+  const [data, setData] = useState(dataListings);
   const [priceFilter, setPriceFilter] = useState(null);
   const [nameFilter, setNameFilter] = useState(null);
-
   function FilterData() {
     if (priceFilter != null && nameFilter != null) {
       setData(
@@ -35,11 +20,11 @@ function ReadListings() {
     } else if (priceFilter == null && nameFilter != null) {
       setData(data.filter((item) => item.title.includes(nameFilter)));
     } else {
-      fetchData();
+      setData(dataListings);
     }
   }
   function ReloadData() {
-    fetchData();
+    setData(dataListings);
     setNameFilter(null);
     setPriceFilter(null);
   }
