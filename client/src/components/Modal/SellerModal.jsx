@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
 
-const SellerModal = ({ setShowSellerModal }) => {
+const sellerModal = ({ setShowSellerModal }) => {
   const modalRef = useRef();
   const [user] = useAtom(userAtom);
 
@@ -68,4 +68,4 @@ const SellerModal = ({ setShowSellerModal }) => {
   );
 };
 
-export default SellerModal;
+export default sellerModal;

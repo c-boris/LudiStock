@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import SellerModal from "../Modal/SellerModal";
+import sellerModal from "../Modal/sellerModal";
 import { userAtom } from "../../utils/atom";
 
 function ShowListing() {
@@ -110,7 +110,7 @@ function ShowListing() {
                         <>
                           <NavLink
                             to="/signup"
-                            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 font-medium rounded-lg text-white py-2 text-sm"
+                            className="group relative h-10 mr-2 px-2.5 overflow-hidden bg-indigo-500 font-medium rounded-lg text-white py-2 text-sm"
                           >
                             Login or create an account to contact seller
                           </NavLink>
