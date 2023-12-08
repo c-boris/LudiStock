@@ -1,4 +1,4 @@
-# app/controllers/api/users/sessions_controller.rb
+# app/controllers/users/sessions_controller.rb
 
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
