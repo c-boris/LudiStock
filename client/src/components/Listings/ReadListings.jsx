@@ -6,6 +6,7 @@ import { listingsAtom } from "../../utils/listingsAtom";
 function ReadListings() {
   const [dataListings] = useAtom(listingsAtom);
   const [data, setData] = useState(dataListings);
+
   const [priceFilter, setPriceFilter] = useState(null);
   const [nameFilter, setNameFilter] = useState(null);
   function FilterData() {

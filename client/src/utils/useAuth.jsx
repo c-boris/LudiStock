@@ -28,10 +28,12 @@ const useAuth = () => {
       const token = response.headers.get("Authorization");
 
       // Store token and user data in cookies
-      Cookies.set("token", token);
-      Cookies.set("id", data.user.id);
-      Cookies.set("email", data.user.email);
-      Cookies.set("username", data.user.username);
+      updateCookies({
+        token,
+        id: data.user.id,
+        email: data.user.email,
+        username: data.user.username,
+      });
 
       // Set the user as logged in
       setUser({
@@ -47,6 +49,13 @@ const useAuth = () => {
     }
   };
 
+  const updateCookies = ({ token, id, email, username }) => {
+    Cookies.set("token", token);
+    Cookies.set("id", id);
+    Cookies.set("email", email);
+    Cookies.set("username", username);
+  };
+
   const login = async (email, password, navigate, toast) => {
     try {
       const response = await fetch(`${API_URL}/users/sign_in`, {
@@ -57,6 +66,7 @@ const useAuth = () => {
         body: JSON.stringify({
           user: { email, password },
         }),
+        credentials: "include",  // Include credentials in the request
       });
 
       const result = await handleResponse(
@@ -113,20 +123,34 @@ const useAuth = () => {
 
   const logout = (navigate, toast) => {
     // Clear cookies and reset user state
-    Cookies.remove("token");
-    Cookies.remove("id");
-    Cookies.remove("email");
-    Cookies.remove("username");
-
+    Object.keys(Cookies.get()).forEach((cookieName) => {
+      Cookies.remove(cookieName);
+    });
+  
+    // Update user state
     setUser({
       isLoggedIn: false,
       email: "",
       username: "",
+      id: "",
     });
-
-    navigate("/login");
-    toast.success("Logout successful!");
+  
+    // Trigger server-side logout using the Devise route
+    fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
+      .then(res => {
+        if (res.ok) {
+          // Delay the navigation to allow state update to propagate
+          setTimeout(() => {
+            // Navigate to the login page and display success message
+            navigate("/");
+            toast.success("Logout successful!");
+          }, 100);
+        }
+      });
   };
+  
+  
+  
 
   const updateProfile = async ({
     email = "",
@@ -147,6 +171,7 @@ const useAuth = () => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
+          // "Authorization": `Bearer ${user.token}`,
         },
         body: JSON.stringify({
           user: {

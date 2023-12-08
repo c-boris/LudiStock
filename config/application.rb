@@ -30,7 +30,7 @@ module Marketplace
     config.api_only = true
 
     # This also configures session_options for use below
-    config.session_store :cookie_store, key: '_interslice_session'
+    config.session_store :cookie_store
 
     # Required for all session management (regardless of session_store)
     config.middleware.use ActionDispatch::Cookies
