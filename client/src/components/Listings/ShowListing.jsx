@@ -1,15 +1,21 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import SellerModal from "../Modal/SellerModal";
 
 function ShowListing() {
   const location = useLocation();
   const item = location.state.item;
   const deleteList = location.state.delete;
   const navigate = useNavigate();
+  const [showSellerModal, setShowSellerModal] = useState(false);
   const [error, setError] = useState(null);
+
+  const openSellerModal = () => {
+    setShowSellerModal(true);
+  };
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -28,7 +34,6 @@ function ShowListing() {
       } else {
         toast.error("Error deleting toy");
         setError("Identifiants invalides");
-
         console.log(error.message);
       }
     } catch (error) {
@@ -84,14 +89,18 @@ function ShowListing() {
                     </form>
                   ) : (
                     <div className="flex items-center mt-4">
-                      <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm">
+                      {/* <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 font-medium rounded-lg text-white text-sm">
                         Add to cart
-                        <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                      </button>
-                      <button className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm">
+                      </button> */}
+                      <button
+                        onClick={openSellerModal}
+                        className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-indigo-500 first-line:font-medium rounded-lg text-white text-sm"
+                      >
                         Contact the seller
-                        <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                       </button>
+                      {showSellerModal && (
+                        <SellerModal setShowSellerModal={setShowSellerModal} />
+                      )}
                     </div>
                   )}
                 </div>
