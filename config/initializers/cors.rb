@@ -5,7 +5,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     #origins 'https://ludistock-95072edabbd0.herokuapp.com', 'http://localhost:3000'
 
     resource '*',
-             headers: %w[Authorization],
+            #  headers: %w[Authorization],
+             headers: :any,
              methods: %i[get post put patch delete options head],
              expose: %w[Authorization]
              #max_age: 600

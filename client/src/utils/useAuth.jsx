@@ -2,15 +2,13 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
-import API_URL from './environment';
-
+import API_URL from "./environment";
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
 
   useEffect(() => {
     const token = Cookies.get("token");
-    console.log("Token from cookie:", token);
 
     if (token) {
       setUser({
@@ -22,38 +20,25 @@ const useAuth = () => {
     }
   }, [setUser]);
 
-  const handleResponse = async (response, successMessage, errorMessage) => {
-    if (response.ok) {
-      const data = await response.json();
-      const token = response.headers.get("Authorization");
-
-      // Store token and user data in cookies
-      updateCookies({
-        token,
-        id: data.user.id,
-        email: data.user.email,
-        username: data.user.username,
-      });
-
-      // Set the user as logged in
-      setUser({
-        isLoggedIn: true,
-        email: data.user.email,
-        username: data.user.username,
-        id: data.user.id,
-      });
-
-      return { success: true, message: successMessage };
-    } else {
-      return { success: false, message: errorMessage };
-    }
-  };
-
   const updateCookies = ({ token, id, email, username }) => {
     Cookies.set("token", token);
     Cookies.set("id", id);
     Cookies.set("email", email);
     Cookies.set("username", username);
+  };
+
+  const handleResponse = async (response, successMessage, errorMessage) => {
+    try {
+      if (response.ok) {
+        const data = await response.json();
+        return { success: true, data };
+      } else {
+        const errorData = await response.json();
+        return { success: false, error: errorData.message || errorMessage };
+      }
+    } catch (error) {
+      return { success: false, error: errorMessage };
+    }
   };
 
   const login = async (email, password, navigate, toast) => {
@@ -66,23 +51,37 @@ const useAuth = () => {
         body: JSON.stringify({
           user: { email, password },
         }),
-        // credentials: "include",  // Include credentials in the request
       });
 
       const result = await handleResponse(
         response,
         "Login successful!",
-        "Invalid credentials"
+        "An error occurred during login"
       );
 
       if (result.success) {
+        const { data } = result;
+        updateCookies({
+          token: response.headers.get("Authorization"),
+          id: data.user.id,
+          email: data.user.email,
+          username: data.user.username,
+        });
+
+        setUser({
+          isLoggedIn: true,
+          email: data.user.email,
+          username: data.user.username,
+          id: data.user.id,
+        });
+
         navigate("/");
-        toast.success(result.message);
+        toast.success("Login successful!");
       } else {
-        toast.error(result.message);
+        toast.error(result.error);
       }
     } catch (error) {
-      toast.error("An error occurred");
+      toast.error("An unexpected error occurred during login");
     }
   };
 
@@ -100,116 +99,90 @@ const useAuth = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: { email, password, password_confirmation: passwordConfirmation },
-        }),
-      });
-
-      const result = await handleResponse(
-        response,
-        "Account created successfully!",
-        "Error creating account"
-      );
-
-      if (result.success) {
-        navigate("/");
-        toast.success(result.message);
-      } else {
-        toast.error(result.message);
-      }
-    } catch (error) {
-      toast.error("An error occurred during account creation");
-    }
-  };
-
-  const logout = (navigate, toast) => {
-    // Clear cookies and reset user state
-    Object.keys(Cookies.get()).forEach((cookieName) => {
-      Cookies.remove(cookieName);
-    });
-  
-    // Update user state
-    setUser({
-      isLoggedIn: false,
-      email: "",
-      username: "",
-      id: "",
-    });
-  
-    fetch(`${API_URL}/users/sign_out`, { method: "DELETE"})
-    // fetch(`${API_URL}/users/sign_out`, { method: "DELETE", credentials: "include" })
-      .then(res => {
-        if (res.ok) {
-          // Delay the navigation to allow state update to propagate
-          setTimeout(() => {
-            // Navigate to the login page and display success message
-            navigate("/");
-            toast.success("Logout successful!");
-          }, 100);
-        }
-      });
-  };
-  
-  const updateProfile = async ({
-    email = "",
-    emailConfirmation = "",
-    password = "",
-    passwordConfirmation = "",
-    currentPassword = "",
-  }) => {
-    const token = Cookies.get("token");
-
-    if (!token) {
-      throw new Error("Authentication token is missing");
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/users/update_profile`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-          // "Authorization": `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({
           user: {
             email,
-            email_confirmation: emailConfirmation,
             password,
             password_confirmation: passwordConfirmation,
-            current_password: currentPassword,
           },
         }),
       });
 
       const result = await handleResponse(
         response,
-        "Profile updated successfully!",
-        "Failed to update profile"
+        "Account created successfully!",
+        "An error occurred during account creation"
       );
 
       if (result.success) {
-        // Update user data in the local state
-        setUser({
-          isLoggedIn: true,
-          email: response.data.user.email,
-          username: response.data.user.username,
-          id: response.data.user.id,
+        const { data } = result;
+        updateCookies({
+          token: response.headers.get("Authorization"),
+          id: data.user.id,
+          email: data.user.email,
+          username: data.user.username,
         });
 
-        // Update cookies if necessary
-        Cookies.set("email", response.data.user.email);
-        Cookies.set("username", response.data.user.username);
+        setUser({
+          isLoggedIn: true,
+          email: data.user.email,
+          username: data.user.username,
+          id: data.user.id,
+        });
 
-        return result; // You can return additional data if needed
+        navigate("/");
+        toast.success("Account created successfully!");
       } else {
-        throw new Error(result.message);
+        toast.error(result.error);
       }
     } catch (error) {
-      throw new Error("An error occurred during profile update");
+      toast.error("An unexpected error occurred during account creation");
     }
   };
 
-  return { user, login, signup, logout, updateProfile };
+  const logout = async (navigate, toast) => {
+    try {
+      const token = Cookies.get("token");
+
+      if (!token) {
+        throw new Error("Authentication token is missing");
+      }
+
+      const response = await fetch(`${API_URL}/users/sign_out`, {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      const result = await handleResponse(
+        response,
+        "Logout successful!",
+        "Logout failed. Please try again."
+      );
+
+      if (result.success) {
+        Object.keys(Cookies.get()).forEach((cookieName) => {
+          Cookies.remove(cookieName);
+        });
+
+        setUser({
+          isLoggedIn: false,
+          email: "",
+          username: "",
+          id: "",
+        });
+
+        navigate("/");
+        toast.success("Logout successful!");
+      } else {
+        toast.error(result.error);
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred during logout");
+    }
+  };
+
+  return { user, login, signup, logout };
 };
 
 export { useAuth };
