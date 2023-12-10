@@ -2,43 +2,27 @@ import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "../../utils/atom";
 import { Link } from "react-router-dom";
-import API_URL from "../../utils/environment";
+import fetchAPI from "../FetchAPI/fetchAPI";
+import { listingsAtom } from "../../utils/listingsAtom";
 
 function MyListings() {
   const [user] = useAtom(userAtom);
-  const [error, setError] = useState(null);
-  const [filteredData, setFilteredData] = useState(null);
-
+  const [filteredData, setFilteredData] = useState([]);
+  const [dataListings, setDataListings] = useAtom(listingsAtom);
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`${API_URL}/listings`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const responseData = await response.json();
-          setFilteredData(
-            responseData.filter((item) => item.user_id == user.id)
-          );
-        } else {
-          setError("Identifiants invalides");
-          console.log(error.message);
-        }
-      } catch (error) {
-        setError("Une erreur s'est produite");
-        console.log(error.message);
-      }
-    }
-
-    fetchData();
+    setDataListings(fetchAPI("listings"));
   }, []);
+  useEffect(() => {
+    setFilteredData(dataListings?.filter((item) => item.user_id == user.id));
+  }, [dataListings]);
+  console.log(filteredData);
   return (
     <>
-      {error && <p>{error}</p>}
+      {!filteredData.length && (
+        <h1 className="text-2xl px-8 text-primary dark:text-dprimary bg-light dark:bg-dark py-24 sm:py-32">
+          No data found
+        </h1>
+      )}
       {filteredData && (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
           <div className="max-w-2xl">
