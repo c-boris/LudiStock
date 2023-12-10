@@ -1,0 +1,15 @@
+#version modifiée en locale pour Jean-Marie
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'http://localhost:3000'
+    # origins 'http://localhost:3000'
+    #origins 'https://ludistock-95072edabbd0.herokuapp.com', 'http://localhost:3000'
+
+    resource '*',
+             headers: %w[Authorization],
+             methods: %i[get post put patch delete options head],
+             expose: %w[Authorization],
+             credentials: true
+  end
+end

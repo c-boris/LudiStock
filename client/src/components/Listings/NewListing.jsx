@@ -4,7 +4,6 @@ import { userAtom } from "../../utils/atom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
 import { categoryAtom } from "../../utils/categoryAtom";
-import FetchListings from "../../components/FetchAPI/FetchListings";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -57,9 +56,7 @@ function NewListing() {
       });
 
       if (response.ok) {
-        const data = await response.json();
         Cookies.set("token", response.headers.get("Authorization"));
-        <FetchListings />;
         toast.success("Toy created successfully!");
         navigate("/my-listings");
       } else {

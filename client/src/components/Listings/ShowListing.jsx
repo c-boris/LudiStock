@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { NavLink, useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
@@ -78,8 +78,13 @@ function ShowListing() {
                   </div>
                   <div className="flex flex-col items-center justify-center mb-4">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                      {item.user} €<p>Add other categories</p>
+                      {item.price} €
                     </span>
+                  </div>
+                  <div className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white">
+                    <h3>category: {item.category.label}</h3>
+                    <h3>age: {item.age.label}</h3>
+                    <h3>state: {item.state.label}</h3>
                   </div>
                   {deleteList ? (
                     <form onSubmit={handleDelete}>
