@@ -1,4 +1,4 @@
-// atom.js
+// atom.jsx
 import { atom } from "jotai";
 
 export const userAtom = atom({

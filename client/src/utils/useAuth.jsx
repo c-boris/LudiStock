@@ -21,13 +21,14 @@ const useAuth = () => {
   }, [setUser]);
 
   const updateCookies = ({ token, id, email, username }) => {
+    console.log("Updating cookies:", { token, id, email, username });
     Cookies.set("token", token);
     Cookies.set("id", id);
     Cookies.set("email", email);
     Cookies.set("username", username);
   };
 
-  const handleResponse = async (response, successMessage, errorMessage) => {
+  const handleResponse = async (response, errorMessage) => {
     try {
       if (response.ok) {
         const data = await response.json();
@@ -40,6 +41,7 @@ const useAuth = () => {
       return { success: false, error: errorMessage };
     }
   };
+  
 
   const login = async (email, password, navigate, toast) => {
     try {
@@ -182,7 +184,75 @@ const useAuth = () => {
     }
   };
 
-  return { user, login, signup, logout };
+  const updateProfile = async ({ username = "", email = "", password = "" }) => {
+    try {
+      const token = Cookies.get("token");
+    
+      if (!token) {
+        throw new Error("Authentication token is missing");
+      }
+    
+      const requestBody = {
+        user: {
+          username,
+          email,
+          password,
+        },
+      };
+    
+      const response = await fetch(`${API_URL}/users/update_profile`, {
+        method: "PATCH",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+    
+      const result = await handleResponse(
+        response,
+        "Profile updated successfully!",
+        "Failed to update profile"
+      );
+    
+      if (result.success) {
+        const newToken = response.headers.get("Authorization");
+    
+        if (newToken) {
+          console.log("New token received:", newToken);
+          updateCookies({
+            token: newToken,
+            id: result.data.user.id,
+            email: result.data.user.email,
+            username: result.data.user.username,
+          });
+        }
+
+        console.log("Updated user state:", {
+          isLoggedIn: true,
+          email: result.data.user.email,
+          username: result.data.user.username,
+          id: result.data.user.id,
+        });
+  
+        setUser({
+          isLoggedIn: true,
+          email: result.data.user.email,
+          username: result.data.user.username,  // Mettez à jour le nom d'utilisateur dans le state
+          id: result.data.user.id,
+        });
+    
+        return result;
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      throw new Error("An error occurred during profile update");
+    }
+  };
+  
+
+  return { user, login, signup, logout, updateProfile };
 };
 
 export { useAuth };
