@@ -1,11 +1,7 @@
-class Users::SessionsController < Devise::SessionsController
-  before_action :authenticate_user!, only: [:destroy]
-  skip_before_action :verify_signed_out_user, only: [:destroy]
-  respond_to :json
+# app/controllers/users/sessions_controller.rb
 
-  def destroy
-    respond_to_on_destroy
-  end
+class Users::SessionsController < Devise::SessionsController
+  respond_to :json
 
   private
 
@@ -30,3 +26,34 @@ class Users::SessionsController < Devise::SessionsController
     render json: { message: 'Hmm nothing happened.' }, status: :unauthorized
   end
 end
+
+
+
+# class Users::SessionsController < Devise::SessionsController
+#   before_action :authenticate_user!, except: [:destroy]
+
+#   def destroy
+#     if current_user
+#       sign_out current_user
+#       render json: { message: 'You are logged out.' }, status: :ok
+#     else
+#       render json: { message: 'You are already logged out.' }, status: :ok
+#     end
+#   end
+
+#   # Ajoutez la méthode respond_to_on_destroy ici
+#   def respond_to_on_destroy
+#     # Personnalisez selon vos besoins
+#     head :no_content
+#   end
+
+#   private
+
+#   def log_out_success
+#     render json: { message: 'You are logged out.' }, status: :ok
+#   end
+
+#   def log_out_failure(message)
+#     render json: { message: "Logout failed. #{message}" }, status: :unauthorized
+#   end
+# end
