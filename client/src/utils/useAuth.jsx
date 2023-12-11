@@ -168,6 +168,8 @@ const useAuth = () => {
           Cookies.remove(cookieName);
         });
 
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         setUser({
           isLoggedIn: false,
           email: "",
