@@ -93,7 +93,7 @@ function ReadListings() {
   return (
     <>
       <form className="px-8 pt-20 bg-light dark:bg-dark">
-        <div className="flex items-center">
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-12">
           <label
             htmlFor="price"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
