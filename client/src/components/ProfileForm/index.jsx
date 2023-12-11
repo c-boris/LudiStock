@@ -1,18 +1,22 @@
 import { useAuth } from "../../utils/useAuth";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import API_URL from '../../utils/environment';
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const ProfileForm = () => {
-  const { user, updateProfile } = useAuth();
+  const navigate = useNavigate();
+  const { user, updateProfile, setUser } = useAuth();
   const [username, setUsername] = useState(user?.username || "");
   const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      setEmail(user.email || "");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setEmail(user.email || "");
+  //   }
+  // }, [user]);
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
@@ -34,8 +38,86 @@ const ProfileForm = () => {
     return <p>Loading...</p>;
   }
 
+  const handleResetPassword = async () => {
+    const confirmed = window.confirm("Reset password?");
+    
+    if (confirmed) {
+      try {
+        const response = await fetch(`${API_URL}/users/password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: {
+              email: user.email,
+            },
+          }),
+        });
+  
+        if (response.ok) {
+          toast.success("Email sent for password reset!");
+        } else {
+          toast.error("Failed to send password reset email.");
+        }
+      } catch (error) {
+        console.error("Error during password reset:", error);
+        toast.error("An error occurred during password reset");
+      }
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm("Delete account?");
+
+    if (confirmed) {
+      try {
+        const token = Cookies.get("token");
+
+        if (!token) {
+          throw new Error("Authentication token is missing");
+        }
+
+        const response = await fetch(`${API_URL}/users`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({
+            userId: user.id,
+          }),
+        });
+
+        if (response.ok) {
+          Object.keys(Cookies.get()).forEach((cookieName) => {
+            Cookies.remove(cookieName);
+          });
+
+          setUser({
+            isLoggedIn: false,
+            email: "",
+            username: "",
+            id: "",
+          });
+          
+          navigate("/");
+          toast.success("Account deleted successfully!");
+        } else {
+          toast.error("Failed to delete account.");
+        }
+      } catch (error) {
+        console.error("Error during account deletion:", error);
+        toast.error("An error occurred during account deletion");
+      }
+    }
+  };
+
   return (
-    <section id="profileform" className="isolate bg-light dark:bg-dark px-6 py-24 sm:py-32 lg:px-8">
+    <section
+      id="profileform"
+      className="isolate bg-light dark:bg-dark px-6 py-24 sm:py-32 lg:px-8"
+    >
       <div className="mx-auto max-w-2xl">
         <form onSubmit={handleUpdateProfile}>
           <div className="space-y-12">
@@ -49,25 +131,30 @@ const ProfileForm = () => {
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-4">
-                  <label htmlFor="username" className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+                  <label
+                    htmlFor="username"
+                    className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+                  >
                     Edit Username
                   </label>
                   <div className="mt-2">
                     <input
                       id="username"
                       name="username"
-                      type="username"
-                      // autoComplete="username"
+                      type="text"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      // required
+                      required
                       aria-label="Edit Username"
                     />
                   </div>
                 </div>
                 <div className="sm:col-span-4">
-                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+                  >
                     Edit Email address
                   </label>
                   <div className="mt-2">
@@ -75,71 +162,72 @@ const ProfileForm = () => {
                       id="email"
                       name="email"
                       type="email"
-                      // autoComplete="email"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      // required
+                      required
                       aria-label="Edit Email address"
                     />
                   </div>
                 </div>
               </div>
               <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-6">
-            <div className="sm:col-span-4">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
-                Confirm changes with password
-              </label>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  aria-label="Password"
-                />
+                <div className="sm:col-span-4">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+                  >
+                    Confirm changes with password
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      aria-label="Password"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 sm:mt-8"
+                >
+                  Save
+                </button>
               </div>
             </div>
+          </div>
+        </form>
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-12">
+          <div className="sm:col-span-4">
+            <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+              Reset password
+            </p>
             <button
-              type="submit"
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 sm:mt-8"
-            >
-              Save
-            </button>
-          </div>
-                
-
-            </div>
-          </div>
-
-          <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-12">
-            <div className="sm:col-span-4">
-              <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
-                Reset password
-              </p>
-              <button
-              type="submit"
+              type="button"
+              onClick={handleResetPassword}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 mb-4 sm:mt-6"
             >
               Reset
             </button>
-            </div>
-            <div className="sm:col-span-4">
-              <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
-                Delete account
-              </p>
-              <button
-              type="submit"
+          </div>
+          <div className="sm:col-span-4">
+            <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+              Delete account
+            </p>
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 mb-4 sm:mt-6"
             >
               Delete
             </button>
-            </div>
           </div>
-        </form>
+        </div>
       </div>
     </section>
   );
