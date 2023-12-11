@@ -153,6 +153,7 @@ const useAuth = () => {
         method: "DELETE",
         headers: {
           Authorization: token,
+          "Content-Type": "application/json",
         },
       });
 
