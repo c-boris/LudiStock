@@ -1,4 +1,4 @@
-import PasswordEditForm from "../../components/PasswordEditForm/"
+import PasswordEditForm from "../../components/Forms/PasswordEditForm/"
 
 const PasswordEdit = () => {
   return (

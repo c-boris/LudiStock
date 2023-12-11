@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../../utils/useAuth"; // Import the useAuth hook
+import { useAuth } from "../../../utils/useAuth";
 
 function SignupForm() {
-  const { signup } = useAuth(); // Destructure the signup function from useAuth
+  const { signup } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_Confirmation] = useState("");
@@ -12,8 +12,6 @@ function SignupForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Call the signup function from useAuth
     signup(email, password, password_confirmation, navigate, toast);
   };
 
