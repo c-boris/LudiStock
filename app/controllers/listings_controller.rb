@@ -3,9 +3,9 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @listings = Listing.includes(:category,:age,:state).all
+    @listings = Listing.includes(:category,:age,:state,:user).all
 
-    render json: @listings,include:{category: {only: [:id, :label]},age: {only: [:id, :label]}, state: {only: [:id, :label]}}
+    render json: @listings,include:{category: {only: [:id, :label]},age: {only: [:id, :label]}, state: {only: [:id, :label]},user: {only: [:id, :email]} }
   end
 
   # GET /listings/1
