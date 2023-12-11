@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import API_URL from '../../utils/environment';
+import API_URL from '../../../utils/environment';
+import PropTypes from 'prop-types';
 
 function PasswordEditForm ({ onPasswordChanged }) {
   const navigate = useNavigate();
@@ -62,31 +63,22 @@ function PasswordEditForm ({ onPasswordChanged }) {
         }),
       });
 
-      if (response.status === 200) {
-        toast.success("Password updated successfully!");
+      if (response.ok) {
+        const data = await response.json();
+        const successMessage = data.message || "Password updated successfully!";
+        toast.success(successMessage);
         if (onPasswordChanged) {
           onPasswordChanged();
         }
         navigate("/");
-        return;
       } else {
         const data = await response.json();
-        if (response.ok) {
-          const successMessage =
-            data.message || "Password updated successfully.";
-          alert(successMessage);
-          if (onPasswordChanged) {
-            onPasswordChanged();
-          }
-          navigate("/");
-        } else {
-          const errorMessage = data.message || "Password reset failed.";
-          showError(errorMessage);
-        }
+        const errorMessage = data.message || "Password reset failed.";
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error(error);
-      showError("An error occurred during password reset.");
+      toast.error("An error occurred during password reset.");
     }
   };
 
@@ -152,5 +144,9 @@ function PasswordEditForm ({ onPasswordChanged }) {
     </>
   );
 }
+
+PasswordEditForm.propTypes = {
+  onPasswordChanged: PropTypes.func,
+};
 
 export default PasswordEditForm;

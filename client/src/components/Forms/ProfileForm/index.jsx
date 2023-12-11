@@ -1,7 +1,7 @@
-import { useAuth } from "../../utils/useAuth";
+import { useAuth } from "../../../utils/useAuth";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import API_URL from '../../utils/environment';
+import API_URL from '../../../utils/environment';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
