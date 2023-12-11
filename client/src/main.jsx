@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
-import ProfileForm from './components/Forms/ProfileForm';
+import Profile from "./pages/Profile";
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <ProtectedRoute><ProfileForm /></ProtectedRoute>,
+        element: <ProtectedRoute><Profile /></ProtectedRoute>,
       },
       { path: "listings/:id", 
         element: <ShowListing /> 
