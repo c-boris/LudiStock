@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
-import ProfileForm from './components/ProfileForm';
+import ProfileForm from "./components/ProfileForm";
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -17,6 +17,7 @@ import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Chat from "./components/Chat/chat.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,9 +55,20 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <ProtectedRoute><ProfileForm /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <ProfileForm />
+          </ProtectedRoute>
+        ),
       },
-      { path: "listings/:id", element: <ShowListing /> },
+      {
+        path: "listings/:id",
+        element: <ShowListing />,
+      },
+      {
+        path: "listings/:id/message",
+        element: <Chat />,
+      },
       {
         path: "/listings/update/:id",
         element: <UpdateListing />,

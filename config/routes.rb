@@ -1,6 +1,9 @@
 # config/routes.rb
 
 Rails.application.routes.draw do
+  resources :messages
+  #action cable server
+  mount ActionCable.server => "/cable"
   resources :ages
   resources :categories
   resources :states

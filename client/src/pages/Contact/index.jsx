@@ -1,13 +1,12 @@
 // import Newsletter from "../../components/Newsletter/"
-import ContactForm from "../../components/ContactForm/"
-
+import ContactForm from "../../components/ContactForm/";
 const Contact = () => {
   return (
     <>
       {/* <Newsletter/> */}
-      <ContactForm/>
+      <ContactForm />
     </>
-  )
-}
+  );
+};
 
 export default Contact;

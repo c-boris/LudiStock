@@ -15,7 +15,7 @@ function ShowListing() {
   const [showSellerModal, setShowSellerModal] = useState(false);
   const [error, setError] = useState(null);
   const [user] = useAtom(userAtom);
-
+  console.log("ITEM", item);
   const openSellerModal = () => {
     setShowSellerModal(true);
   };
@@ -109,7 +109,7 @@ function ShowListing() {
                           {showSellerModal && (
                             <SellerModal
                               setShowSellerModal={setShowSellerModal}
-                              seller_email={item.user.email}
+                              sellerEmail={item.user.email}
                             />
                           )}
                         </>

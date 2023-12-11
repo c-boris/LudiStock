@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const sellerModal = ({ setShowSellerModal, seller_email }) => {
+const SellerModal = ({ setShowSellerModal, sellerEmail }) => {
   const modalRef = useRef();
-
+  const location = useLocation();
+  const item = location.state.item;
   const closeOnOutsideClick = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setShowSellerModal(false);
@@ -21,14 +23,12 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [setShowSellerModal]);
-  console.log("seller email:", seller_email);
+  console.log("seller email:", sellerEmail);
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto sm:p-0 pt-4 pr-4 pb-20 pl-4 focus:outline-none">
       <div className="flex justify-center items-end text-center min-h-screen sm:block">
         <div className="bg-gray-500 transition-opacity bg-opacity-75"></div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen">
-          ​
-        </span>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
         <div
           ref={modalRef}
           className="inline-block text-left bg-gray-900 rounded-lg overflow-hidden align-bottom transition-all transform shadow-2xl sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"
@@ -46,9 +46,15 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
                     Seller Contact
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-center text-gray-200">
-                    {seller_email}
+                    {sellerEmail}
                   </p>
                   <div className="w-full mt-6">
+                    <Link
+                      to={`message`}
+                      className="flex text-center items-center justify-center w-full pt-4 pr-10 pb-4 pl-10 mb-2 text-base font-medium text-white bg-indigo-600 rounded-xl transition duration-500 ease-in-out transform hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Chat with the seller
+                    </Link>
                     <button
                       onClick={() => setShowSellerModal(false)}
                       className="flex text-center items-center justify-center w-full pt-4 pr-10 pb-4 pl-10 text-base font-medium text-white bg-indigo-600 rounded-xl transition duration-500 ease-in-out transform hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -66,4 +72,4 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
   );
 };
 
-export default sellerModal;
+export default SellerModal;
