@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
 
-const sellerModal = ({ setShowSellerModal }) => {
+const sellerModal = ({ setShowSellerModal, seller_email }) => {
   const modalRef = useRef();
-  const [user] = useAtom(userAtom);
 
   const closeOnOutsideClick = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -23,7 +21,7 @@ const sellerModal = ({ setShowSellerModal }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [setShowSellerModal]);
-
+  console.log("seller email:", seller_email);
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto sm:p-0 pt-4 pr-4 pb-20 pl-4 focus:outline-none">
       <div className="flex justify-center items-end text-center min-h-screen sm:block">
@@ -48,7 +46,7 @@ const sellerModal = ({ setShowSellerModal }) => {
                     Seller Contact
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-center text-gray-200">
-                    seller@email
+                    {seller_email}
                   </p>
                   <div className="w-full mt-6">
                     <button

@@ -15,5 +15,6 @@ export const listingsAtom = atom([
     age: { id: 0, label: "" },
     created_at: "",
     updated_at: "",
+    user: { id: 0, email: "" },
   },
 ]);
