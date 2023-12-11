@@ -238,7 +238,7 @@ const useAuth = () => {
         setUser({
           isLoggedIn: true,
           email: result.data.user.email,
-          username: result.data.user.username,  // Mettez à jour le nom d'utilisateur dans le state
+          username: result.data.user.username,
           id: result.data.user.id,
         });
     
@@ -252,7 +252,7 @@ const useAuth = () => {
   };
   
 
-  return { user, login, signup, logout, updateProfile };
+  return { user, setUser, login, signup, logout, updateProfile };
 };
 
 export { useAuth };

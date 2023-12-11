@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
-// import Profile from "./pages/Profile";
 import ProfileForm from './components/ProfileForm';
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
@@ -18,7 +17,6 @@ import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute";
-// import { useAuth } from "./utils/useAuth";
 
 const router = createBrowserRouter([
   {
@@ -34,10 +32,6 @@ const router = createBrowserRouter([
         path: "listings",
         element: <ReadListings />,
       },
-      // {
-      //   path: "marketplace",
-      //   element: <Marketplace />,
-      // },
       // {
       //   path: "contact",
       //   element: <Contact />,
@@ -78,8 +72,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-// const { user } = useAuth();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
