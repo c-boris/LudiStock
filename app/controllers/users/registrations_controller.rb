@@ -6,13 +6,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_profile
     authenticate_user!
 
-    # Ensure the password is provided in the request
     if params[:user][:password].blank?
       render json: { error: 'Password is required to update profile' }, status: :unprocessable_entity
       return
     end
 
-    # Check if the provided password is valid
     if current_user.valid_password?(params[:user][:password])
       if current_user.update(user_params)
         render json: {
@@ -33,12 +31,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     authenticate_user!
 
-    # Supprimer les enregistrements associés dans la table "listings"
-    # ou effectuer d'autres actions nécessaires pour gérer les contraintes de clé étrangère
-
     begin
       current_user.destroy
-      sign_out(current_user) # Déconnexion de l'utilisateur après la suppression
+      sign_out(current_user)
       render json: { message: 'Account deleted successfully.' }, status: :ok
     rescue ActiveRecord::InvalidForeignKey
       render json: { error: 'Failed to delete account due to foreign key constraint.' }, status: :unprocessable_entity
