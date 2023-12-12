@@ -24,7 +24,7 @@ function MyListings() {
         </h1>
       )}
       {filteredData && (
-        <div className="bg-light dark:bg-dark py-24 sm:py-32">
+        <div className="bg-light dark:bg-dark py-24 sm:py-32 h-screen">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8">
               MY toys
