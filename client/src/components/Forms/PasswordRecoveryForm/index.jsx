@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import API_URL from '../../utils/environment';
+import API_URL from '../../../utils/environment';
 
 function PasswordRecoveryForm() {
   const [email, setEmail] = useState('');

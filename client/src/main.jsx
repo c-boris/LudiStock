@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
-import ProfileForm from './components/ProfileForm';
+import Profile from "./pages/Profile";
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LostPassword from "./pages/LostPassword";
+import PasswordEdit from "./pages/PasswordEdit";
 import ErrorPage from "./pages/Error/";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -53,10 +54,16 @@ const router = createBrowserRouter([
         element: <MyListings />,
       },
       {
-        path: "profile",
-        element: <ProtectedRoute><ProfileForm /></ProtectedRoute>,
+        path: "/users/password/edit",
+        element: <PasswordEdit />,
       },
-      { path: "listings/:id", element: <ShowListing /> },
+      {
+        path: "profile",
+        element: <ProtectedRoute><Profile /></ProtectedRoute>,
+      },
+      { path: "listings/:id", 
+        element: <ShowListing /> 
+      },
       {
         path: "/listings/update/:id",
         element: <UpdateListing />,

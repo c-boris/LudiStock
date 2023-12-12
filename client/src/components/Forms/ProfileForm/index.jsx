@@ -1,7 +1,7 @@
-import { useAuth } from "../../utils/useAuth";
-import { useState, useEffect } from "react";
+import { useAuth } from "../../../utils/useAuth";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import API_URL from '../../utils/environment';
+import API_URL from '../../../utils/environment';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -28,9 +28,11 @@ const ProfileForm = () => {
         password,
       });
 
+      setPassword("");
+
       toast.success("Profile updated successfully!");
     } catch (error) {
-      toast.error("Failed to update profile");
+      toast.error("Invalid password");
     }
   };
 
@@ -171,7 +173,7 @@ const ProfileForm = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-6">
+              <div className="mt-6 flex flex-col sm:flex-row  gap-x-6">
                 <div className="sm:col-span-4">
                   <label
                     htmlFor="password"
@@ -202,7 +204,7 @@ const ProfileForm = () => {
             </div>
           </div>
         </form>
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-12">
+        <div className="mt-6 flex  sm:flex-row items-center gap-x-12">
           <div className="sm:col-span-4">
             <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
               Reset password

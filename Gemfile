@@ -54,3 +54,4 @@ gem "rack-cors", "~> 2.0"
 gem "dotenv", "~> 2.8"
 gem "aws-sdk-s3", require: false
 
+gem 'dotenv-rails'

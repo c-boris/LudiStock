@@ -144,40 +144,47 @@ const useAuth = () => {
   const logout = async (navigate, toast) => {
     try {
       const token = Cookies.get("token");
-
+  
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-
+  
       const response = await fetch(`${API_URL}/users/sign_out`, {
         method: "DELETE",
         headers: {
           Authorization: token,
+          "Content-Type": "application/json",
         },
       });
-
-      const result = await handleResponse(
-        response,
-        "Logout successful!",
-        "Logout failed. Please try again."
-      );
-
-      if (result.success) {
+  
+      if (response.status === 200) {
+        // Si la réponse du serveur est 200, considérez la déconnexion comme réussie
         Object.keys(Cookies.get()).forEach((cookieName) => {
           Cookies.remove(cookieName);
         });
-
+  
+        await new Promise(resolve => setTimeout(resolve, 500));
+  
         setUser({
           isLoggedIn: false,
           email: "",
           username: "",
           id: "",
         });
-
+  
         navigate("/");
         toast.success("Logout successful!");
       } else {
-        toast.error(result.error);
+        // Si la réponse n'est pas 200, il peut y avoir un problème côté serveur
+        const result = await handleResponse(
+          response,
+          "Logout successful!",
+          "Logout failed. Please try again."
+        );
+  
+        if (!result.success) {
+          toast.error(result.error);
+        }
       }
     } catch (error) {
       toast.error("An unexpected error occurred during logout");
