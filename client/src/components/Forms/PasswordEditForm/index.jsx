@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import API_URL from '../../../utils/environment';
-import PropTypes from 'prop-types';
+import API_URL from "../../../utils/environment";
+import PropTypes from "prop-types";
 
-function PasswordEditForm ({ onPasswordChanged }) {
+function PasswordEditForm({ onPasswordChanged }) {
   const navigate = useNavigate();
   const [resetPasswordToken, setResetPasswordToken] = useState("");
   const [formData, setFormData] = useState({
@@ -63,10 +63,10 @@ function PasswordEditForm ({ onPasswordChanged }) {
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const successMessage = data.message || "Password updated successfully!";
-        toast.success(successMessage);
+      console.log(response);
+
+      if (response.status === 200) {
+        toast.success("Password updated successfully!");
         if (onPasswordChanged) {
           onPasswordChanged();
         }
@@ -139,14 +139,14 @@ function PasswordEditForm ({ onPasswordChanged }) {
               </button>
             </div>
             <p className="mt-5 text-center text-sm text-primary dark:text-dprimary">
-            Remember your password?{' '}
-            <NavLink
-              to="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Log in
-            </NavLink>
-          </p>
+              Remember your password?{" "}
+              <NavLink
+                to="/login"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
+                Log in
+              </NavLink>
+            </p>
           </form>
         </div>
       </div>
