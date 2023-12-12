@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import API_URL from '../../../utils/environment';
 import PropTypes from 'prop-types';
@@ -138,6 +138,15 @@ function PasswordEditForm ({ onPasswordChanged }) {
                 Change
               </button>
             </div>
+            <p className="mt-5 text-center text-sm text-primary dark:text-dprimary">
+            Remember your password?{' '}
+            <NavLink
+              to="/login"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Log in
+            </NavLink>
+          </p>
           </form>
         </div>
       </div>
