@@ -15,7 +15,7 @@ function MyListings() {
   useEffect(() => {
     setFilteredData(dataListings?.filter((item) => item.user_id == user.id));
   }, [dataListings]);
-  console.log(filteredData);
+  console.log("filteredData :", filteredData);
   return (
     <>
       {!filteredData.length && (
@@ -49,10 +49,11 @@ function MyListings() {
                 <li key={item.id}>
                   <div className="max-w-full mx-auto">
                     <div className="shadow-md rounded-lg max-w-full dark:bg-gray-800 dark:border-gray-700">
+                      item.id: {item.id}
                       <a href="#">
                         <img
-                          className="rounded-t-lg p-8"
-                          src="https://i.ibb.co/KqdgGY4/cosmetic-packaging-mockup-1150-40280.webp"
+                          className="p-8 justify-center h-60 rounded-2xl w-full object-cover"
+                          src={item.header_image}
                           alt="product image"
                         />
                       </a>

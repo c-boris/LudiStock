@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { categoryAtom } from "./utils/categoryAtom";
 import { stateAtom } from "./utils/stateAtom";
 import { ageAtom } from "./utils/ageAtom";
-
 function Layout() {
   const [categoryAtomValue, setCategories] = useAtom(categoryAtom);
   const [, setAge] = useAtom(ageAtom);

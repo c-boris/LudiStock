@@ -296,7 +296,7 @@ function ReadListings() {
                           <div className="overflow-x-hidden rounded-2xl relative">
                             <img
                               className="h-40 rounded-2xl w-full object-cover"
-                              src="https://m.media-amazon.com/images/I/81+QNejuvqL._AC_SY300_SX300_.jpg"
+                              src={item.header_image}
                               alt="Product"
                             />
                             <p className="absolute right-2 top-2 bg-white rounded-full p-2 cursor-pointer group">
