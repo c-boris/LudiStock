@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
-import API_URL from "./environment";
+// import API_URL from "./environment";
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
@@ -41,11 +41,10 @@ const useAuth = () => {
       return { success: false, error: errorMessage };
     }
   };
-  
 
   const login = async (email, password, navigate, toast) => {
     try {
-      const response = await fetch(`${API_URL}/users/sign_in`, {
+      const response = await fetch(`/users/sign_in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +94,7 @@ const useAuth = () => {
     toast
   ) => {
     try {
-      const response = await fetch(`${API_URL}/users`, {
+      const response = await fetch(`/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,34 +143,34 @@ const useAuth = () => {
   const logout = async (navigate, toast) => {
     try {
       const token = Cookies.get("token");
-  
+
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-  
-      const response = await fetch(`${API_URL}/users/sign_out`, {
+
+      const response = await fetch(`/users/sign_out`, {
         method: "DELETE",
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.status === 200) {
         // Si la réponse du serveur est 200, considérez la déconnexion comme réussie
         Object.keys(Cookies.get()).forEach((cookieName) => {
           Cookies.remove(cookieName);
         });
-  
-        await new Promise(resolve => setTimeout(resolve, 500));
-  
+
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         setUser({
           isLoggedIn: false,
           email: "",
           username: "",
           id: "",
         });
-  
+
         navigate("/");
         toast.success("Logout successful!");
       } else {
@@ -181,7 +180,7 @@ const useAuth = () => {
           "Logout successful!",
           "Logout failed. Please try again."
         );
-  
+
         if (!result.success) {
           toast.error(result.error);
         }
@@ -191,14 +190,18 @@ const useAuth = () => {
     }
   };
 
-  const updateProfile = async ({ username = "", email = "", password = "" }) => {
+  const updateProfile = async ({
+    username = "",
+    email = "",
+    password = "",
+  }) => {
     try {
       const token = Cookies.get("token");
-    
+
       if (!token) {
         throw new Error("Authentication token is missing");
       }
-    
+
       const requestBody = {
         user: {
           username,
@@ -206,8 +209,8 @@ const useAuth = () => {
           password,
         },
       };
-    
-      const response = await fetch(`${API_URL}/users/update_profile`, {
+
+      const response = await fetch(`/users/update_profile`, {
         method: "PATCH",
         headers: {
           Authorization: token,
@@ -215,16 +218,16 @@ const useAuth = () => {
         },
         body: JSON.stringify(requestBody),
       });
-    
+
       const result = await handleResponse(
         response,
         "Profile updated successfully!",
         "Failed to update profile"
       );
-    
+
       if (result.success) {
         const newToken = response.headers.get("Authorization");
-    
+
         if (newToken) {
           console.log("New token received:", newToken);
           updateCookies({
@@ -241,14 +244,14 @@ const useAuth = () => {
           username: result.data.user.username,
           id: result.data.user.id,
         });
-  
+
         setUser({
           isLoggedIn: true,
           email: result.data.user.email,
           username: result.data.user.username,
           id: result.data.user.id,
         });
-    
+
         return result;
       } else {
         throw new Error(result.error);
@@ -257,7 +260,6 @@ const useAuth = () => {
       throw new Error("An error occurred during profile update");
     }
   };
-  
 
   return { user, setUser, login, signup, logout, updateProfile };
 };
