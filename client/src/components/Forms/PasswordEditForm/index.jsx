@@ -159,3 +159,17 @@ PasswordEditForm.propTypes = {
 };
 
 export default PasswordEditForm;
+
+// PasswordEditForm.propTypes = {
+//   onPasswordChanged: PropTypes.func,
+// };
+
+// export default PasswordEditForm;PasswordEditForm.propTypes = {
+//   onPasswordChanged: PropTypes.func,
+// };
+
+// export default PasswordEditForm;PasswordEditForm.propTypes = {
+//   onPasswordChanged: PropTypes.func,
+// };
+
+// export default PasswordEditForm;
