@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { userAtom } from "./atom";
-// import API_URL from "./environment";
+import API_URL from "./environment";
 
 const useAuth = () => {
   const [user, setUser] = useAtom(userAtom);
@@ -44,7 +44,7 @@ const useAuth = () => {
 
   const login = async (email, password, navigate, toast) => {
     try {
-      const response = await fetch(`/users/sign_in`, {
+      const response = await fetch(`${API_URL}/users/sign_in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const useAuth = () => {
     toast
   ) => {
     try {
-      const response = await fetch(`/users`, {
+      const response = await fetch(`${API_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const useAuth = () => {
         throw new Error("Authentication token is missing");
       }
 
-      const response = await fetch(`/users/sign_out`, {
+      const response = await fetch(`${API_URL}/users/sign_out`, {
         method: "DELETE",
         headers: {
           Authorization: token,
@@ -210,7 +210,7 @@ const useAuth = () => {
         },
       };
 
-      const response = await fetch(`/users/update_profile`, {
+      const response = await fetch(`${API_URL}/users/update_profile`, {
         method: "PATCH",
         headers: {
           Authorization: token,
