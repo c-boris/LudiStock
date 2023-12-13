@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
-
+import BearIcon from "../../assets/img/BearIcon.jpg";
 const sellerModal = ({ setShowSellerModal, seller_email }) => {
   const modalRef = useRef();
 
@@ -38,7 +37,7 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
               <div className="mt-4 mr-auto mb-4 ml-auto max-w-lg">
                 <div className="flex flex-col items-center pt-6 pr-6 pb-6 pl-6">
                   <img
-                    src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"
+                    src={BearIcon}
                     className="flex-shrink-0 object-cover object-center btn- flex w-16 h-16 mr-auto -mb-8 ml-auto rounded-full shadow-xl"
                     alt="User Avatar"
                   />
