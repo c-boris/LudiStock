@@ -30,10 +30,10 @@ module Marketplace
     config.api_only = true
 
     # This also configures session_options for use below
-    config.session_store :disabled
+    # config.session_store :disabled
     
-    # config.session_store :cookie_store
-    # config.middleware.use ActionDispatch::Cookies
-    # config.middleware.use config.session_store, config.session_options
+    config.session_store :cookie_store
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
   end
 end
