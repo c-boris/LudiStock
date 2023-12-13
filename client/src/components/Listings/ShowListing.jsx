@@ -45,7 +45,6 @@ function ShowListing() {
       console.log(error.message);
     }
   };
-  console.log("User:", user);
   return (
     <>
       {item && (
@@ -61,13 +60,11 @@ function ShowListing() {
             </div>
             <div className="max-w-full mx-auto">
               <div className="shadow-md rounded-lg max-w-full dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
-                  <img
-                    className="rounded-t-lg p-8"
-                    src="https://i.ibb.co/KqdgGY4/cosmetic-packaging-mockup-1150-40280.webp"
-                    alt="product image"
-                  />
-                </a>
+                <img
+                  className="rounded-t-lg p-8"
+                  src={item.header_image}
+                  alt="Product image"
+                />
                 <div className="px-5 pb-5 flex flex-col items-center justify-between">
                   <div>
                     <h2 className="text-gray-900 font-semibold text-2xl tracking-tight dark:text-white">

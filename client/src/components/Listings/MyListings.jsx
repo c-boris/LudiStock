@@ -34,7 +34,7 @@ function MyListings() {
             </p>
             <Link
               to={`newListing`}
-              className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8"
+              className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8 mb-7"
             >
               Create new toy
               <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
@@ -49,14 +49,11 @@ function MyListings() {
                 <li key={item.id}>
                   <div className="max-w-full mx-auto">
                     <div className="shadow-md rounded-lg max-w-full dark:bg-gray-800 dark:border-gray-700">
-                      item.id: {item.id}
-                      <a href="#">
-                        <img
-                          className="p-8 justify-center h-60 rounded-2xl w-full object-cover"
-                          src={item.header_image}
-                          alt="product image"
-                        />
-                      </a>
+                      <img
+                        className="rounded-t-lg p-8"
+                        src={item.header_image}
+                        alt="product image"
+                      />
                       <div className="px-5 pb-5 flex flex-col items-center justify-between">
                         <h2 className="text-gray-900 font-semibold text-2xl tracking-tight dark:text-white">
                           {item.title}

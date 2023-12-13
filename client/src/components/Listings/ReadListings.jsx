@@ -295,7 +295,7 @@ function ReadListings() {
                         <div className="relative max-w-sm min-w-[340px] bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
                           <div className="overflow-x-hidden rounded-2xl relative">
                             <img
-                              className="h-40 rounded-2xl w-full object-cover"
+                              className="rounded-t-lg p-8r"
                               src={item.header_image}
                               alt="Product"
                             />
