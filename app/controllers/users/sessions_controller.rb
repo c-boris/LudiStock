@@ -21,12 +21,10 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def log_out_success
-    Rails.logger.info("User #{current_user.email} logged out successfully.")
     render json: { message: 'You are logged out.' }, status: :ok
   end
   
   def log_out_failure
-    Rails.logger.error("Logout failure - current_user is nil.")
     render json: { message: 'Hmm, nothing happened.' }, status: :unauthorized
   end
 end
