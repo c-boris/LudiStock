@@ -7,7 +7,7 @@ function TermsConditions() {
         <section className="mt-10 flex flex-col px-10 w-full lg:w-2/3 ">
           <div className="flex flex-col border-2 mt-20 mb-5 dark:border-primary border-secondary rounded-xl px-7 py-7 max-h-[350px] overflow-y-auto gap-2">
             <h1 className="font-heading text-lg">Terms and Conditions</h1>
-            <p className="mb-4 ">Effective Date: 01.09.2023</p>
+            <p className="mb-4 ">Effective Date: 13.12.2023</p>
 
             <h1 className="font-heading m-2">1. Acceptance of Terms</h1>
             <p className="px-5">
@@ -117,7 +117,7 @@ function TermsConditions() {
         <section className="mt-10 flex flex-col px-10 w-full lg:w-2/3">
           <div className="flex flex-col border-2 mb-5 dark:border-primary border-secondary rounded-xl px-7 py-7 max-h-[350px] overflow-y-auto gap-2">
             <h1 className="font-heading mb-3 text-lg">Privacy Policy</h1>
-            <p className="mb-4 px-5">Effective Date: 01.09.2023</p>
+            <p className="mb-4 px-5">Effective Date: 13.12.2023</p>
 
             <h2 className="font-heading m-2">1. Information We Collect</h2>
             <p className="px-5">
