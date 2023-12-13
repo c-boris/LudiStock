@@ -53,6 +53,7 @@ class ListingsController < ApplicationController
 
   # DELETE /listings/1
   def destroy
+    @listing.header_image.purge
     @listing.destroy!
   end
 
