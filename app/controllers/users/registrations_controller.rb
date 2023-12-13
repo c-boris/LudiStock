@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
+  before_action :drop_session_cookie
 
   def update_profile
     authenticate_user!
@@ -61,5 +62,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def register_failed
     render json: { message: 'Something went wrong.' }, status: :unprocessable_entity
+  end
+  
+  private
+
+  def drop_session_cookie
+    request.session_options[:skip] = true
   end
 end
