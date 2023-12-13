@@ -93,7 +93,7 @@ function ReadListings() {
   return (
     <>
       <form className="px-8 pt-20 bg-light dark:bg-dark">
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-x-12">
+        <div className="mb-3 mt-6 flex flex-col sm:flex-row items-center gap-x-12">
           <label
             htmlFor="price"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
@@ -205,7 +205,7 @@ function ReadListings() {
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap items-center text-secondary dark:text-dsecondary">
+        <div className="mb-2 flex flex-wrap items-center text-secondary dark:text-dsecondary">
           {statesSelected.map((state, index) => (
             <div
               onClick={() => {

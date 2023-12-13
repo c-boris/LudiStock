@@ -25,8 +25,6 @@ function NewListing() {
 
   const [headerImage, setHeaderImage] = useState("");
 
-  console.log("headerImage: ", headerImage);
-
   const navigate = useNavigate();
   const handleAgeChange = (event) => {
     setSelectedAge(event.target.value);

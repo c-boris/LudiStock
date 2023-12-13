@@ -1,6 +1,6 @@
-User.create!(email: 'user1@gmail.com',password:'123456');
-User.create!(email: 'user2@gmail.com',password:'123456');
-User.create!(email: 'user3@gmail.com',password:'123456');
+User.create!(email: 'user1@gmail.com',password:'123456',admin:false);
+User.create!(email: 'user2@gmail.com',password:'123456',admin:false);
+User.create!(email: 'user3@gmail.com',password:'123456',admin:false);
 
 Age.create!(value: 1, label: "0-12 month");
 Age.create!(value: 2, label: "12-24 month");
