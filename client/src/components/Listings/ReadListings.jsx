@@ -10,33 +10,47 @@ import { stateAtom } from "../../utils/stateAtom";
 function ReadListings() {
   const [dataListings, setDataListings] = useAtom(listingsAtom);
   const [data, setData] = useState(dataListings);
+  const [categoryAtomValue] = useAtom(categoryAtom);
+  const [ageAtomValue] = useAtom(ageAtom);
+  const [stateAtomValue] = useAtom(stateAtom);
+  const [priceFilter, setPriceFilter] = useState(null);
+  const [nameFilter, setNameFilter] = useState(null);
+  const [categoriesSelected, setCategoriesSelected] = useState(
+    categoryAtomValue.map((category) => {
+      return { ...category, selected: false };
+    })
+  );
+  const [agesSelected, setAgesSelected] = useState(
+    ageAtomValue.map((age) => {
+      return { ...age, selected: false };
+    })
+  );
+  const [statesSelected, setStatesSelected] = useState(
+    stateAtomValue.map((state) => {
+      return { ...state, selected: false };
+    })
+  );
+  const styleSelected = {
+    border: "solid 3px grey",
+    padding: "5px 12px",
+    borderRadius: "20px",
+    margin: "5px",
+    cursor: "pointer",
+  };
+  const styleNotSelected = {
+    border: "solid 1px grey",
+    padding: "5px 12px",
+    borderRadius: "20px",
+    margin: "5px",
+    cursor: "pointer",
+  };
+
   useEffect(() => {
     setDataListings(fetchAPI("listings"));
   }, []);
   useEffect(() => {
     setData(dataListings);
   }, [dataListings]);
-
-  const [priceFilter, setPriceFilter] = useState(null);
-  const [nameFilter, setNameFilter] = useState(null);
-  const [categoryAtomValue] = useAtom(categoryAtom);
-  const [categoriesSelected, setCategoriesSelected] = useState(
-    categoryAtomValue.map((category) => {
-      return { ...category, selected: false };
-    })
-  );
-  const [ageAtomValue] = useAtom(ageAtom);
-  const [agesSelected, setAgesSelected] = useState(
-    ageAtomValue.map((age) => {
-      return { ...age, selected: false };
-    })
-  );
-  const [stateAtomValue] = useAtom(stateAtom);
-  const [statesSelected, setStatesSelected] = useState(
-    stateAtomValue.map((state) => {
-      return { ...state, selected: false };
-    })
-  );
 
   function FilterData() {
     const filteredCategory = categoriesSelected
@@ -52,19 +66,20 @@ function ReadListings() {
     setData(
       dataListings.filter(
         (item) =>
-          (priceFilter ? item.price <= priceFilter : true) &&
-          (nameFilter ? item.title.includes(nameFilter) : true) &&
-          (filteredCategory.length
-            ? filteredCategory.find(
-                (category) => category === item.category.label
-              )
-            : true) &&
-          (filteredAge.length
-            ? filteredAge.find((age) => age === item.age.label)
-            : true) &&
-          (filteredState.length
-            ? filteredState.find((state) => state === item.state.label)
-            : true)
+          ((priceFilter ? item.price <= priceFilter : true) &&
+            (nameFilter ? item.title.includes(nameFilter) : true)) ||
+          ((nameFilter ? item.description.includes(nameFilter) : true) &&
+            (filteredCategory.length
+              ? filteredCategory.find(
+                  (category) => category === item.category.label
+                )
+              : true) &&
+            (filteredAge.length
+              ? filteredAge.find((age) => age === item.age.label)
+              : true) &&
+            (filteredState.length
+              ? filteredState.find((state) => state === item.state.label)
+              : true))
       )
     );
   }
@@ -114,7 +129,7 @@ function ReadListings() {
             htmlFor="name"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Name filter on title :
+            Keyword search :
           </label>
           <div className="mt-1">
             <input
@@ -144,23 +159,7 @@ function ReadListings() {
                 );
               }}
               key={index}
-              style={
-                category.selected
-                  ? {
-                      border: "solid 3px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-                  : {
-                      border: "solid 1px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-              }
+              style={category.selected ? styleSelected : styleNotSelected}
             >
               {category.selected ? `✅ ${category.label}` : category.label}
             </div>
@@ -183,23 +182,7 @@ function ReadListings() {
                 );
               }}
               key={index}
-              style={
-                age.selected
-                  ? {
-                      border: "solid 3px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-                  : {
-                      border: "solid 1px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-              }
+              style={age.selected ? styleSelected : styleNotSelected}
             >
               {age.selected ? `✅ ${age.label}` : age.label}
             </div>
@@ -222,23 +205,7 @@ function ReadListings() {
                 );
               }}
               key={index}
-              style={
-                state.selected
-                  ? {
-                      border: "solid 3px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-                  : {
-                      border: "solid 1px grey",
-                      padding: "5px 12px",
-                      borderRadius: "20px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }
-              }
+              style={state.selected ? styleSelected : styleNotSelected}
             >
               {state.selected ? `✅ ${state.label}` : state.label}
             </div>
