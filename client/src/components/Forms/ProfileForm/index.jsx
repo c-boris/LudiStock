@@ -1,22 +1,20 @@
 import { useAuth } from "../../../utils/useAuth";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import API_URL from '../../../utils/environment';
+import API_URL from "../../../utils/environment";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import { atom } from "jotai";
+
+const usernameAtom = atom("");
 
 const ProfileForm = () => {
   const navigate = useNavigate();
   const { user, updateProfile, setUser } = useAuth();
-  const [username, setUsername] = useState(user?.username || "");
+  const [username, setUsername] = useAtom(usernameAtom);
   const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setEmail(user.email || "");
-  //   }
-  // }, [user]);
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
@@ -36,13 +34,9 @@ const ProfileForm = () => {
     }
   };
 
-  if (!user) {
-    return <p>Loading...</p>;
-  }
-
   const handleResetPassword = async () => {
     const confirmed = window.confirm("Reset password?");
-    
+
     if (confirmed) {
       try {
         const response = await fetch(`${API_URL}/users/password`, {
@@ -56,7 +50,7 @@ const ProfileForm = () => {
             },
           }),
         });
-  
+
         if (response.ok) {
           toast.success("Email sent for password reset!");
         } else {
@@ -102,7 +96,7 @@ const ProfileForm = () => {
             username: "",
             id: "",
           });
-          
+
           navigate("/");
           toast.success("Account deleted successfully!");
         } else {
@@ -124,11 +118,13 @@ const ProfileForm = () => {
         <form onSubmit={handleUpdateProfile}>
           <div className="space-y-12">
             <div className="border-b border-primary/10 dark:border-dprimary/10 pb-12">
-              <h2 className="text-2xl font-semibold leading-7 text-primary dark:text-dprimary">Profile</h2>
-              <p className="block text-sm text-center font-medium leading-6 text-primary dark:text-dprimary">
+              <h2 className="text-2xl font-semibold leading-7 text-primary dark:text-dprimary mb-10">
+                Profile
+              </h2>
+              <p className="block  font-medium leading-6 text-primary dark:text-dprimary mb-2">
                 Username : {user.username}
               </p>
-              <p className="block text-sm text-center font-medium leading-6 text-primary dark:text-dprimary">
+              <p className="block  font-medium leading-6 text-primary dark:text-dprimary mb-2">
                 Email : {user.email}
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

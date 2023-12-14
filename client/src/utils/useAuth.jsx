@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import { userAtom } from "./atom";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
-import { userAtom } from "./atom";
 import API_URL from "./environment";
 
 const useAuth = () => {
@@ -21,7 +21,6 @@ const useAuth = () => {
   }, [setUser]);
 
   const updateCookies = ({ token, id, email, username }) => {
-    console.log("Updating cookies:", { token, id, email, username });
     Cookies.set("token", token);
     Cookies.set("id", id);
     Cookies.set("email", email);
@@ -157,12 +156,9 @@ const useAuth = () => {
       });
 
       if (response.status === 200) {
-        // Si la réponse du serveur est 200, considérez la déconnexion comme réussie
         Object.keys(Cookies.get()).forEach((cookieName) => {
           Cookies.remove(cookieName);
         });
-
-        await new Promise((resolve) => setTimeout(resolve, 500));
 
         setUser({
           isLoggedIn: false,
@@ -174,7 +170,6 @@ const useAuth = () => {
         navigate("/");
         toast.success("Logout successful!");
       } else {
-        // Si la réponse n'est pas 200, il peut y avoir un problème côté serveur
         const result = await handleResponse(
           response,
           "Logout successful!",
@@ -229,7 +224,6 @@ const useAuth = () => {
         const newToken = response.headers.get("Authorization");
 
         if (newToken) {
-          console.log("New token received:", newToken);
           updateCookies({
             token: newToken,
             id: result.data.user.id,
@@ -237,13 +231,6 @@ const useAuth = () => {
             username: result.data.user.username,
           });
         }
-
-        console.log("Updated user state:", {
-          isLoggedIn: true,
-          email: result.data.user.email,
-          username: result.data.user.username,
-          id: result.data.user.id,
-        });
 
         setUser({
           isLoggedIn: true,
@@ -264,4 +251,4 @@ const useAuth = () => {
   return { user, setUser, login, signup, logout, updateProfile };
 };
 
-export { useAuth };
+export { useAuth, userAtom };

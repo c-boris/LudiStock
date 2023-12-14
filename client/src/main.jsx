@@ -17,7 +17,7 @@ import MyListings from "./components/Listings/MyListings.jsx";
 import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
-import ProtectedRoute from "./utils/ProtectedRoute";
+// import ProtectedRoute from "./utils/ProtectedRoute";
 import TermsConditions from "./pages/TermsAndConditions/TermsAndConditions.jsx";
 
 const router = createBrowserRouter([
@@ -61,9 +61,11 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: (
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
+          <Profile />
+
+          // <ProtectedRoute>
+          //   <Profile />
+          // </ProtectedRoute>
         ),
       },
       { path: "listings/:id", element: <ShowListing /> },
