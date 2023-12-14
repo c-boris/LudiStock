@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Admin from "./pages/Admin";
 import LostPassword from "./pages/LostPassword";
 import PasswordEdit from "./pages/PasswordEdit";
 import ErrorPage from "./pages/Error/";
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "lost-password",
         element: <LostPassword />,
+      },
+      {
+        path: "admin",
+        element: <Admin />,
       },
       {
         path: "my-listings",
