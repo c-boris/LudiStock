@@ -13,6 +13,7 @@ const useAuth = () => {
     if (token) {
       setUser({
         isLoggedIn: true,
+        isAdmin: Cookies.get("isAdmin") === "true",
         email: Cookies.get("email"),
         username: Cookies.get("username"),
         id: Cookies.get("id"),
@@ -70,6 +71,7 @@ const useAuth = () => {
 
         setUser({
           isLoggedIn: true,
+          isAdmin: data.user.admin,
           email: data.user.email,
           username: data.user.username,
           id: data.user.id,
@@ -124,6 +126,7 @@ const useAuth = () => {
 
         setUser({
           isLoggedIn: true,
+          isAdmin: data.user.admin,
           email: data.user.email,
           username: data.user.username,
           id: data.user.id,
