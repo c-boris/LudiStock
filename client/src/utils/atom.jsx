@@ -1,9 +1,11 @@
 // atom.jsx
 import { atom } from "jotai";
 
-export const userAtom = atom({
-  email: "",
-  id: "",
+const userAtom = atom({
   isLoggedIn: false,
+  email: "",
   username: "",
+  id: "",
 });
+
+export { userAtom };
