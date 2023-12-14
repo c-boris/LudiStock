@@ -278,10 +278,10 @@ function ReadListings() {
               All you are looking for is here below.
             </p>
           </div>
-          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2">
+          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 content-center">
             <ul
               role="list"
-              className="grid gap-x-4 gap-y-2 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2"
+              className="grid gap-x-4 gap-y-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:gap-y-4 xl:col-span-2 place-self-center"
             >
               {data.map((item) => (
                 <li key={item.id}>
@@ -292,7 +292,7 @@ function ReadListings() {
                   >
                     <div className="flex flex-col justify-center">
                       <div className="relative m-3 flex flex-wrap mx-auto justify-center">
-                        <div className="relative max-w-sm min-w-[340px] bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
+                        <div className="relative bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
                           <div className="overflow-x-hidden rounded-2xl relative">
                             <img
                               className="rounded-t-lg p-8r"
