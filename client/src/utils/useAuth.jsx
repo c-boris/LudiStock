@@ -10,23 +10,33 @@ const useAuth = () => {
   useEffect(() => {
     const token = Cookies.get("token");
 
-    if (token) {
-      setUser({
-        isLoggedIn: true,
-        isAdmin: Cookies.get("isAdmin") === "true",
-        email: Cookies.get("email"),
-        username: Cookies.get("username"),
-        id: Cookies.get("id"),
-      });
+    if (token && !user.isLoggedIn) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${API_URL}/member-data`, {
+            method: "GET",
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUser({
+              isLoggedIn: true,
+              isAdmin: data.user.admin,
+              email: data.user.email,
+              username: data.user.username,
+              id: data.user.id,
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user data", error);
+        }
+      };
+      fetchData();
     }
-  }, [setUser]);
-
-  const updateCookies = ({ token, id, email, username }) => {
-    Cookies.set("token", token);
-    Cookies.set("id", id);
-    Cookies.set("email", email);
-    Cookies.set("username", username);
-  };
+  }, [user.isLoggedIn, setUser]);
 
   const handleResponse = async (response, errorMessage) => {
     try {
@@ -62,12 +72,9 @@ const useAuth = () => {
 
       if (result.success) {
         const { data } = result;
-        updateCookies({
-          token: response.headers.get("Authorization"),
-          id: data.user.id,
-          email: data.user.email,
-          username: data.user.username,
-        });
+        const token = response.headers.get("Authorization");
+
+        Cookies.set("token", token);
 
         setUser({
           isLoggedIn: true,
@@ -117,12 +124,9 @@ const useAuth = () => {
 
       if (result.success) {
         const { data } = result;
-        updateCookies({
-          token: response.headers.get("Authorization"),
-          id: data.user.id,
-          email: data.user.email,
-          username: data.user.username,
-        });
+        const token = response.headers.get("Authorization");
+
+        Cookies.set("token", token);
 
         setUser({
           isLoggedIn: true,
@@ -227,12 +231,7 @@ const useAuth = () => {
         const newToken = response.headers.get("Authorization");
 
         if (newToken) {
-          updateCookies({
-            token: newToken,
-            id: result.data.user.id,
-            email: result.data.user.email,
-            username: result.data.user.username,
-          });
+          Cookies.set("token", newToken);
         }
 
         setUser({
@@ -240,6 +239,7 @@ const useAuth = () => {
           email: result.data.user.email,
           username: result.data.user.username,
           id: result.data.user.id,
+          isAdmin: result.data.user.admin,
         });
 
         return result;

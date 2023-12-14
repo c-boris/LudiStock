@@ -19,7 +19,7 @@ function ListingForm(props) {
               <input
                 type="text"
                 id="title"
-                placeholder="5 caracters minimum"
+                placeholder="5 characters minimum"
                 value={props.title}
                 onChange={(e) => props.setTitle(e.target.value)}
                 required
@@ -77,7 +77,7 @@ function ListingForm(props) {
             <div className="mt-2">
               <textarea
                 id="description"
-                placeholder="15 caractères minimum"
+                placeholder="15 characters minimum"
                 value={props.description}
                 onChange={(e) => props.setDescription(e.target.value)}
                 required
