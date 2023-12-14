@@ -15,7 +15,6 @@ function MyListings() {
   useEffect(() => {
     setFilteredData(dataListings?.filter((item) => item.user_id == user.id));
   }, [dataListings]);
-  console.log("filteredData :", filteredData);
   return (
     <>
       {!filteredData.length && (
@@ -24,7 +23,7 @@ function MyListings() {
         </h1>
       )}
       {filteredData && (
-        <div className="bg-light dark:bg-dark py-24 sm:py-32 h-screen">
+        <div className="bg-light dark:bg-dark py-24 sm:py-32">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 m-8">
               My listings
