@@ -25,17 +25,17 @@ function MyListings() {
       {filteredData && (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8">
-              My toys
+            <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 m-8">
+              My listings
             </h2>
             <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary">
-              All toys belonging to me (user:{user.id})
+              {/* All toys belonging to me (user:{user.id}) */}
             </p>
             <Link
               to={`newListing`}
               className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8 mb-7"
             >
-              Create new toy
+              Create a new listing
               <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
             </Link>
           </div>
