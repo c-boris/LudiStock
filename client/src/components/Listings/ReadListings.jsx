@@ -278,10 +278,10 @@ function ReadListings() {
               All you are looking for is here below.
             </p>
           </div>
-          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 content-center">
+          <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  content-center">
             <ul
               role="list"
-              className="grid gap-x-4 gap-y-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:gap-y-4 xl:col-span-2 place-self-center"
+              className="grid gap-x-4 gap-y-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3  xl:col-span-2 "
             >
               {data.map((item) => (
                 <li key={item.id}>
