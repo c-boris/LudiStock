@@ -1,6 +1,10 @@
+import { useTranslation } from "react-i18next";
+
 function ListingForm(props) {
+  const { t } = useTranslation();
+
   return (
-    <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-light dark:bg-dark">
+    <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 mt-12 lg:px-8 bg-light dark:bg-dark">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-primary dark:text-dprimary">
           {props.viewTitle}
@@ -13,13 +17,13 @@ function ListingForm(props) {
               htmlFor="title"
               className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
             >
-              Title (*):
+              {t("title")}
             </label>
             <div className="mt-2">
               <input
                 type="text"
                 id="title"
-                placeholder="5 characters minimum"
+                placeholder={t("5cars")}
                 value={props.title}
                 onChange={(e) => props.setTitle(e.target.value)}
                 required
@@ -32,7 +36,7 @@ function ListingForm(props) {
               htmlFor="headerImage"
               className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
             >
-              Header image :
+              {t("header")}
             </label>
             <div className="mt-2">
               <input
@@ -51,7 +55,7 @@ function ListingForm(props) {
               htmlFor="price"
               className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
             >
-              Price :
+              {t("price")}
             </label>
             <div className="mt-2">
               <input
@@ -72,7 +76,7 @@ function ListingForm(props) {
               htmlFor="Description"
               className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
             >
-              Description (*):
+              Description :
             </label>
             <div className="mt-2">
               <textarea
@@ -89,14 +93,14 @@ function ListingForm(props) {
             htmlFor="age"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Age Selection :
+            {t("age")}
           </label>
           <select
             id="age"
             value={props.selectedAge}
             onChange={props.handleAgeChange}
           >
-            <option value="">Select a range</option>
+            <option value="">Selection</option>
             {props.ageAtomValue.map((age) => (
               <option key={age.id} value={age.id}>
                 {age.label}
@@ -108,14 +112,14 @@ function ListingForm(props) {
             htmlFor="state"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            State Selection :
+            {t("state")}
           </label>
           <select
             id="state"
             value={props.selectedState}
             onChange={props.handleStateChange}
           >
-            <option value="">Select a state</option>
+            <option value="">Selection</option>
             {props.stateAtomValue.map((state) => (
               <option key={state.id} value={state.id}>
                 {state.label}
@@ -127,14 +131,14 @@ function ListingForm(props) {
             htmlFor="category"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Category Selection :
+            {t("category")}
           </label>
           <select
             id="category"
             value={props.selectedCategory}
             onChange={props.handleCategoryChange}
           >
-            <option value="">Select a category</option>
+            <option value="">Selection</option>
             {props.categoryAtomValue.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.label}

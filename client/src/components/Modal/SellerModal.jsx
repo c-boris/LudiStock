@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import BearIcon from "../../assets/img/BearIcon.jpg";
+
 const sellerModal = ({ setShowSellerModal, seller_email }) => {
   const modalRef = useRef();
 
@@ -20,7 +21,6 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [setShowSellerModal]);
-  console.log("seller email:", seller_email);
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto sm:p-0 pt-4 pr-4 pb-20 pl-4 focus:outline-none">
       <div className="flex justify-center items-end text-center min-h-screen sm:block">
