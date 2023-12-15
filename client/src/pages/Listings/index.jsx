@@ -4,8 +4,8 @@ import DataLoader from "../../utils/DataLoader";
 const Listings = () => {
   return (
     <div id="listings">
-      <ReadListings />
       <DataLoader />
+      <ReadListings />
     </div>
   );
 };
