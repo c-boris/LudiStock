@@ -5,8 +5,12 @@
   "joy": "Rediscover Joy: Reimagined Toys for Every Playful Heart!",
   "myListings": "My listings",
   "viewProfile": "View my profil",
-  "listings": "listings",
+  "listings": "Listings",
+  "Listings": "listings",
+
   "createAccount": "Create an account",
   "hello": "Hello, welcome to our marketplace, please login to get a full access to our app!",
-  "signUp": "Click to sign up!"
+  "signUp": "Click to sign up!",
+  "logOut": "Log out",
+  "logIn": "Log in"
 }
