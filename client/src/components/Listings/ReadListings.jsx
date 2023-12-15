@@ -6,7 +6,6 @@ import fetchAPI from "../FetchAPI/fetchAPI";
 import { categoryAtom } from "../../utils/categoryAtom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
-import { initReactI18next } from "react-i18next";
 
 import { useTranslation } from "react-i18next";
 
