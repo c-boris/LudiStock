@@ -46,19 +46,11 @@ function ReadListings() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const listingsData = await fetchAPI("listings");
-        console.log("Listings Data:", listingsData);
-        setDataListings(listingsData);
-        setData(listingsData); // Mettez à jour data après avoir mis à jour dataListings
-      } catch (error) {
-        console.error("Error fetching listings data:", error);
-      }
-    };
-
-    fetchData();
-  }, [setDataListings]);
+    setDataListings(fetchAPI("listings"));
+  }, []);
+  useEffect(() => {
+    setData(dataListings);
+  }, [dataListings]);
 
   function FilterData() {
     const filteredCategory = categoriesSelected
@@ -78,18 +70,20 @@ function ReadListings() {
             (nameFilter ? item.title.includes(nameFilter) : true)) ||
           ((nameFilter ? item.description.includes(nameFilter) : true) &&
             (filteredCategory.length
-              ? filteredCategory.includes(item.category.label)
+              ? filteredCategory.find(
+                  (category) => category === item.category.label
+                )
               : true) &&
             (filteredAge.length
-              ? filteredAge.includes(item.age.label)
+              ? filteredAge.find((age) => age === item.age.label)
               : true) &&
             (filteredState.length
-              ? filteredState.includes(item.state.label)
+              ? filteredState.find((state) => state === item.state.label)
               : true))
       )
     );
   }
-
+  //filteredCategory.find((category) => category === item.category.label) || filteredCategory.includes(item.category.label)
   function ReloadData() {
     setData(dataListings);
     setNameFilter(null);
