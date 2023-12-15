@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './useAuth';  // Mettez à jour le chemin selon votre structure
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./useAuth";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();

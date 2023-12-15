@@ -81,18 +81,6 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-    # {
-    #   address: "smtp.gmail.com",
-    #   port: 587,
-    #   domain: "ludistock-95072edabbd0.herokuapp.com",
-    #   user_name: ENV["GMAIL_LOGIN"],
-    #   password: ENV["GMAIL_USER_PASSWORD"],
-    #   authentication: "plain",
-    #   enable_starttls_auto: true,
-    #   open_timeout: 5,
-    #   read_timeout: 5
-    # }
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
