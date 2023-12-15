@@ -6,8 +6,12 @@ import fetchAPI from "../FetchAPI/fetchAPI";
 import { categoryAtom } from "../../utils/categoryAtom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
+import { initReactI18next } from "react-i18next";
+
+import { useTranslation } from "react-i18next";
 
 function ReadListings() {
+  const { t } = useTranslation();
   const [dataListings, setDataListings] = useAtom(listingsAtom);
   const [data, setData] = useState(dataListings);
   const [categoryAtomValue] = useAtom(categoryAtom);
@@ -46,19 +50,12 @@ function ReadListings() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const listingsData = await fetchAPI("listings");
-        console.log("Listings Data:", listingsData);
-        setDataListings(listingsData);
-        setData(listingsData); // Mettez à jour data après avoir mis à jour dataListings
-      } catch (error) {
-        console.error("Error fetching listings data:", error);
-      }
-    };
+    setDataListings(fetchAPI("listings"));
+  }, []);
 
-    fetchData();
-  }, [setDataListings]);
+  useEffect(() => {
+    setData(dataListings);
+  }, [dataListings]);
 
   function FilterData() {
     const filteredCategory = categoriesSelected
@@ -78,17 +75,21 @@ function ReadListings() {
             (nameFilter ? item.title.includes(nameFilter) : true)) ||
           ((nameFilter ? item.description.includes(nameFilter) : true) &&
             (filteredCategory.length
-              ? filteredCategory.includes(item.category.label)
+              ? filteredCategory.find(
+                  (category) => category === item.category.label
+                )
               : true) &&
             (filteredAge.length
-              ? filteredAge.includes(item.age.label)
+              ? filteredAge.find((age) => age === item.age.label)
               : true) &&
             (filteredState.length
-              ? filteredState.includes(item.state.label)
+              ? filteredState.find((state) => state === item.state.label)
               : true))
       )
     );
   }
+  //filteredCategory.find((category) => category === item.category.label) ||
+  //filteredCategory.includes(item.category.label);
 
   function ReloadData() {
     setData(dataListings);
@@ -119,7 +120,7 @@ function ReadListings() {
             htmlFor="price"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Price filter max :
+            {t("priceFilter")}
           </label>
           <div className="mt-1">
             <input
@@ -128,14 +129,15 @@ function ReadListings() {
               value={priceFilter || ""}
               onChange={(e) => setPriceFilter(parseInt(e.target.value, 10))}
               required
-              className="mx-11 block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+              className="mx-11 block w-2/3 rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300
+          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
           <label
             htmlFor="name"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            Keyword search :
+            {t("keyword")}
           </label>
           <div className="mt-1">
             <input
@@ -144,7 +146,8 @@ function ReadListings() {
               value={nameFilter || ""}
               onChange={(e) => setNameFilter(e.target.value)}
               required
-              className="mx-1 block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+              className="mx-1 block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-gray-300
+          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
             />
           </div>
         </div>
@@ -223,7 +226,7 @@ function ReadListings() {
             onClick={FilterData}
             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
           >
-            Filter
+            {t("filter")}
             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
           </button>
           <button
@@ -231,24 +234,24 @@ function ReadListings() {
             onClick={ReloadData}
             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm grid place-items-center"
           >
-            Reload data
+            {t("reload")}
             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
           </button>
         </div>
       </form>
       {!data.length ? (
         <div className="text-2xl px-8 text-primary dark:text-dprimary bg-light dark:bg-dark py-24 sm:py-32">
-          <h1>Nothing found</h1>
+          <h1>{t("nothing")}</h1>
         </div>
       ) : null}
       {data && (
         <div className="bg-light dark:bg-dark pt-8 sm:py-1">
           <div className="max-w-2xl">
             <h2 className=" font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 pt-8">
-              List of toys
+              {t("listToys")}
             </h2>
             <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary">
-              All you are looking for is here below.
+              {t("lookingFor")}
             </p>
           </div>
           <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  content-center">
@@ -300,13 +303,14 @@ function ReadListings() {
                                 {item.description}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                category: {item.category.label}
+                                {t("category")} {item.category.label}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                age: {item.age.label}
+                                {t("age")}
+                                {item.age.label}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                state: {item.state.label}
+                                {t("stateName")} {item.state.label}
                               </p>
                             </div>
                             <div className="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">

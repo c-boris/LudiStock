@@ -19,7 +19,6 @@ function ShowListing() {
   const openSellerModal = () => {
     setShowSellerModal(true);
   };
-  console.log("seller email show:", item.user_id);
 
   const handleDelete = async (event) => {
     event.preventDefault();
