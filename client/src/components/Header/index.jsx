@@ -51,6 +51,8 @@ const Header = () => {
           <ReactSwitch
             onChange={myLang.toggleLng}
             checked={myLang.lng === "en"}
+            onColor="#000"
+            offColor="#000"
           />
         </div>
         <div className="flex lg:hidden">
