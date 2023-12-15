@@ -22,12 +22,11 @@ const Header = () => {
   const myLang = useContext(LanguageContext);
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Use navigate from react-router-dom
-  const { logout } = useAuth(); // Destructure the logout function from useAuth
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [user] = useAtom(userAtom);
 
   const handleLogout = () => {
-    // Call the logout function from useAuth
     logout(navigate, toast);
   };
 
@@ -69,13 +68,13 @@ const Header = () => {
             <NavLink
               key={item.name}
               to={item.to}
-              className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary px-12"
+              className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
             >
               {t(`${item.name}`)}
             </NavLink>
           ))}
         </div>
-        <div className="hidden lg:flex lg:gap-x-4">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-6">
           <LightToggle />
           {user.isLoggedIn ? (
             <>
