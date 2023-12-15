@@ -28,4 +28,10 @@ RSpec.describe User, type: :model do
         expect(invalid_User).not_to be_valid
       end
     end
+     describe "not admin on creation " do
+      it "should not be admin" do
+        invalid_User = User.new(password: "123")
+        expect(invalid_User).not_to be_valid
+      end
+    end
 end
