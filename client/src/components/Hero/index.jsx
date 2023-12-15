@@ -14,14 +14,14 @@ export default function Hero() {
               <div className="relative rounded-full px-9 py-4 text-2xl leading-9 text-secondary dark:text-dsecondary ring-1 ring-primary/10 hover:ring-primary/20 dark:ring-dprimary/10 dark:hover:ring-dprimary/20 text-center">
                 {user.isLoggedIn ? (
                   user.username ? (
-                    `Hy ${user.username}`
+                    `Hi ${user.username}`
                   ) : (
-                    `Hy ${user.email}`
+                    `Hi ${user.email}`
                   )
                 ) : (
                   <>
-                    Hy welcome to our marketplace, please login to get a full
-                    access to our app!
+                    Hello, welcome to our marketplace, please login to get a
+                    full access to our app!
                     <br />
                     <NavLink to="/signup" className="font-semibold text-accent">
                       Click to sign up!

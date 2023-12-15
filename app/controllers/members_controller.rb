@@ -13,9 +13,9 @@ class MembersController < ApplicationController
   end
 
   def get_all_users
-  @users = User.all # User.all pour récupérer tous les utilisateurs enregistrés
-  render json: @users # Vous pouvez choisir de renvoyer les utilisateurs au format JSON ou HTML, selon vos besoins
-end
+    @users = User.all
+    render json: @users
+  end
   private
 
   def get_user_from_token

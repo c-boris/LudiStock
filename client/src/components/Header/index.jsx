@@ -71,7 +71,7 @@ const Header = () => {
                 to="/my-listings"
                 className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
               >
-                My Listings
+                My listings
               </NavLink>
               <NavLink
                 to="/profile"
@@ -79,7 +79,16 @@ const Header = () => {
               >
                 Profile
               </NavLink>
-
+              {user.isAdmin && (
+                <>
+                  <NavLink
+                    to="/admin"
+                    className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
+                  >
+                    Admin
+                  </NavLink>
+                </>
+              )}
               <NavLink
                 to="/"
                 className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
@@ -148,7 +157,7 @@ const Header = () => {
                         setMobileMenuOpen(false);
                       }}
                     >
-                      My Listings
+                      My listings
                     </NavLink>
                     <NavLink
                       to="/profile"

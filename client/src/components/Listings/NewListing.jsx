@@ -4,7 +4,6 @@ import { userAtom } from "../../utils/atom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
 import { categoryAtom } from "../../utils/categoryAtom";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
@@ -55,14 +54,13 @@ function NewListing() {
       });
 
       if (response.ok) {
-        Cookies.set("token", response.headers.get("Authorization"));
-        toast.success("Toy created successfully!");
+        toast.success("Listing created successfully!");
         navigate("/my-listings");
       } else {
         toast.error("Missing field values");
       }
     } catch (error) {
-      toast.error("An error occurred during toy creation");
+      toast.error("An error occurred during Listing creation");
     }
   };
   return (
