@@ -71,20 +71,20 @@ function ReadListings() {
     setData(
       dataListings.filter(
         (item) =>
-          ((priceFilter ? item.price <= priceFilter : true) &&
-            (nameFilter ? item.title.includes(nameFilter) : true)) ||
-          ((nameFilter ? item.description.includes(nameFilter) : true) &&
-            (filteredCategory.length
-              ? filteredCategory.find(
-                  (category) => category === item.category.label
-                )
-              : true) &&
-            (filteredAge.length
-              ? filteredAge.find((age) => age === item.age.label)
-              : true) &&
-            (filteredState.length
-              ? filteredState.find((state) => state === item.state.label)
-              : true))
+          (priceFilter ? item.price <= priceFilter : true) &&
+          ((nameFilter ? item.title.includes(nameFilter) : true) ||
+            (nameFilter ? item.description.includes(nameFilter) : true)) &&
+          (filteredCategory.length
+            ? filteredCategory.find(
+                (category) => category === item.category.label
+              )
+            : true) &&
+          (filteredAge.length
+            ? filteredAge.find((age) => age === item.age.label)
+            : true) &&
+          (filteredState.length
+            ? filteredState.find((state) => state === item.state.label)
+            : true)
       )
     );
   }
