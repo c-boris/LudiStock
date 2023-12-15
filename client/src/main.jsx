@@ -2,23 +2,22 @@ import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-// import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
 import LostPassword from "./pages/LostPassword";
 import PasswordEdit from "./pages/PasswordEdit";
+import MyListings from "./pages/MyListings";
+import Listings from "./pages/Listings";
 import ErrorPage from "./pages/Error/";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReadListings from "./components/Listings/ReadListings.jsx";
-import MyListings from "./components/Listings/MyListings.jsx";
 import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
-// import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import TermsConditions from "./pages/TermsAndConditions/TermsAndConditions.jsx";
 
 const router = createBrowserRouter([
@@ -33,12 +32,8 @@ const router = createBrowserRouter([
       },
       {
         path: "listings",
-        element: <ReadListings />,
+        element: <Listings />,
       },
-      // {
-      //   path: "contact",
-      //   element: <Contact />,
-      // },
       {
         path: "login",
         element: <Login />,
@@ -66,11 +61,9 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: (
-          <Profile />
-
-          // <ProtectedRoute>
-          //   <Profile />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
         ),
       },
       { path: "listings/:id", element: <ShowListing /> },

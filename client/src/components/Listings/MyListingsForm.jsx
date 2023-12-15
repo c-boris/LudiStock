@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import fetchAPI from "../FetchAPI/fetchAPI";
 import { listingsAtom } from "../../utils/listingsAtom";
 
-function MyListings() {
+function MyListingsForm() {
   const [user] = useAtom(userAtom);
   const [filteredData, setFilteredData] = useState([]);
   const [dataListings, setDataListings] = useAtom(listingsAtom);
@@ -106,4 +106,4 @@ function MyListings() {
   );
 }
 
-export default MyListings;
+export default MyListingsForm;

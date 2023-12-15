@@ -168,6 +168,16 @@ const Header = () => {
                     >
                       Profile
                     </NavLink>
+                    {user.isAdmin && (
+                      <>
+                        <NavLink
+                          to="/admin"
+                          className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
+                        >
+                          Admin
+                        </NavLink>
+                      </>
+                    )}
                     <NavLink
                       to="/"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
