@@ -7,10 +7,12 @@ class User < ApplicationRecord
         #  :rememberable, :validatable,
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
-  #  validates :email, presence: true
   has_many :listings, dependent: :destroy
 
   validates :username, presence: true, allow_blank: true
+  validates :email, presence: true
+  validates :password, presence: true, length: { minimum: 6 }
+
 
   # attr_accessor :login
   # validates :admin, inclusion: { in: [true, false] }

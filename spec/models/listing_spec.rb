@@ -2,20 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Listing, type: :model do
   before(:each) do
-    # Création des instances nécessaires pour passer les validations
-    category = Category.create(value: 1)
-    age = Age.create(value: 1)
-    state = State.create(value: 1)
-    user = User.create(email: "testing@email.com", password: 123456)
+    @category = Category.create(value: 1)
+    @age = Age.create(value: 1)
+    @state = State.create(value: 1)
+    @user = User.create(email: "testing@email.com", password: "123456")
 
     @listing = Listing.create(
       title: "Mon premier jouet en bois",
       price: 26,
       description: "Différentes formes: cubes, triangles, rectangles. 56 pièces au total.",
-      category: category,
-      age: age,
-      state: state,
-      user: user
+      category: @category,
+      age: @age,
+      state: @state,
+      user: @user
     )
   end
 
@@ -34,4 +33,19 @@ RSpec.describe Listing, type: :model do
   end
 
   context "associations" do 
+    describe "listings" do 
+      it "should belong to a user" do
+        expect(@user.listings.include?(@listing)).to eq(true)
+      end
+      it "should belong to age" do 
+        expect(@age.listings.include?(@listing)).to eq(true)
+      end
+      it "should belong to state" do 
+        expect(@state.listings.include?(@listing)).to eq(true)
+      end
+       it "should belong to state" do 
+        expect(@category.listings.include?(@listing)).to eq(true)
+      end
+    end
+  end
 end
