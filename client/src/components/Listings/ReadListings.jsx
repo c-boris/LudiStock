@@ -6,7 +6,7 @@ import fetchAPI from "../FetchAPI/fetchAPI";
 import { categoryAtom } from "../../utils/categoryAtom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
-
+import DataLoader from "../../utils/DataLoader";
 import { useTranslation } from "react-i18next";
 
 function ReadListings() {
@@ -54,7 +54,22 @@ function ReadListings() {
 
   useEffect(() => {
     setData(dataListings);
-  }, [dataListings]);
+    setCategoriesSelected(
+      categoryAtomValue.map((category) => {
+        return { ...category, selected: false };
+      })
+    );
+    setAgesSelected(
+      ageAtomValue.map((age) => {
+        return { ...age, selected: false };
+      })
+    );
+    setStatesSelected(
+      stateAtomValue.map((state) => {
+        return { ...state, selected: false };
+      })
+    );
+  }, [dataListings, categoryAtomValue, ageAtomValue, stateAtomValue]);
 
   function FilterData() {
     const filteredCategory = categoriesSelected
