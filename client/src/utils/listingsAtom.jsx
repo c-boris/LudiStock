@@ -16,5 +16,6 @@ export const listingsAtom = atom([
     created_at: "",
     updated_at: "",
     user: { id: 0, email: "" },
+    header_image: "",
   },
 ]);
