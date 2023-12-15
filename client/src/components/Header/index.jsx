@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../utils/useAuth"; // Import the useAuth hook
 import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
+import ReactSwitch from "react-switch";
+import { LanguageContext } from "../../main";
+import { useTranslation } from "react-i18next";
 
 const navigation = [
   { name: "Listings", to: "/listings" },
@@ -16,7 +19,9 @@ const navigation = [
 ];
 
 const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const myLang = useContext(LanguageContext);
+  const { t } = useTranslation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate(); // Use navigate from react-router-dom
   const { logout } = useAuth(); // Destructure the logout function from useAuth
   const [user] = useAtom(userAtom);
@@ -57,13 +62,20 @@ const Header = () => {
             <NavLink
               key={item.name}
               to={item.to}
-              className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
+              className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary px-12"
             >
-              {item.name}
+              {t(`${item.name}`)}
             </NavLink>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-6">
+        <div className="hidden lg:flex lg:gap-x-4">
+          <label className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary">
+            {myLang.lng === "fr" ? "EN" : "FR"}
+          </label>
+          <ReactSwitch
+            onChange={myLang.toggleLng}
+            checked={myLang.lng === "en"}
+          />
           <LightToggle />
           {user.isLoggedIn ? (
             <>
@@ -71,7 +83,7 @@ const Header = () => {
                 to="/my-listings"
                 className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
               >
-                My listings
+                {t("myListings")}
               </NavLink>
               <NavLink
                 to="/profile"
@@ -94,7 +106,7 @@ const Header = () => {
                 className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
                 onClick={handleLogout}
               >
-                Log out
+                {t("logOut")}
               </NavLink>
             </>
           ) : (
@@ -102,7 +114,7 @@ const Header = () => {
               to="/login"
               className="text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
             >
-              Log in
+              {t("logIn")}
             </NavLink>
           )}
         </div>
@@ -143,7 +155,7 @@ const Header = () => {
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary  dark:hover:bg-secondary"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item.name}
+                    {t(`${item.name}`)}
                   </NavLink>
                 ))}
               </div>
@@ -157,7 +169,7 @@ const Header = () => {
                         setMobileMenuOpen(false);
                       }}
                     >
-                      My listings
+                      {t("myListings")}
                     </NavLink>
                     <NavLink
                       to="/profile"
@@ -168,6 +180,16 @@ const Header = () => {
                     >
                       Profile
                     </NavLink>
+                    {user.isAdmin && (
+                      <>
+                        <NavLink
+                          to="/admin"
+                          className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
+                        >
+                          Admin
+                        </NavLink>
+                      </>
+                    )}
                     <NavLink
                       to="/"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
@@ -176,7 +198,7 @@ const Header = () => {
                         setMobileMenuOpen(false);
                       }}
                     >
-                      Log out
+                      {t("logOut")}
                     </NavLink>
                   </>
                 ) : (
@@ -185,7 +207,7 @@ const Header = () => {
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Log in
+                    {t("logIn")}
                   </NavLink>
                 )}
               </div>
