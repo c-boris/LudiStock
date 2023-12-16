@@ -1,3 +1,4 @@
+<br>
 <h1 align="center">LudiStock - A Marketplace for Second-Hand Toys</h1>
 
 <h2 align="center">
@@ -41,6 +42,12 @@ npm run dev
 ```
 
 This will install the necessary dependencies and start the development server.
+
+Three users will have access with emails/passwords :
+
+- user1@gmail.com / 123456
+- user2@gmail.com / 123456
+- user3@gmail.com / 123456
 
 ## Authors
 

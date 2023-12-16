@@ -20,6 +20,10 @@ const ProfileForm = () => {
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
+    const confirmed = window.confirm("Update profile?");
+    if (!confirmed) {
+      return;
+    }
     try {
       await updateProfile({
         username,
@@ -31,7 +35,7 @@ const ProfileForm = () => {
 
       toast.success("Profile updated successfully!");
     } catch (error) {
-      toast.error("Invalid password");
+      toast.error("Please, verify your email or password");
     }
   };
 
@@ -87,9 +91,7 @@ const ProfileForm = () => {
         });
 
         if (response.ok) {
-          Object.keys(Cookies.get()).forEach((cookieName) => {
-            Cookies.remove(cookieName);
-          });
+          Cookies.remove("token");
 
           setUser({
             isLoggedIn: false,
