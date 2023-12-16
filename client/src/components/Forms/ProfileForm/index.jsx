@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { atom } from "jotai";
+import { useTranslation } from "react-i18next";
 
 const usernameAtom = atom("");
 
@@ -15,6 +16,7 @@ const ProfileForm = () => {
   const [username, setUsername] = useAtom(usernameAtom);
   const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
@@ -123,7 +125,7 @@ const ProfileForm = () => {
                 Profile
               </h2>
               <p className="block  font-medium leading-6 text-primary dark:text-dprimary mb-2">
-                Username : {user.username}
+                {t("username")} {user.username}
               </p>
               <p className="block  font-medium leading-6 text-primary dark:text-dprimary mb-2">
                 Email : {user.email}
@@ -134,7 +136,7 @@ const ProfileForm = () => {
                     htmlFor="username"
                     className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
                   >
-                    Edit Username
+                    {t("editUsername")}
                   </label>
                   <div className="mt-2">
                     <input
@@ -154,7 +156,7 @@ const ProfileForm = () => {
                     htmlFor="email"
                     className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
                   >
-                    Edit Email address
+                    {t("editEmail")}
                   </label>
                   <div className="mt-2">
                     <input
@@ -176,7 +178,7 @@ const ProfileForm = () => {
                     htmlFor="password"
                     className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
                   >
-                    Confirm changes with password
+                    {t("confirmChangesPassword")}
                   </label>
                   <div className="mt-2">
                     <input
@@ -195,7 +197,7 @@ const ProfileForm = () => {
                   type="submit"
                   className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 sm:mt-8"
                 >
-                  Save
+                  {t("save")}
                 </button>
               </div>
             </div>
@@ -204,26 +206,26 @@ const ProfileForm = () => {
         <div className="mt-6 flex  sm:flex-row items-center gap-x-12">
           <div className="sm:col-span-4">
             <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
-              Reset password
+              {t("resetMyPassword")}
             </p>
             <button
               type="button"
               onClick={handleResetPassword}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 mb-4 sm:mt-6"
             >
-              Reset
+              {t("reset")}
             </button>
           </div>
           <div className="sm:col-span-4">
             <p className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
-              Delete account
+              {t("deleteAccount")}
             </p>
             <button
               type="button"
               onClick={handleDeleteAccount}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4 mb-4 sm:mt-6"
             >
-              Delete
+              {t("delete")}
             </button>
           </div>
         </div>

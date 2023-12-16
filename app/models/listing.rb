@@ -4,5 +4,7 @@ class Listing < ApplicationRecord
   belongs_to :state
   belongs_to :user
   has_one_attached :header_image
-  #has_many_attached :images
+  validates :title, presence: true, length: { minimum: 5 }
+  validates :description, presence: true, length: { minimum: 15 }
+  validates :price, presence: true
 end

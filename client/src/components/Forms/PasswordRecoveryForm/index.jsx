@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import API_URL from '../../../utils/environment';
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import API_URL from "../../../utils/environment";
+import { useTranslation } from "react-i18next";
 
 function PasswordRecoveryForm() {
-  const [email, setEmail] = useState('');
-
+  const [email, setEmail] = useState("");
+  const { t } = useTranslation();
   const handlePasswordRecovery = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch(`${API_URL}/users/password`, {
         method: "POST",
@@ -23,12 +23,12 @@ function PasswordRecoveryForm() {
       });
 
       if (response.ok) {
-        toast.success('Password recovery email sent successfully!');
+        toast.success("Password recovery email sent successfully!");
       } else {
-        toast.error('No accounts match. Please verify your email address.');
+        toast.error("No accounts match. Please verify your email address.");
       }
     } catch (error) {
-      toast.error('An error occurred during password recovery');
+      toast.error("An error occurred during password recovery");
     }
   };
 
@@ -36,12 +36,16 @@ function PasswordRecoveryForm() {
     <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-light dark:bg-dark">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-primary dark:text-dprimary">
-          Forgot your password?
+          {t("forgotPassword")}
         </div>
         <form onSubmit={handlePasswordRecovery} className="space-y-6">
           <div>
-            <label htmlFor="passwordRecoveryEmail" className="block text-sm font-medium leading-6 text-primary dark:text-dprimary">
+            <label
+              htmlFor="passwordRecoveryEmail"
+              className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
+            >
               Enter your email address to reset your password
+              {t("resetPassword")}
             </label>
             <div className="mt-2">
               <input
@@ -65,7 +69,7 @@ function PasswordRecoveryForm() {
             </button>
           </div>
           <p className="mt-5 text-center text-sm text-primary dark:text-dprimary">
-            Remember your password?{' '}
+            {t("rememberPassword")}
             <NavLink
               to="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"

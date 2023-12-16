@@ -4,38 +4,40 @@ import { userAtom } from "../../utils/atom";
 import { Link } from "react-router-dom";
 import fetchAPI from "../FetchAPI/fetchAPI";
 import { listingsAtom } from "../../utils/listingsAtom";
+import { useTranslation } from "react-i18next";
 
 function MyListingsForm() {
   const [user] = useAtom(userAtom);
   const [filteredData, setFilteredData] = useState([]);
   const [dataListings, setDataListings] = useAtom(listingsAtom);
+  const { t } = useTranslation();
+
   useEffect(() => {
     setDataListings(fetchAPI("listings"));
   }, []);
   useEffect(() => {
     setFilteredData(dataListings?.filter((item) => item.user_id == user.id));
   }, [dataListings]);
+
   return (
     <>
       {!filteredData.length && (
         <h1 className="text-2xl px-8 text-primary dark:text-dprimary bg-light dark:bg-dark py-24 sm:py-32">
-          Create a new listing
+          {t("myListings")}
         </h1>
       )}
       {filteredData && (
         <div className="bg-light dark:bg-dark py-24 sm:py-32">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 m-8">
-              My listings
+              {t("myListings")}
             </h2>
-            <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary">
-              {/* All toys belonging to me (user:{user.id}) */}
-            </p>
+            <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary"></p>
             <Link
               to={`newListing`}
               className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8 mb-7"
             >
-              Create a new listing
+              {t("createListing")}
               <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
             </Link>
           </div>
@@ -71,7 +73,7 @@ function MyListingsForm() {
                             state={{ item: item, delete: false }}
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
-                            Details
+                            {t("details")}
                             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
 
@@ -80,7 +82,7 @@ function MyListingsForm() {
                             state={{ item: item }}
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-green-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
-                            Modify
+                            {t("modify")}
                             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
 
@@ -89,7 +91,7 @@ function MyListingsForm() {
                             state={{ item: item, delete: true }}
                             className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-red-700 font-medium rounded-lg text-white text-sm grid place-items-center"
                           >
-                            Delete
+                            {t("delete")}
                             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                           </Link>
                         </div>

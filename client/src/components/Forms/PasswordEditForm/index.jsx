@@ -3,6 +3,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import API_URL from "../../../utils/environment";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function PasswordEditForm({ onPasswordChanged }) {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function PasswordEditForm({ onPasswordChanged }) {
     newPassword: "",
     confirmPassword: "",
   });
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,8 +65,6 @@ function PasswordEditForm({ onPasswordChanged }) {
         }),
       });
 
-      console.log(response);
-
       if (response.status === 200) {
         toast.success("Password updated successfully!");
         if (onPasswordChanged) {
@@ -95,7 +95,7 @@ function PasswordEditForm({ onPasswordChanged }) {
                 htmlFor="newPassword"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Password :
+                {t("password")}
               </label>
               <div className="mt-2">
                 <input
@@ -115,7 +115,7 @@ function PasswordEditForm({ onPasswordChanged }) {
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Password confirmation :
+                {t("passwordConfirm")}
               </label>
               <div className="mt-2">
                 <input
@@ -135,16 +135,16 @@ function PasswordEditForm({ onPasswordChanged }) {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Change
+                {t("change")}
               </button>
             </div>
             <p className="mt-5 text-center text-sm text-primary dark:text-dprimary">
-              Remember your password?{" "}
+              {t("rememberPassword")}
               <NavLink
                 to="/login"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
               >
-                Log in
+                {t("logIn")}
               </NavLink>
             </p>
           </form>
@@ -159,17 +159,3 @@ PasswordEditForm.propTypes = {
 };
 
 export default PasswordEditForm;
-
-// PasswordEditForm.propTypes = {
-//   onPasswordChanged: PropTypes.func,
-// };
-
-// export default PasswordEditForm;PasswordEditForm.propTypes = {
-//   onPasswordChanged: PropTypes.func,
-// };
-
-// export default PasswordEditForm;PasswordEditForm.propTypes = {
-//   onPasswordChanged: PropTypes.func,
-// };
-
-// export default PasswordEditForm;
