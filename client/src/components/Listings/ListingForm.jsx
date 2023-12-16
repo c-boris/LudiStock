@@ -96,7 +96,7 @@ function ListingForm(props) {
             htmlFor="age"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            {t("age")}
+            {t("ageSelection")}
           </label>
           <select
             id="age"
@@ -134,7 +134,7 @@ function ListingForm(props) {
             htmlFor="category"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
           >
-            {t("category")}
+            {t("categorySelection")}
           </label>
           <select
             id="category"

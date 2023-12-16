@@ -6,7 +6,6 @@ import fetchAPI from "../FetchAPI/fetchAPI";
 import { categoryAtom } from "../../utils/categoryAtom";
 import { ageAtom } from "../../utils/ageAtom";
 import { stateAtom } from "../../utils/stateAtom";
-import DataLoader from "../../utils/DataLoader";
 import { useTranslation } from "react-i18next";
 
 function ReadListings() {
@@ -317,10 +316,10 @@ function ReadListings() {
                                 {item.description}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                {t("category")} {item.category.label}
+                                {t("categoryDisplay")} {item.category.label}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                {t("age")}
+                                {t("ageDisplay")}
                                 {item.age.label}
                               </p>
                               <p className="text-md text-gray-800 mt-0">

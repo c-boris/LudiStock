@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
 import LightToggle from "../LightToggle/";
 import { toast } from "react-toastify";
-import { useAuth } from "../../utils/useAuth"; // Import the useAuth hook
+import { useAuth } from "../../utils/useAuth";
 import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
 import ReactSwitch from "react-switch";
