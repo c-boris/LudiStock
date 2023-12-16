@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from '../../../utils/useAuth';
+import { useAuth } from "../../../utils/useAuth";
+import { useTranslation } from "react-i18next";
 
 function LoginForm() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ function LoginForm() {
       <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-light dark:bg-dark">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-primary dark:text-dprimary">
-            Sign in to your account
+            {t("signIn")}
           </h2>
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
@@ -27,7 +29,7 @@ function LoginForm() {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Email address
+                {t("email")}
               </label>
               <div className="mt-2">
                 <input
@@ -48,14 +50,14 @@ function LoginForm() {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
                 >
-                  Password
+                  {t("password")}
                 </label>
                 <div className="text-sm">
                   <NavLink
                     to="/lost-password"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
-                    Forgot password?
+                    {t("forgotPSWD")}
                   </NavLink>
                 </div>
               </div>
@@ -77,17 +79,17 @@ function LoginForm() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Log in
+                {t("logIn")}
               </button>
             </div>
           </form>
           <p className="mt-10 text-center text-sm text-primary dark:text-dprimary">
-            Not a member?{" "}
+            {t("notMember")}
             <NavLink
               to="/signup"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Sign up
+              {t("signUp")}
             </NavLink>
           </p>
         </div>

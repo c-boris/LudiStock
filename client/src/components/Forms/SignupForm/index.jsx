@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../utils/useAuth";
+import { useTranslation } from "react-i18next";
 
 function SignupForm() {
   const { signup } = useAuth();
@@ -9,6 +10,7 @@ function SignupForm() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_Confirmation] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +22,7 @@ function SignupForm() {
       <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-light dark:bg-dark">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-primary dark:text-dprimary">
-            Create an account
+            {t("createAccount")}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -28,7 +30,7 @@ function SignupForm() {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Email :
+                {t("email")}
               </label>
               <div className="mt-2">
                 <input
@@ -47,7 +49,7 @@ function SignupForm() {
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Password :
+                {t("password")}
               </label>
               <div className="mt-2">
                 <input
@@ -66,7 +68,7 @@ function SignupForm() {
                 htmlFor="password_confirmation"
                 className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
               >
-                Password confirmation :
+                {t("passwordConfirm")}
               </label>
               <div className="mt-2">
                 <input
@@ -85,17 +87,17 @@ function SignupForm() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                {t("signUp")}
               </button>
             </div>
           </form>
           <p className="mt-10 text-center text-sm text-primary dark:text-dprimary">
-            Already a member?{" "}
+            {t("alreadyMember")}
             <NavLink
               to="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Log in
+              {t("logIn")}
             </NavLink>
           </p>
         </div>

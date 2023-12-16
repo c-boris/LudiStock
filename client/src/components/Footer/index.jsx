@@ -1,7 +1,10 @@
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <section id="footer" className="bg-light dark:bg-dark py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -36,10 +39,10 @@ export default function Footer() {
             to="/terms-and-conditions"
             className="px-3 hover:underline text-secondary dark:text-dsecondary"
           >
-            Terms and Conditions
+            {t("termsAndConditions")}
           </Link>
           <p className="text-secondary dark:text-dsecondary">
-            © 2023 LudiStock | All rights reserved.
+            © 2023 LudiStock | {t("reserved")}.
           </p>
         </div>
       </div>
