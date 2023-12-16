@@ -37,7 +37,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_out(current_user)
       render json: { message: 'Account deleted successfully.' }, status: :ok
     rescue ActiveRecord::InvalidForeignKey
-      render json: { error: 'Failed to delete account due to foreign key constraint.' }, status: :unprocessable_entity
+      render json: { error: 'Failed to delete account.' }, status: :unprocessable_entity
     end
   end
 
@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_failed
-    render json: { message: 'Something went wrong.' }, status: :unprocessable_entity
+    render json: { message: 'Registration failed.' }, status: :unprocessable_entity
   end
   
   private

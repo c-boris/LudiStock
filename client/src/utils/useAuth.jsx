@@ -38,20 +38,6 @@ const useAuth = () => {
     }
   }, [user.isLoggedIn, setUser]);
 
-  const handleResponse = async (response, errorMessage) => {
-    try {
-      if (response.ok) {
-        const data = await response.json();
-        return { success: true, data };
-      } else {
-        const errorData = await response.json();
-        return { success: false, error: errorData.message || errorMessage };
-      }
-    } catch (error) {
-      return { success: false, error: errorMessage };
-    }
-  };
-
   const login = async (email, password, navigate, toast) => {
     try {
       const response = await fetch(`${API_URL}/users/sign_in`, {
@@ -64,30 +50,29 @@ const useAuth = () => {
         }),
       });
 
-      const result = await handleResponse(
-        response,
-        "Login successful!",
-        "An error occurred during login"
-      );
+      try {
+        if (response.ok) {
+          const data = await response.json();
+          const token = response.headers.get("Authorization");
 
-      if (result.success) {
-        const { data } = result;
-        const token = response.headers.get("Authorization");
+          Cookies.set("token", token);
 
-        Cookies.set("token", token);
+          setUser({
+            isLoggedIn: true,
+            isAdmin: data.user.admin,
+            email: data.user.email,
+            username: data.user.username,
+            id: data.user.id,
+          });
 
-        setUser({
-          isLoggedIn: true,
-          isAdmin: data.user.admin,
-          email: data.user.email,
-          username: data.user.username,
-          id: data.user.id,
-        });
-
-        navigate("/");
-        toast.success("Login successful!");
-      } else {
-        toast.error(result.error);
+          navigate("/");
+          toast.success("Login successful!");
+        } else {
+          const errorData = await response.json();
+          toast.error(errorData.message || "An error occurred during login");
+        }
+      } catch (error) {
+        toast.error("An unexpected error occurred during login");
       }
     } catch (error) {
       toast.error("An unexpected error occurred during login");
@@ -116,30 +101,31 @@ const useAuth = () => {
         }),
       });
 
-      const result = await handleResponse(
-        response,
-        "Account created successfully!",
-        "An error occurred during account creation"
-      );
+      try {
+        if (response.ok) {
+          const data = await response.json();
+          const token = response.headers.get("Authorization");
 
-      if (result.success) {
-        const { data } = result;
-        const token = response.headers.get("Authorization");
+          Cookies.set("token", token);
 
-        Cookies.set("token", token);
+          setUser({
+            isLoggedIn: true,
+            isAdmin: data.user.admin,
+            email: data.user.email,
+            username: data.user.username,
+            id: data.user.id,
+          });
 
-        setUser({
-          isLoggedIn: true,
-          isAdmin: data.user.admin,
-          email: data.user.email,
-          username: data.user.username,
-          id: data.user.id,
-        });
-
-        navigate("/");
-        toast.success("Account created successfully!");
-      } else {
-        toast.error(result.error);
+          navigate("/");
+          toast.success("Account created successfully!");
+        } else {
+          const errorData = await response.json();
+          toast.error(
+            errorData.message || "An error occurred during account creation"
+          );
+        }
+      } catch (error) {
+        toast.error("An unexpected error occurred during account creation");
       }
     } catch (error) {
       toast.error("An unexpected error occurred during account creation");
@@ -162,30 +148,27 @@ const useAuth = () => {
         },
       });
 
-      if (response.status === 200) {
-        Object.keys(Cookies.get()).forEach((cookieName) => {
-          Cookies.remove(cookieName);
-        });
+      try {
+        if (response.status === 200) {
+          Object.keys(Cookies.get()).forEach((cookieName) => {
+            Cookies.remove(cookieName);
+          });
 
-        setUser({
-          isLoggedIn: false,
-          email: "",
-          username: "",
-          id: "",
-        });
+          setUser({
+            isLoggedIn: false,
+            email: "",
+            username: "",
+            id: "",
+          });
 
-        navigate("/");
-        toast.success("Logout successful!");
-      } else {
-        const result = await handleResponse(
-          response,
-          "Logout successful!",
-          "Logout failed. Please try again."
-        );
-
-        if (!result.success) {
-          toast.error(result.error);
+          navigate("/");
+          toast.success("Logout successful!");
+        } else {
+          const errorData = await response.json();
+          toast.error(errorData.message || "Logout failed. Please try again.");
         }
+      } catch (error) {
+        toast.error("An unexpected error occurred during logout");
       }
     } catch (error) {
       toast.error("An unexpected error occurred during logout");
@@ -221,33 +204,33 @@ const useAuth = () => {
         body: JSON.stringify(requestBody),
       });
 
-      const result = await handleResponse(
-        response,
-        "Profile updated successfully!",
-        "Failed to update profile"
-      );
+      try {
+        if (response.ok) {
+          const data = await response.json();
+          const newToken = response.headers.get("Authorization");
 
-      if (result.success) {
-        const newToken = response.headers.get("Authorization");
+          if (newToken) {
+            Cookies.set("token", newToken);
+          }
 
-        if (newToken) {
-          Cookies.set("token", newToken);
+          setUser({
+            isLoggedIn: true,
+            email: data.user.email,
+            username: data.user.username,
+            id: data.user.id,
+            isAdmin: data.user.admin,
+          });
+
+          return { success: true, data };
+        } else {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to update profile");
         }
-
-        setUser({
-          isLoggedIn: true,
-          email: result.data.user.email,
-          username: result.data.user.username,
-          id: result.data.user.id,
-          isAdmin: result.data.user.admin,
-        });
-
-        return result;
-      } else {
-        throw new Error(result.error);
+      } catch (error) {
+        throw new Error("An error occurred during profile update");
       }
     } catch (error) {
-      throw new Error("An error occurred during profile update");
+      throw new Error("An unexpected error occurred during profile update");
     }
   };
 
