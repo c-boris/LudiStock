@@ -1,19 +1,46 @@
-# README
+<h1 align="center">LudiStock (React App with Rails API server)</h1>
+<h1 align="center">Ludistock is a marketplace for buying and selling second-hand toys.</h1>
 
-To get the application up and running on local, please follow instructions:
+<p align="center">
+  <a href="#requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#getting-started">Getting Started</a> &#xa0; | &#xa0;
+  <a href="#authors">Authors</a> &#xa0; | &#xa0;
+  <a href="#special-thanks">Special thanks</a>
+</p>
 
-1. On a first terminal: git clone https://github.com/c-boris/marketplace-rails-react.git
-   1.1 cd marketplace-rails-react
-   1.2 bundle install
-   1.3 rails db:create
-   1.4 rails db:migrate db:seed
-   1.5 rails server
-2. On a second terminal:
-   2.1 cd client
-   2.2 pnpm install
-   2.3 pnpm run dev
-3. Go to your web browser on http://localhost:5173/
-4. Three users are already created with following emails / password:
-   user1@gmail.com / 123456
-   user2@gmail.com / 123456
-   user3@gmail.com / 123456
+<br>
+
+## Requirements
+
+- [Git](https://git-scm.com)
+- [Node](https://nodejs.org/en/)
+- [Ruby on Rails](https://rubyonrails.org/)
+
+## Getting Started
+
+<br>
+
+```bash
+cd LudiStock
+bundle install
+rails db:create
+rails db:migrate
+rails s
+cd client
+npm install
+npm run dev
+```
+
+## Authors
+
+- [@Loulergue-jm](https://github.com/Loulergue-jm)
+- [@Alex314064](https://github.com/Alex314064)
+- [@c-boris](https://github.com/c-boris)
+
+## Special thanks
+
+- [The Hacking Project](https://www.thehackingproject.org/)
+
+<br>
+
+<a href="#top">Back to top</a>
