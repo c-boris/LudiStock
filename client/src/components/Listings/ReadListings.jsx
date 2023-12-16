@@ -101,8 +101,6 @@ function ReadListings() {
       )
     );
   }
-  //filteredCategory.find((category) => category === item.category.label) ||
-  //filteredCategory.includes(item.category.label);
 
   function ReloadData() {
     setData(dataListings);
@@ -183,7 +181,9 @@ function ReadListings() {
               key={index}
               style={category.selected ? styleSelected : styleNotSelected}
             >
-              {category.selected ? `✅ ${category.label}` : category.label}
+              {category.selected
+                ? `✅ ${t(category.label)}`
+                : `${t(category.label)}`}
             </div>
           ))}
         </div>
@@ -206,7 +206,7 @@ function ReadListings() {
               key={index}
               style={age.selected ? styleSelected : styleNotSelected}
             >
-              {age.selected ? `✅ ${age.label}` : age.label}
+              {age.selected ? `✅ ${t(age.label)}` : `${t(age.label)}`}
             </div>
           ))}
         </div>
@@ -229,7 +229,7 @@ function ReadListings() {
               key={index}
               style={state.selected ? styleSelected : styleNotSelected}
             >
-              {state.selected ? `✅ ${state.label}` : state.label}
+              {state.selected ? `✅ ${t(state.label)}` : `${t(state.label)}`}
             </div>
           ))}
         </div>
@@ -285,7 +285,7 @@ function ReadListings() {
                             <img
                               className="rounded-t-lg p-8r"
                               src={item.header_image}
-                              alt="Product"
+                              alt="Product Image"
                             />
                             <p className="absolute right-2 top-2 bg-white rounded-full p-2 cursor-pointer group">
                               <svg
@@ -316,14 +316,14 @@ function ReadListings() {
                                 {item.description}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                {t("categoryDisplay")} {item.category.label}
+                                {t("categoryDisplay")} {t(item.category.label)}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
                                 {t("ageDisplay")}
-                                {item.age.label}
+                                {t(item.age.label)}
                               </p>
                               <p className="text-md text-gray-800 mt-0">
-                                {t("stateName")} {item.state.label}
+                                {t("stateName")} {t(item.state.label)}
                               </p>
                             </div>
                             <div className="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">

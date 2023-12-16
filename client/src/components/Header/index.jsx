@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../utils/useAuth";
 import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
-import ReactSwitch from "react-switch";
 import { LanguageContext } from "../../main";
 import { useTranslation } from "react-i18next";
 
@@ -44,15 +43,12 @@ const Header = () => {
             <span className="sr-only">LudiStock</span>
             LudiStock
           </NavLink>
-          <label className="ml-5 text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary">
-            {myLang.lng === "fr" ? "EN→" : "FR→"}
-          </label>
-          <ReactSwitch
-            onChange={myLang.toggleLng}
-            checked={myLang.lng === "en"}
-            onColor="#000"
-            offColor="#000"
-          />
+          <button
+            onClick={myLang.toggleLng}
+            className="ml-5 text-sm font-semibold leading-6 text-primary dark:text-dprimary hover:text-secondary dark:hover:text-dsecondary"
+          >
+            {myLang.lng === "fr" ? "FR→EN" : "EN→FR"}
+          </button>
         </div>
         <div className="flex lg:hidden">
           <LightToggle />

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import BearIcon from "../../assets/img/BearIcon.jpg";
-const sellerModal = ({ setShowSellerModal, seller_email }) => {
+import { useTranslation } from "react-i18next";
+
+function SellerModal({ setShowSellerModal, seller_email }) {
+  const { t } = useTranslation();
   const modalRef = useRef();
 
   const closeOnOutsideClick = (event) => {
@@ -20,7 +23,6 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [setShowSellerModal]);
-  console.log("seller email:", seller_email);
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto sm:p-0 pt-4 pr-4 pb-20 pl-4 focus:outline-none">
       <div className="flex justify-center items-end text-center min-h-screen sm:block">
@@ -42,7 +44,7 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
                     alt="User Avatar"
                   />
                   <p className="mt-8 text-2xl font-semibold leading-none text-white tracking-tighter lg:text-3xl">
-                    Seller Contact
+                    {t("sellerContact")}
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-center text-gray-200">
                     {seller_email}
@@ -52,7 +54,7 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
                       onClick={() => setShowSellerModal(false)}
                       className="flex text-center items-center justify-center w-full pt-4 pr-10 pb-4 pl-10 text-base font-medium text-white bg-indigo-600 rounded-xl transition duration-500 ease-in-out transform hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                      Close
+                      {t('close')}
                     </button>
                   </div>
                 </div>
@@ -63,6 +65,6 @@ const sellerModal = ({ setShowSellerModal, seller_email }) => {
       </div>
     </div>
   );
-};
+}
 
-export default sellerModal;
+export default SellerModal;
