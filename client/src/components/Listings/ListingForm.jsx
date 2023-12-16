@@ -4,7 +4,7 @@ function ListingForm(props) {
   const { t } = useTranslation();
 
   return (
-    <div className="flex h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 mt-12 lg:px-8 bg-light dark:bg-dark">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 mt-19 lg:px-8 bg-light dark:bg-dark">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-primary dark:text-dprimary">
           {props.viewTitle}
@@ -84,7 +84,7 @@ function ListingForm(props) {
             <div className="mt-2">
               <textarea
                 id="description"
-                placeholder="15 characters minimum"
+                placeholder={t("15cars")}
                 value={props.description}
                 onChange={(e) => props.setDescription(e.target.value)}
                 required
@@ -106,7 +106,7 @@ function ListingForm(props) {
             <option value="">Selection</option>
             {props.ageAtomValue.map((age) => (
               <option key={age.id} value={age.id}>
-                {age.label}
+                {t(age.label)}
               </option>
             ))}
           </select>
@@ -125,7 +125,7 @@ function ListingForm(props) {
             <option value="">Selection</option>
             {props.stateAtomValue.map((state) => (
               <option key={state.id} value={state.id}>
-                {state.label}
+                {t(state.label)}
               </option>
             ))}
           </select>
@@ -144,7 +144,7 @@ function ListingForm(props) {
             <option value="">Selection</option>
             {props.categoryAtomValue.map((category) => (
               <option key={category.id} value={category.id}>
-                {category.label}
+                {t(category.label)}
               </option>
             ))}
           </select>
