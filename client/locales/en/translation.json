@@ -157,5 +157,9 @@
   "contactSeller": "Contact the seller",
   "loginSeller": "Login or create an account to contact seller",
   "sellerContact": "Seller Contact",
-  "close": "Close"
+  "close": "Close",
+  "createToyToSell": "Create a new toy to sell",
+  "create": "Create",
+  "modifyToy": "Modify toy to sell",
+  "update": "Update"
 }

@@ -24,7 +24,7 @@
   "priceFilter": "Prix <= à :",
   "keyword": "mot clé à chercher :",
   "filter": "Filtrer",
-  "reload": "Recharger données",
+  "reload": "Recharger les données",
   "nothing": "Aucune donnée trouvée",
   "listToys": "Liste de jouets",
   "lookingFor": "Tout ce que vous cherchez est ici.",
@@ -183,5 +183,9 @@
   "contactSeller": "Contacter le vendeur",
   "loginSeller": "Se connecter pour contacter le vendeur",
   "sellerContact": "Contact du vendeur",
-  "close": "Fermer"
+  "close": "Fermer",
+  "createToyToSell": "Créer un nouveau jouet à vendre",
+  "create": "Créer",
+  "modifyToy": "Modifier le jouet à vendre",
+  "update": "Mettre à jour"
 }

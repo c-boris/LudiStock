@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingForm from "./ListingForm";
 import API_URL from "../../utils/environment";
+import { useTranslation } from "react-i18next";
 
 function NewListing() {
+  const { t } = useTranslation();
   const [user] = useAtom(userAtom);
   const [ageAtomValue] = useAtom(ageAtom);
   const [stateAtomValue] = useAtom(stateAtom);
@@ -66,7 +68,7 @@ function NewListing() {
   return (
     <>
       <ListingForm
-        viewTitle={"Create a new toy to sell"}
+        viewTitle={t("createToyToSell")}
         title={title}
         setTitle={setTitle}
         price={price}
@@ -85,7 +87,7 @@ function NewListing() {
         selectedCategory={selectedCategory}
         handleCategoryChange={handleCategoryChange}
         handleSubmit={handleSubmit}
-        action={"Create"}
+        action={t("create")}
       />
     </>
   );
