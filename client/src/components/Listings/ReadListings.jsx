@@ -126,14 +126,14 @@ function ReadListings() {
   return (
     <>
       <form className="px-8 pt-20 bg-light dark:bg-dark">
-        <div className="mb-2 mt-6 flex flex-col sm:flex-row items-center gap-x-12">
+        <div className="mb-2 mt-6 flex flex-col sm:flex-row items-center gap-x-6">
           <label
             htmlFor="price"
-            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
+            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary mb-4"
           >
             {t("priceFilter")}
           </label>
-          <div className="mt-1">
+          <div className="mt-1 mb-4">
             <input
               type="text"
               id="price-filter"
@@ -146,11 +146,11 @@ function ReadListings() {
           </div>
           <label
             htmlFor="name"
-            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary"
+            className="block text-lg font-medium leading-6 text-primary dark:text-dprimary mb-4"
           >
             {t("keyword")}
           </label>
-          <div className="mt-1">
+          <div className="mt-1 mb-4">
             <input
               type="text"
               id="name-filter"
@@ -162,7 +162,7 @@ function ReadListings() {
             />
           </div>
         </div>
-        <div className="flex flex-wrap items-center text-secondary dark:text-dsecondary">
+        <div className="flex flex-wrap text-sm items-center text-secondary dark:text-dsecondary mb-4 mt-4">
           {categoriesSelected.map((category, index) => (
             <div
               onClick={() => {
@@ -187,7 +187,7 @@ function ReadListings() {
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap items-center text-secondary dark:text-dsecondary">
+        <div className="flex flex-wrap text-sm items-center text-secondary dark:text-dsecondary mb-4">
           {agesSelected.map((age, index) => (
             <div
               onClick={() => {
@@ -210,7 +210,7 @@ function ReadListings() {
             </div>
           ))}
         </div>
-        <div className="mb-2 flex flex-wrap items-center text-secondary dark:text-dsecondary">
+        <div className="flex flex-wrap text-sm items-center text-secondary dark:text-dsecondary mb-8">
           {statesSelected.map((state, index) => (
             <div
               onClick={() => {
@@ -259,7 +259,7 @@ function ReadListings() {
       ) : null}
       {data && (
         <div className="bg-light dark:bg-dark pt-8 sm:py-1">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl mb-4">
             <h2 className=" font-bold tracking-tight text-primary dark:text-dprimary sm:text-4xl mx-8 pt-8">
               {t("listToys")}
             </h2>
