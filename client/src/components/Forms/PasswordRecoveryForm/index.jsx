@@ -44,7 +44,6 @@ function PasswordRecoveryForm() {
               htmlFor="passwordRecoveryEmail"
               className="block text-sm font-medium leading-6 text-primary dark:text-dprimary"
             >
-              Enter your email address to reset your password
               {t("resetPassword")}
             </label>
             <div className="mt-2">
@@ -65,7 +64,7 @@ function PasswordRecoveryForm() {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Reset Password
+              {t("resetMyPassword")}
             </button>
           </div>
           <p className="mt-5 text-center text-sm text-primary dark:text-dprimary">
@@ -74,7 +73,7 @@ function PasswordRecoveryForm() {
               to="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Log in
+              {t("logIn")}
             </NavLink>
           </p>
         </form>

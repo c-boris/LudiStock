@@ -12,8 +12,10 @@ import { useLocation } from "react-router-dom";
 import API_URL from "../../utils/environment";
 import fetchAPI from "../FetchAPI/fetchAPI";
 import { listingsAtom } from "../../utils/listingsAtom";
+import { useTranslation } from "react-i18next";
 
 function UpdateListing() {
+  const { t } = useTranslation();
   const location = useLocation();
   const item = location.state.item;
   const [error, setError] = useState(null);
@@ -79,7 +81,7 @@ function UpdateListing() {
   return (
     <>
       <ListingForm
-        viewTitle={"Modify toy to sell"}
+        viewTitle={t("modifyToy")}
         title={title}
         setTitle={setTitle}
         price={price}
@@ -98,7 +100,7 @@ function UpdateListing() {
         selectedCategory={selectedCategory}
         handleCategoryChange={handleCategoryChange}
         handleSubmit={handleSubmit}
-        action={"Update"}
+        action={t("update")}
       />
     </>
   );
