@@ -82,7 +82,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/listings/update/:id",
-        element: <UpdateListing />,
+        element: (
+          <ProtectedRoute>
+            <UpdateListing />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/listings/delete/:id",
