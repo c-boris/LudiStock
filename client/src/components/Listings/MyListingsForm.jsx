@@ -35,7 +35,7 @@ function MyListingsForm() {
             <p className="mx-8 text-lg leading-8 text-secondary dark:text-dsecondary"></p>
             <Link
               to={`newListing`}
-              className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8 mb-7"
+              className="group relative w-2/3 h-10 mr-3 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-lg grid place-items-center mx-8 mb-16"
             >
               {t("createListing")}
               <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>

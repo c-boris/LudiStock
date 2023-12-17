@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home";
@@ -17,7 +18,7 @@ import NewListing from "./components/Listings/NewListing.jsx";
 import UpdateListing from "./components/Listings/UpdateListing.jsx";
 import ShowListing from "./components/Listings/ShowListing.jsx";
 import TranslationProvider from "./utils/TranslationProvider";
-// import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import TermsConditions from "./pages/TermsAndConditions/TermsAndConditions.jsx";
 import "./index.css";
 
@@ -25,7 +26,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-
     errorElement: <ErrorPage />,
     children: [
       {
@@ -50,11 +50,19 @@ const router = createBrowserRouter([
       },
       {
         path: "admin",
-        element: <Admin />,
+        element: (
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "my-listings",
-        element: <MyListings />,
+        element: (
+          <ProtectedRoute>
+            <MyListings />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/users/password/edit",
@@ -63,12 +71,15 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: (
-          // <ProtectedRoute>
-          <Profile />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
         ),
       },
-      { path: "listings/:id", element: <ShowListing /> },
+      {
+        path: "listings/:id",
+        element: <ShowListing />,
+      },
       {
         path: "/listings/update/:id",
         element: <UpdateListing />,
@@ -79,7 +90,11 @@ const router = createBrowserRouter([
       },
       {
         path: "my-listings/newListing",
-        element: <NewListing />,
+        element: (
+          <ProtectedRoute>
+            <NewListing />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/terms-and-conditions",
@@ -91,10 +106,10 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
+  <React.StrictMode>
     <TranslationProvider>
       <ToastContainer position="bottom-center" theme="dark" />
       <RouterProvider router={router} />
     </TranslationProvider>
-  </>
+  </React.StrictMode>
 );

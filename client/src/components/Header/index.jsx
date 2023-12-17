@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../utils/useAuth";
 import { userAtom } from "../../utils/atom";
 import { useAtom } from "jotai";
-import ReactSwitch from "react-switch";
 import { LanguageContext } from "../../utils/TranslationProvider";
 import { useTranslation } from "react-i18next";
 
