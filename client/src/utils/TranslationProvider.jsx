@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
-import * as i18n from "../i18n";
+import * as i18n from "./i18n";
 import { useTranslation } from "react-i18next";
 import "react-toastify/dist/ReactToastify.css";
 
 export const LanguageContext = createContext(null);
 
 const TranslationProvider = ({ children }) => {
-  const [lng, setLng] = useState("fr");
+  const [lng, setLng] = useState("en");
   const { t, i18n } = useTranslation();
 
   useEffect(() => {

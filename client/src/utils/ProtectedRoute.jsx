@@ -1,15 +1,18 @@
-import { Navigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useAuth } from "./useAuth";
+import LoginForm from "../components/Forms/LoginForm/";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
-  // console.log("User in ProtectedRoute:", user);
 
   if (!user.isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <LoginForm />;
   }
-
   return children;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default ProtectedRoute;

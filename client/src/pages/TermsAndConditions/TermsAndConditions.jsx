@@ -5,7 +5,7 @@ function TermsConditions() {
 
   return (
     <>
-      <main className="bg-light dark:bg-dark text-black dark:text-white flex flex-col items-center">
+      <main className="bg-light dark:bg-dark text-secondary dark:text-dsecondary flex flex-col items-center">
         <section className="mt-10 flex flex-col px-10 w-full lg:w-2/3 ">
           <div className="flex flex-col border-2 mt-20 mb-5 dark:border-primary border-secondary rounded-xl px-7 py-7 max-h-[350px] overflow-y-auto gap-2">
             <h1 className="font-heading text-lg">{t("terms.heading")}</h1>
