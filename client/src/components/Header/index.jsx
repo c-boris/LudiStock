@@ -182,6 +182,9 @@ const Header = () => {
                         <NavLink
                           to="/admin"
                           className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-primary hover:bg-dsecondary dark:text-dprimary dark:hover:bg-secondary"
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                          }}
                         >
                           Admin
                         </NavLink>

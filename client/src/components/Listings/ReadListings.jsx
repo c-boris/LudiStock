@@ -126,7 +126,7 @@ function ReadListings() {
   return (
     <>
       <form className="px-8 pt-20 bg-light dark:bg-dark">
-        <div className="mb-2 mt-6 flex flex-col sm:flex-row items-center gap-x-6">
+        <div className="mb-2 mt-6 flex flex-col sm:flex-row items-center gap-x-12">
           <label
             htmlFor="price"
             className="block text-lg font-medium leading-6 text-primary dark:text-dprimary mb-4"
@@ -237,7 +237,7 @@ function ReadListings() {
           <button
             type="button"
             onClick={FilterData}
-            className="group relative h-10 mr-2 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
+            className="group relative h-10 mr-8 px-2.5 py-0.5 overflow-hidden bg-blue-700 font-medium rounded-lg text-white text-sm grid place-items-center"
           >
             {t("filter")}
             <div className="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
