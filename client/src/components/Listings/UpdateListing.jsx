@@ -64,7 +64,6 @@ function UpdateListing() {
       });
 
       if (response.ok) {
-        Cookies.set("token", response.headers.get("Authorization"));
         toast.success("Listing modified successfully!");
         setListingsAtom(fetchAPI("listings"));
         navigate("/my-listings");
