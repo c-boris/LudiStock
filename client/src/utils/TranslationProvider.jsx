@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const LanguageContext = createContext(null);
 
 const TranslationProvider = ({ children }) => {
-  const [lng, setLng] = useState("en");
+  const [lng, setLng] = useState("fr");
   const { t, i18n } = useTranslation();
 
   useEffect(() => {

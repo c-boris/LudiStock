@@ -99,7 +99,6 @@ const router = createBrowserRouter([
       {
         path: "/terms-and-conditions",
         element: <TermsConditions />,
-        errorElement: <ErrorPage />,
       },
     ],
   },
